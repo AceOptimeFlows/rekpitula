@@ -227,16 +227,76 @@
     return /^data:/i.test(v);
   }
 
+  const EMAIL_LOGO_MAX_W = 160;
+  const EMAIL_LOGO_MAX_H = 48;
+
   function resolveHeaderLogoForPrint(cfg) {
     const src = getHeaderLogo(cfg);
     return src || '';
   }
 
+  function fitInsideBox(width, height, maxWidth, maxHeight) {
+    const w = Math.max(1, Number(width) || 1);
+    const h = Math.max(1, Number(height) || 1);
+    const mw = Math.max(1, Number(maxWidth) || w);
+    const mh = Math.max(1, Number(maxHeight) || h);
+    const scale = Math.min(mw / w, mh / h, 1);
+    return {
+      width: Math.max(1, Math.round(w * scale)),
+      height: Math.max(1, Math.round(h * scale))
+    };
+  }
+
+  async function loadImageElement(src) {
+    return await new Promise((resolve, reject) => {
+      try {
+        const img = new Image();
+        img.decoding = 'async';
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Image load failed'));
+        img.src = src;
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  async function normalizeEmailLogoAsset(src) {
+    const value = String(src || '').trim();
+    if (!value) return { src: '', width: 0, height: 0 };
+
+    if (!looksDataUrl(value)) {
+      return { src: value, width: EMAIL_LOGO_MAX_W, height: 0 };
+    }
+
+    try {
+      const img = await loadImageElement(value);
+      const dims = fitInsideBox(img.naturalWidth || img.width, img.naturalHeight || img.height, EMAIL_LOGO_MAX_W, EMAIL_LOGO_MAX_H);
+      const canvas = document.createElement('canvas');
+      canvas.width = dims.width;
+      canvas.height = dims.height;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return { src: value, width: dims.width, height: dims.height };
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      return {
+        src: canvas.toDataURL('image/png'),
+        width: canvas.width,
+        height: canvas.height
+      };
+    } catch {
+      return { src: value, width: EMAIL_LOGO_MAX_W, height: 0 };
+    }
+  }
+
   async function resolveHeaderLogoForEmail(cfg) {
     const src = getHeaderLogo(cfg);
-    if (!src) return '';
-    if (looksDataUrl(src) || looksAbsoluteUrl(src)) return src;
-    return '';
+    if (!src) return { src: '', width: 0, height: 0 };
+    if (looksDataUrl(src) || looksAbsoluteUrl(src)) return await normalizeEmailLogoAsset(src);
+    return { src: '', width: 0, height: 0 };
   }
 
   // =========================
@@ -549,6 +609,27 @@ body.print-mode {
   background: #dbe2ea !important;
 }
 
+body.print-mode,
+body.print-mode .page-root {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+body.print-mode .page-root {
+  display: block !important;
+}
+
+@media print {
+  html,
+  body,
+  .page-root {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+}
+
 #printArea {
   padding: 0 !important;
   margin: 0 !important;
@@ -557,6 +638,7 @@ body.print-mode {
 
 body.print-mode #printArea {
   padding: 10mm !important;
+  overflow: visible !important;
 }
 
 #printArea .formal-sheet {
@@ -820,6 +902,14 @@ body.print-mode #printArea .formal-sheet {
 #printArea .formal-table tr {
   break-inside: avoid;
   page-break-inside: avoid;
+}
+
+#printArea .participants-table {
+  page-break-inside: auto;
+}
+
+#printArea .participants-table thead {
+  display: table-header-group;
 }
 
 #printArea .participants-table td:last-child {
@@ -1250,7 +1340,10 @@ body.print-mode #printArea .formal-sheet {
 
   async function buildEmailHTML(state, cfg) {
     const headerName = getHeaderName(cfg);
-    const logoDataUrl = await resolveHeaderLogoForEmail(cfg);
+    const logoAsset = await resolveHeaderLogoForEmail(cfg);
+    const logoDataUrl = logoAsset && logoAsset.src ? logoAsset.src : '';
+    const logoWidthPx = logoAsset && logoAsset.width ? logoAsset.width : EMAIL_LOGO_MAX_W;
+    const logoHeightPx = logoAsset && logoAsset.height ? logoAsset.height : 0;
     const logoAlt = headerName || T('export.logoAlt') || 'Logo';
 
     const meetingTitle = (state.meeting && state.meeting.title) ? String(state.meeting.title) : '';
@@ -1310,7 +1403,7 @@ body.print-mode #printArea .formal-sheet {
   <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid #222;">
     <tr>
       <td style="width:25%;border:1px solid #222;padding:8px;vertical-align:middle;text-align:center;">
-        ${logoDataUrl ? `<img src="${escHtml(logoDataUrl)}" alt="${escHtml(logoAlt)}" style="display:block;margin:0 auto 6px auto;max-height:48px;max-width:100%;height:auto;width:auto;">` : ''}
+        ${logoDataUrl ? `<img src="${escHtml(logoDataUrl)}" alt="${escHtml(logoAlt)}"${logoWidthPx ? ` width="${escHtml(String(logoWidthPx))}"` : ''}${logoHeightPx ? ` height="${escHtml(String(logoHeightPx))}"` : ''} style="display:block;margin:0 auto 6px auto;max-width:${EMAIL_LOGO_MAX_W}px;width:${logoWidthPx ? escHtml(String(logoWidthPx)) + 'px' : 'auto'};${logoHeightPx ? `height:${escHtml(String(logoHeightPx))}px;` : 'height:auto;'}max-height:${EMAIL_LOGO_MAX_H}px;object-fit:contain;">` : ''}
         ${headerName ? `<div style="font-weight:700;font-size:13px;word-break:break-word;">${escHtml(headerName)}</div>` : ''}
       </td>
       <td style="width:47%;border:1px solid #222;padding:10px 12px;vertical-align:middle;text-align:center;font-size:24px;font-weight:800;">

@@ -692,6 +692,33 @@ html, body{
   gap:10px;
   flex-wrap:wrap;
 }
+
+.app-shell,
+.command-bar,
+.command-left,
+.command-right,
+.side-panel,
+.workspace,
+.workspace-inner,
+#commandTranscriberBox,
+#commandWhisperProgressBox{
+  min-width:0;
+}
+
+#commandTranscriberBox,
+#commandWhisperState,
+#commandWhisperProgressBox,
+#commandWhisperProgressText{
+  max-width:100%;
+}
+
+#commandWhisperState{
+  overflow-wrap:anywhere;
+}
+
+#commandTranscriberModeSelect{
+  max-width:100%;
+}
 .pill-status{
   display:inline-flex;
   align-items:center;
@@ -731,20 +758,91 @@ html, body{
   gap:12px;
 }
 
-/* Mobile */
-@media (max-width: 980px){
-  .main-area{ overflow:hidden; }
+/* Mobile / foldables / coarse-pointer portrait */
+@media (max-width: 1180px), (pointer: coarse) and (orientation: portrait){
+  .main-area{
+    overflow-y:auto;
+    overflow-x:hidden;
+  }
+
   .app-shell{
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    overflow:auto;
+    height:auto;
+    min-height:0;
+    overflow:visible;
   }
-  .side-panel, .workspace{
-    grid-column: 1;
-    overflow: visible;
+
+  .command-bar{
+    flex-direction:column;
+    align-items:stretch;
   }
-  .side-panel{ grid-row: 2; }
-  .workspace{ grid-row: 3; }
+
+  .command-left,
+  .command-right{
+    width:100%;
+    min-width:0;
+    justify-content:flex-start;
+  }
+
+  .side-panel,
+  .workspace{
+    grid-column:1;
+    min-width:0;
+    overflow:visible;
+  }
+
+  .side-panel{ grid-row:2; }
+  .workspace{ grid-row:3; }
+
+  .workspace-inner{
+    min-width:0;
+  }
+
+  .form-row{
+    align-items:stretch;
+  }
+
+  .field,
+  .grow{
+    min-width:0;
+    flex:1 1 100%;
+  }
+
+  .add-row{
+    flex-wrap:wrap;
+  }
+
+  .add-row .text{
+    min-width:0;
+  }
+
+  #commandTranscriberBox{
+    width:100%;
+    flex:1 1 100%;
+    min-width:0 !important;
+  }
+
+  #commandTranscriberModeSelect{
+    width:100% !important;
+    min-width:0 !important;
+    flex:1 1 100%;
+  }
+
+  #commandWhisperState{
+    width:100%;
+  }
+
+  #commandWhisperProgressBox{
+    width:100%;
+    flex-wrap:wrap !important;
+  }
+
+  #commandWhisperProgressBox .progress-bar{
+    width:100% !important;
+    min-width:0 !important;
+    flex:1 1 100%;
+  }
 }
 
 /* ===========================

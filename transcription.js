@@ -6,14 +6,14 @@
   const MODE_KEY = APP_KEY + ':transcriber:mode:v1';
   const MODEL_FLAG_KEY = APP_KEY + ':whisper:model:v1';
   const MODEL_CACHE_NAME = 'rekpitu-whisper-model-v1';
-  const RUNTIME_CACHE_NAME = 'rekpitu-whisper-runtime-v2';
+  const RUNTIME_CACHE_NAME = 'rekpitu-whisper-runtime-v3';
   const LEGACY_MODEL_CACHES = ['transformers-cache', 'transformers-cache-v1'];
-  const LEGACY_RUNTIME_CACHES = ['rekpitu-whisper-runtime-v1'];
+  const LEGACY_RUNTIME_CACHES = ['rekpitu-whisper-runtime-v1', 'rekpitu-whisper-runtime-v2'];
   const MODEL_ID = 'Xenova/whisper-small';
   const TRANSFORMERS_VERSION = '3.8.1';
   const TRANSFORMERS_IMPORT_URL = `https://cdn.jsdelivr.net/npm/@huggingface/transformers@${TRANSFORMERS_VERSION}`;
   const TRANSFORMERS_DIST_URL = TRANSFORMERS_IMPORT_URL + '/dist/';
-  const TRANSFORMERS_ENTRY_URL = TRANSFORMERS_DIST_URL + 'transformers.min.mjs';
+  const TRANSFORMERS_ENTRY_URL = TRANSFORMERS_DIST_URL + 'transformers.web.min.js';
   const TRANSFORMERS_FALLBACK_URL = TRANSFORMERS_IMPORT_URL;
   const RUNTIME_ASSET_URLS = [
     TRANSFORMERS_ENTRY_URL,

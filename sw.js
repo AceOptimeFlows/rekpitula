@@ -8,19 +8,19 @@
 
 'use strict';
 
-const SW_VERSION = '2026-03-14-v2.2';
+const SW_VERSION = '2026-03-14-v2.3';
 const STATIC_CACHE = `rekpitu-static-${SW_VERSION}`;
 const RUNTIME_CACHE = `rekpitu-runtime-${SW_VERSION}`;
 const REMOTE_CACHE = `rekpitu-remote-${SW_VERSION}`;
 const MODEL_CACHE = 'rekpitu-whisper-model-v1';
-const WHISPER_RUNTIME_CACHE = 'rekpitu-whisper-runtime-v2';
+const WHISPER_RUNTIME_CACHE = 'rekpitu-whisper-runtime-v3';
 const LEGACY_MODEL_CACHES = ['transformers-cache', 'transformers-cache-v1'];
-const LEGACY_RUNTIME_CACHES = ['rekpitu-whisper-runtime-v1'];
+const LEGACY_RUNTIME_CACHES = ['rekpitu-whisper-runtime-v1', 'rekpitu-whisper-runtime-v2'];
 
 const TRANSFORMERS_VERSION = '3.8.1';
 const TRANSFORMERS_DIST_URL = `https://cdn.jsdelivr.net/npm/@huggingface/transformers@${TRANSFORMERS_VERSION}/dist/`;
 const WHISPER_RUNTIME_URLS = [
-  TRANSFORMERS_DIST_URL + 'transformers.min.mjs',
+  TRANSFORMERS_DIST_URL + 'transformers.web.min.js',
   TRANSFORMERS_DIST_URL + 'ort-wasm-simd-threaded.jsep.mjs',
   TRANSFORMERS_DIST_URL + 'ort-wasm-simd-threaded.jsep.wasm'
 ];

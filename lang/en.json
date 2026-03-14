@@ -1,0 +1,290 @@
+{
+  "a11y": {
+    "skip": "Skip to content"
+  },
+  "app": {
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "logoAlt": "OptimeFlow(s) logo",
+    "brandName": "OptimeFlow(s)",
+    "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "settings": {
+    "openButton": "Settings",
+    "themeLabel": "Theme",
+    "themes": {
+      "system": "System",
+      "dark": "Dark Core",
+      "midnight": "Midnight Blue",
+      "nebula": "Neon Nebula",
+      "ocean": "Deep Ocean",
+      "forest": "Emerald Forest",
+      "amber": "Warm Amber",
+      "violet": "Royal Violet",
+      "mono": "Mono noir"
+    },
+    "languageLabel": "Language",
+    "languages": {
+      "es": "Spanish",
+      "en": "English",
+      "pt-br": "Portuguese (Brazil)",
+      "de": "German",
+      "it": "Italian",
+      "fr": "French",
+      "ko": "Korean",
+      "ja": "Japanese",
+      "ru": "Russian",
+      "zh": "Chinese",
+      "hi": "Hindi",
+      "ar": "Arabic"
+    },
+    "installButton": "Install app"
+  },
+  "actions": {
+    "clear": "Clear",
+    "export": "Export PDF",
+    "copy": "Copy for Gmail",
+    "jumpAria": "Jump to section",
+    "jump": {
+      "contrib": "Contributions",
+      "keypoints": "Key points",
+      "tasks": "Tasks",
+      "observations": "Observations"
+    }
+  },
+  "export": {
+    "settingsTitle": "Meeting minutes export",
+    "headerHint": "Set the meeting minutes header with the entity name and, if you want, a logo.",
+    "headerNameLabel": "Company / entity name",
+    "headerNamePh": "E.g.: Globalogistics, COCOLAB Committee, General Management…",
+    "includeLogo": "Include logo",
+    "logoLabel": "Logo",
+    "logoPick": "Choose",
+    "logoReset": "Remove",
+    "logoStatusApp": "Logo: using the app one",
+    "logoStatusCustom": "Logo: custom",
+    "logoStatusSet": "Header logo configured",
+    "logoStatusNone": "No header logo",
+    "logoAlt": "Header logo",
+    "footerLabel": "Footer",
+    "footerPh": "Optional footer text…",
+    "footerHint": "Tip: this text is added at the end of the minutes (useful for entity, area, confidentiality, etc.)."
+  },
+  "setup": {
+    "title": "Setup",
+    "lead": "Define the base data and generate the meeting minutes structure.",
+    "meetingTitle": "Meeting title / name",
+    "meetingTitlePh": "Sprint Review, Committee, etc.",
+    "date": "Date",
+    "type": "Type",
+    "types": {
+      "meeting": "Meeting",
+      "catchup": "Catch-up",
+      "workshop": "Workshop",
+      "oneonone": "1:1",
+      "retro": "Retrospective"
+    },
+    "participants": "Participants",
+    "participantsPh": "Add participant…",
+    "add": "Add",
+    "generate": "Generate structure",
+    "autosave": "Autosave ON · Local",
+    "autosaveSavedAt": "Saved · {{time}}",
+    "removeParticipant": "Remove participant",
+    "noParticipantsOption": "Add participants first…"
+  },
+  "empty": {
+    "title": "Start by creating the meeting",
+    "body": "Add participants and click “Generate structure”. Then you can dictate contributions, extract key points, assign tasks, and export."
+  },
+  "progress": {
+    "title": "Progress",
+    "caption": "sections ready",
+    "pill": "{{done}}/{{total}}"
+  },
+  "contrib": {
+    "title": "Meeting contributions",
+    "lead": "Each contribution is tagged by participant and supports nested replies (thread style).",
+    "author": "Author",
+    "text": "Contribution text",
+    "textPh": "Write or dictate your contribution…",
+    "dictate": "🎙️ Dictate",
+    "add": "Add contribution",
+    "reply": "Reply",
+    "emptyThreads": "There are no contributions yet. Add the first one above or dictate one with 🎙️."
+  },
+  "dictation": {
+    "listening": "🎙️ Listening… speak naturally."
+  },
+  "keypoints": {
+    "title": "Key points",
+    "lead": "Extract points from the contributions (including replies) with deduplication.",
+    "howmany": "How many points?",
+    "extract": "Extract",
+    "empty": "There are no key points yet. Click “Extract”.",
+    "remove": "Remove key point"
+  },
+  "tasks": {
+    "title": "Tasks and timelines",
+    "lead": "Assign tasks to each participant with a target date.",
+    "task": "Task",
+    "taskPh": "Task description…",
+    "assignee": "Assignee",
+    "due": "Due date",
+    "status": "Status",
+    "pending": "Pending",
+    "done": "Done",
+    "add": "Add",
+    "hint": "Tip: toggle status with ✓ and switch back with ↩︎.",
+    "empty": "There are no tasks yet. Add one above."
+  },
+  "observations": {
+    "title": "Observations",
+    "lead": "Record setbacks, meeting atmosphere, risks, incidents, or any relevant note.",
+    "field": "Final observations",
+    "ph": "Write down incidents, blockers, overall atmosphere, dependencies, tacit agreements, or any relevant aspect here…",
+    "hint": "These notes will appear at the end of the exported minutes."
+  },
+  "timeline": {
+    "title": "Timeline by participant",
+    "empty": "When you add tasks, you will see the timeline by person here."
+  },
+  "print": {
+    "untitled": "Untitled meeting",
+    "none": "—",
+    "doc": {
+      "title": "MEETING MINUTES"
+    },
+    "header": {
+      "reference": "Reference",
+      "version": "Version",
+      "issueDate": "Issue date"
+    },
+    "details": {
+      "meeting": "Committee / Meeting",
+      "entity": "Entity / Team",
+      "participantsCount": "No. of participants"
+    },
+    "meta": {
+      "date": "Date",
+      "type": "Type",
+      "participants": "Participants",
+      "createdAt": "Generated"
+    },
+    "sections": {
+      "summary": "Executive summary",
+      "contrib": "Meeting discussion",
+      "keypoints": "Key points and agreements",
+      "tasks": "Tasks / conclusions",
+      "observations": "Observations",
+      "participants": "Participants"
+    },
+    "summary": {
+      "bullets": {
+        "contrib": "Contributions recorded: {{total}} ({{threads}} main threads)",
+        "keypoints": "Key points identified: {{n}}",
+        "tasks": "Tasks: {{total}} ({{done}} done, {{pending}} pending)"
+      },
+      "highlights": "Highlights"
+    },
+    "contrib": {
+      "kind": {
+        "root": "Intervention",
+        "reply": "Reply"
+      },
+      "replyTo": "associated with point #{{n}}",
+      "repliesLabel": "Related interventions"
+    },
+    "tasksTable": {
+      "id": "ID",
+      "task": "Task / conclusion",
+      "assignee": "Assignee",
+      "due": "Due date",
+      "status": "Status"
+    },
+    "observations": {
+      "empty": "No observations recorded."
+    },
+    "participantsTable": {
+      "number": "#",
+      "name": "Name",
+      "role": "Role / Position",
+      "company": "Company / Team",
+      "signature": "Signature"
+    },
+    "footer": "Generated with OptimeFlow(s) · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "alerts": {
+    "needParticipants": "Add at least 1 participant to continue.",
+    "needAuthor": "Select an author.",
+    "needText": "Write something first.",
+    "needTextField": "Select a text field for dictation.",
+    "voiceNotAvail": "Dictation is not available in this browser.",
+    "voicePermissionDenied": "Microphone permission was not granted.",
+    "voiceMicUnavailable": "No available microphone was detected.",
+    "voiceNoSpeech": "No speech was detected. Try again.",
+    "voiceNetwork": "Browser dictation needs a connection on this device.",
+    "voiceGenericError": "The dictation could not be completed. Try again.",
+    "noThreadsForKeypoints": "Add contributions first so key points can be extracted.",
+    "needTaskText": "Write a task.",
+    "needGenerateFirst": "Generate the structure first (Setup → Generate structure).",
+    "clearConfirm": "Are you sure you want to clear all data? This cannot be undone.",
+    "deleteContribConfirm": "Delete this contribution and all its replies?",
+    "deleteTaskConfirm": "Delete this task?",
+    "printAreaMissing": "The print area (printArea) was not found.",
+    "copyNotSupported": "Automatic copy could not be completed in this browser. Try another one (Chrome/Edge) or copy the plain text.",
+    "logoTooBig": "The logo is too large. Use a lighter image (ideally < 900KB).",
+    "logoReadFail": "The logo could not be read. Try another file."
+  },
+  "toasts": {
+    "structureReady": "Structure ready ✅",
+    "participantAdded": "Participant added: {{name}}",
+    "participantRemoved": "Participant removed: {{name}}",
+    "contribAdded": "Contribution added ✅",
+    "replyAdded": "Reply added ✅",
+    "deleted": "Deleted ✅",
+    "keypointsExtracted": "Key points extracted: {{n}}",
+    "keypointRemoved": "Key point removed",
+    "taskAdded": "Task added ✅",
+    "taskToggled": "Status updated ✅",
+    "taskRemoved": "Task removed ✅",
+    "cleared": "Data cleared ✅",
+    "exportPreparing": "Preparing PDF…",
+    "copyPreparing": "Copying minutes…",
+    "exportCopied": "Minutes copied ✅ (paste it into Gmail)",
+    "exportSettingsSaved": "Export updated ✅",
+    "logoUpdated": "Logo updated ✅",
+    "logoReset": "Logo removed ✅"
+  },
+  "footer": {
+    "brand": "OptimeFlow(s)®",
+    "appName": "ReKπTúL@",
+    "year": "2025",
+    "author": "Andrés Calvo Espinosa",
+    "coherenceButtonAria": "Universal Coherence",
+    "licenseButtonAria": "MIT License",
+    "licenseButton": "MIT License",
+    "privacyButton": "Privacy",
+    "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "licenseOverlay": {
+    "title": "MIT License",
+    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> runs 100% in your browser. We do not send your data to any server.</p>"
+  },
+  "coherence": {
+    "title": "Universal Coherence",
+    "body": "May this work serve as gratitude and as a commitment: to think, feel, and act in the same direction."
+  },
+  "confirm": {
+    "title": "Confirmation"
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save"
+  }
+}

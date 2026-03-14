@@ -1,0 +1,327 @@
+{
+  "a11y": {
+    "skip": "Saltar al contenido"
+  },
+  "app": {
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "logoAlt": "Logo de OptimeFlow(s)",
+    "brandName": "OptimeFlow(s)",
+    "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "settings": {
+    "openButton": "Ajustes",
+    "themeLabel": "Tema",
+    "themes": {
+      "system": "Sistema",
+      "dark": "Núcleo oscuro",
+      "midnight": "Azul medianoche",
+      "nebula": "Nebulosa neón",
+      "ocean": "Océano profundo",
+      "forest": "Bosque esmeralda",
+      "amber": "Ámbar cálido",
+      "violet": "Violeta real",
+      "mono": "Mono noir"
+    },
+    "languageLabel": "Idioma",
+    "languages": {
+      "es": "Español",
+      "en": "Inglés",
+      "pt-br": "Portugués (Brasil)",
+      "de": "Alemán",
+      "it": "Italiano",
+      "fr": "Francés",
+      "ko": "Coreano",
+      "ja": "Japonés",
+      "zh": "Chino",
+      "ru": "Ruso",
+      "hi": "Hindi",
+      "ar": "Árabe"
+    },
+    "installButton": "Instalar app"
+  },
+  "actions": {
+    "clear": "Limpiar",
+    "export": "Exportar PDF",
+    "copy": "Copiar para Gmail",
+    "jumpAria": "Ir a sección",
+    "jump": {
+      "contrib": "Aportes",
+      "keypoints": "Puntos clave",
+      "tasks": "Quehaceres",
+      "observations": "Observaciones"
+    }
+  },
+  "export": {
+    "settingsTitle": "Exportación del acta",
+    "headerHint": "Configura el encabezado del acta con el nombre de la entidad y, si quieres, un logotipo.",
+    "headerNameLabel": "Nombre de empresa / entidad",
+    "headerNamePh": "Ej.: Globalogistics, Comité COCOLAB, Dirección General…",
+    "includeLogo": "Incluir logo",
+    "logoLabel": "Logo",
+    "logoPick": "Elegir",
+    "logoReset": "Quitar",
+    "logoStatusApp": "Logo: usando el de la app",
+    "logoStatusCustom": "Logo: personalizado",
+    "logoStatusSet": "Logo de encabezado configurado",
+    "logoStatusNone": "Sin logo de encabezado",
+    "logoAlt": "Logotipo del encabezado",
+    "footerLabel": "Pie de página",
+    "footerPh": "Texto opcional para el pie de página…",
+    "footerHint": "Tip: este texto se añade al final del acta (útil para entidad, área, confidencialidad, etc.)."
+  },
+  "setup": {
+    "title": "Configuración",
+    "lead": "Define los datos base y genera la estructura del acta.",
+    "meetingTitle": "Título / Nombre de la reunión",
+    "meetingTitlePh": "Sprint Review, Comité, etc.",
+    "date": "Fecha",
+    "type": "Tipo",
+    "types": {
+      "meeting": "Reunión",
+      "catchup": "Seguimiento",
+      "workshop": "Taller",
+      "oneonone": "1:1",
+      "retro": "Retrospectiva"
+    },
+    "participants": "Integrantes",
+    "participantsPh": "Añadir integrante…",
+    "add": "Añadir",
+    "generate": "Generar estructura",
+    "autosave": "Autosave ON · Local",
+    "autosaveSavedAt": "Guardado · {{time}}",
+    "removeParticipant": "Eliminar integrante",
+    "noParticipantsOption": "Añade integrantes primero…"
+  },
+  "empty": {
+    "title": "Empieza creando la reunión",
+    "body": "Añade integrantes y pulsa “Generar estructura”. Luego podrás dictar aportes, sacar puntos clave, asignar tareas y exportar."
+  },
+  "progress": {
+    "title": "Progreso",
+    "caption": "secciones listas",
+    "pill": "{{done}}/{{total}}"
+  },
+  "contrib": {
+    "title": "Aportes de la reunión",
+    "lead": "Cada aporte queda etiquetado por integrante y admite respuestas anidadas (estilo hilo).",
+    "author": "Autor",
+    "text": "Texto del aporte",
+    "textPh": "Escribe o dicta tu aporte…",
+    "dictate": "🎙️ Dictar",
+    "add": "Añadir aporte",
+    "reply": "Responder",
+    "emptyThreads": "Aún no hay aportes. Añade el primero arriba o dicta uno con 🎙️."
+  },
+  "dictation": {
+    "listening": "🎙️ Escuchando… habla con naturalidad.",
+    "whisperHelp": "Pulsa una vez para grabar. Vuelve a pulsar para que se transcriba lo grabado.",
+    "browserHelp": "Pulsa una vez para empezar a dictar. Pulsa otra vez para detener el dictado."
+  },
+  "transcription": {
+    "modeLabel": "Motor de transcripción",
+    "modeWhisper": "Whisper offline · Privacidad",
+    "modeBrowser": "Navegador · Más rápido",
+    "modeHintWhisper": "Máxima privacidad: audio y texto se procesan localmente tras descargar el modelo.",
+    "modeHintBrowser": "Arranque más rápido: usa el motor de voz del navegador y puede depender de servicios de la plataforma o del propio navegador.",
+    "title": "Transcriptor offline · Whisper Small",
+    "lead": "Descarga el modelo una vez y luego dicta sin conexión.",
+    "download": "Descargar modelo",
+    "delete": "Eliminar modelo",
+    "statusMissing": "Modelo no descargado.",
+    "statusReady": "Modelo listo para dictado offline.",
+    "statusChecking": "Comprobando modelo local…",
+    "statusPreparingRuntime": "Preparando runtime local…",
+    "statusDownloading": "Descargando modelo…",
+    "statusLoading": "Cargando modelo local…",
+    "statusRecording": "Grabando audio… pulsa de nuevo para terminar.",
+    "statusProcessing": "Transcribiendo localmente…",
+    "statusDeleted": "Modelo eliminado.",
+    "browserStatusListening": "Dictado del navegador activo… habla ahora.",
+    "toastReady": "Modelo Whisper Small listo.",
+    "toastDeleted": "Modelo eliminado.",
+    "errModelMissing": "Descarga primero Whisper Small desde Ajustes.",
+    "errMicDenied": "Permiso de micrófono denegado.",
+    "errMicUnavailable": "Micrófono no disponible.",
+    "errProcessing": "No se pudo transcribir localmente.",
+    "errTooShort": "No detecté suficiente voz.",
+    "errDownload": "No se pudo descargar el modelo.",
+    "errUnsupported": "Este navegador no soporta transcripción local offline.",
+    "errLibrary": "No se pudo cargar el motor de transcripción local.",
+    "commandSelectAria": "Motor de transcripción",
+    "commandDownload": "Descargar Whisper",
+    "commandReady": "Whisper listo",
+    "commandMissing": "Whisper no descargado"
+  },
+  "keypoints": {
+    "title": "Puntos clave",
+    "lead": "Extrae puntos a partir de los aportes (incluye replies) con deduplicación.",
+    "howmany": "¿Cuántos puntos?",
+    "extract": "Extraer",
+    "empty": "Aún no hay puntos clave. Pulsa “Extraer”.",
+    "remove": "Eliminar punto clave"
+  },
+  "tasks": {
+    "title": "Quehaceres y timelines",
+    "lead": "Asigna tareas por integrante con fecha objetivo.",
+    "task": "Tarea",
+    "taskPh": "Descripción de la tarea…",
+    "assignee": "Responsable",
+    "due": "Fecha límite",
+    "status": "Estado",
+    "pending": "Pendiente",
+    "done": "Hecho",
+    "add": "Añadir",
+    "hint": "Tip: alterna estado con ✓ y vuelve con ↩︎.",
+    "empty": "Aún no hay tareas. Añade una arriba."
+  },
+  "observations": {
+    "title": "Observaciones",
+    "lead": "Deja constancia de contratiempos, ambiente de la reunión, riesgos, incidencias o cualquier apunte relevante.",
+    "field": "Observaciones finales",
+    "ph": "Anota aquí incidencias, bloqueos, ambiente general, dependencias, acuerdos tácitos o cualquier aspecto relevante…",
+    "hint": "Estas notas aparecerán al final del acta exportada."
+  },
+  "timeline": {
+    "title": "Timeline por integrante",
+    "empty": "Cuando añadas tareas, aquí verás el timeline por persona."
+  },
+  "print": {
+    "untitled": "Reunión sin título",
+    "none": "—",
+    "doc": {
+      "title": "ACTA DE REUNIÓN"
+    },
+    "header": {
+      "reference": "Referencia",
+      "version": "Versión",
+      "issueDate": "Fecha de emisión"
+    },
+    "details": {
+      "meeting": "Comité / Reunión",
+      "entity": "Entidad / Equipo",
+      "participantsCount": "N.º de participantes"
+    },
+    "meta": {
+      "date": "Fecha",
+      "type": "Tipo",
+      "participants": "Integrantes",
+      "createdAt": "Generado"
+    },
+    "sections": {
+      "summary": "Resumen ejecutivo",
+      "contrib": "Desarrollo de la reunión",
+      "keypoints": "Puntos clave y acuerdos",
+      "tasks": "Tareas / conclusiones",
+      "observations": "Observaciones",
+      "participants": "Participantes"
+    },
+    "summary": {
+      "bullets": {
+        "contrib": "Aportes registrados: {{total}} ({{threads}} hilos principales)",
+        "keypoints": "Puntos clave identificados: {{n}}",
+        "tasks": "Tareas: {{total}} ({{done}} hechas, {{pending}} pendientes)"
+      },
+      "highlights": "Aspectos destacados"
+    },
+    "contrib": {
+      "kind": {
+        "root": "Intervención",
+        "reply": "Respuesta"
+      },
+      "replyTo": "asociada al punto #{{n}}",
+      "repliesLabel": "Intervenciones asociadas"
+    },
+    "tasksTable": {
+      "id": "ID",
+      "task": "Tarea / conclusión",
+      "assignee": "Responsable",
+      "due": "Fecha límite",
+      "status": "Estado"
+    },
+    "observations": {
+      "empty": "Sin observaciones registradas."
+    },
+    "participantsTable": {
+      "number": "#",
+      "name": "Nombre",
+      "role": "Cargo / Puesto",
+      "company": "Empresa / Equipo",
+      "signature": "Firma"
+    },
+    "footer": "Generado con OptimeFlow(s) · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "alerts": {
+    "needParticipants": "Añade al menos 1 integrante para continuar.",
+    "needAuthor": "Selecciona un autor.",
+    "needText": "Escribe algo primero.",
+    "needTextField": "Selecciona un campo de texto para dictar.",
+    "voiceNotAvail": "Dictado no disponible en este navegador.",
+    "voicePermissionDenied": "No se concedió permiso al micrófono.",
+    "voiceMicUnavailable": "No se detectó un micrófono disponible.",
+    "voiceNoSpeech": "No se detectó voz. Inténtalo de nuevo.",
+    "voiceNetwork": "El dictado del navegador necesita conexión en este dispositivo.",
+    "voiceGenericError": "No se pudo completar el dictado. Inténtalo de nuevo.",
+    "noThreadsForKeypoints": "Primero añade aportes para poder extraer puntos clave.",
+    "needTaskText": "Escribe una tarea.",
+    "needGenerateFirst": "Primero genera la estructura (Configuración → Generar estructura).",
+    "clearConfirm": "¿Seguro que quieres limpiar todos los datos? Esto no se puede deshacer.",
+    "deleteContribConfirm": "¿Eliminar este aporte y todas sus respuestas?",
+    "deleteTaskConfirm": "¿Eliminar esta tarea?",
+    "printAreaMissing": "No se encontró el área de impresión (printArea).",
+    "copyNotSupported": "No se pudo copiar automáticamente en este navegador. Intenta con otro (Chrome/Edge) o copia el texto sin formato.",
+    "logoTooBig": "El logo es demasiado grande. Usa una imagen más ligera (ideal < 900KB).",
+    "logoReadFail": "No se pudo leer el logo. Prueba con otro archivo."
+  },
+  "toasts": {
+    "structureReady": "Estructura lista ✅",
+    "participantAdded": "Integrante añadido: {{name}}",
+    "participantRemoved": "Integrante eliminado: {{name}}",
+    "contribAdded": "Aporte añadido ✅",
+    "replyAdded": "Respuesta añadida ✅",
+    "deleted": "Eliminado ✅",
+    "keypointsExtracted": "Puntos clave extraídos: {{n}}",
+    "keypointRemoved": "Punto clave eliminado",
+    "taskAdded": "Tarea añadida ✅",
+    "taskToggled": "Estado actualizado ✅",
+    "taskRemoved": "Tarea eliminada ✅",
+    "cleared": "Datos limpiados ✅",
+    "exportPreparing": "Preparando PDF…",
+    "copyPreparing": "Copiando acta…",
+    "exportCopied": "Acta copiada ✅ (pégala en Gmail)",
+    "exportSettingsSaved": "Exportación actualizada ✅",
+    "logoUpdated": "Logo actualizado ✅",
+    "logoReset": "Logo eliminado ✅"
+  },
+  "footer": {
+    "brand": "OptimeFlow(s)®",
+    "appName": "ReKπTúL@",
+    "year": "2025",
+    "author": "Andrés Calvo Espinosa",
+    "coherenceButtonAria": "Coherencia Universal",
+    "licenseButtonAria": "Licencia MIT",
+    "licenseButton": "Licencia MIT",
+    "privacyButton": "Privacidad",
+    "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "licenseOverlay": {
+    "title": "Licencia MIT",
+    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> se ejecuta 100% en tu navegador. No enviamos tus datos a ningún servidor.</p>"
+  },
+  "coherence": {
+    "title": "Coherencia Universal",
+    "body": "Que esta obra sirva como agradecimiento y como compromiso: pensar, sentir y actuar en la misma dirección."
+  },
+  "confirm": {
+    "title": "Confirmación"
+  },
+  "common": {
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar"
+  }
+}

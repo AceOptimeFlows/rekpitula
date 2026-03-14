@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+
+  <title>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline</title>
+  <meta name="description" content="OptimeFlow(s) · Re⏪ K🧠 π🌀 Tú🫵 L@🗣️: actas con hilos, dictado, tareas, puntos clave, observaciones y exportación a PDF." />
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/recapitula180.png">
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- i18n -->
+  <script src="i18n.js" defer></script>
+
+  <!-- Transcription -->
+  <script src="transcription.js" defer></script>
+
+  <!-- Export PRO PDF -->
+  <script src="export.js" defer></script>
+
+  <link rel="stylesheet" href="styles.css" />         
+  <!-- JS base -->
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <a class="skip" href="#main" data-i18n="a11y.skip">Saltar al contenido</a>
+
+  <div class="page-root">
+
+    <!-- ====== HEADER ====== -->
+    <header class="app-header brand-header" role="banner">
+      <div class="brand">
+        <a
+          class="brand-logo-link"
+          href="https://www.optimeflow.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="OptimeFlow(s)"
+          title="OptimeFlow(s)"
+        >
+          <img
+            id="appLogo"
+            class="brand-logo heat"
+            src="assets/img/logo.png"
+            alt="OptimeFlow(s) logo"
+            data-i18n-alt="app.logoAlt"
+          >
+        </a>
+
+        <span class="brand-word brand-neon" data-i18n="app.brandName">OptimeFlow(s)</span>
+
+        <div id="tagline" class="tagline tagline-reku" aria-hidden="true">
+          <span class="glyph rk-core">R</span>
+          <span class="glyph rk-soft">e</span>
+          <span class="glyph rk-symbol rk-arrow">⏪</span>
+
+          <span class="glyph rk-gap">&nbsp;</span>
+
+          <span class="glyph rk-core">K</span>
+          <span class="glyph rk-symbol rk-brain">🧠</span>
+
+          <span class="glyph rk-gap">&nbsp;&nbsp;</span>
+
+          <span class="glyph rk-core rk-pi">π</span>
+          <span class="glyph rk-symbol rk-swirl">🌀</span>
+
+          <span class="glyph rk-gap">&nbsp;</span>
+
+          <span class="glyph rk-core">T</span>
+          <span class="glyph rk-soft">ú</span>
+          <span class="glyph rk-symbol rk-point">🫵</span>
+
+          <span class="glyph rk-gap">&nbsp;</span>
+
+          <span class="glyph rk-core">L</span>
+          <span class="glyph rk-symbol rk-at">@</span>
+          <span class="glyph rk-symbol rk-talk">🗣️</span>
+        </div>
+
+        <span id="i-app-title" class="sr-only" data-i18n="app.brandSrOnly">
+          Re⏪ K🧠  π🌀 Tú🫵 L@🗣️
+        </span>
+
+        <div class="quick-controls">
+          <button class="icon-button" id="btnSettings" aria-expanded="false">
+            <span class="sr-only" data-i18n="settings.openButton">Ajustes</span>
+            <span class="icon-gear" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ====== SETTINGS SHEET ====== -->
+    <div id="settingsSheet" class="settings-sheet" aria-hidden="true">
+      <div class="settings-card">
+        <div class="settings-row">
+          <label for="themeSelect" data-i18n="settings.themeLabel">Tema</label>
+          <select id="themeSelect" class="sel">
+            <option value="system" data-i18n="settings.themes.system">Sistema</option>
+            <option value="dark" data-i18n="settings.themes.dark">Núcleo oscuro</option>
+            <option value="midnight" data-i18n="settings.themes.midnight">Azul medianoche</option>
+            <option value="nebula" data-i18n="settings.themes.nebula">Nebulosa neón</option>
+            <option value="ocean" data-i18n="settings.themes.ocean">Océano profundo</option>
+            <option value="forest" data-i18n="settings.themes.forest">Bosque esmeralda</option>
+            <option value="amber" data-i18n="settings.themes.amber">Ámbar cálido</option>
+            <option value="violet" data-i18n="settings.themes.violet">Violeta real</option>
+            <option value="mono" data-i18n="settings.themes.mono">Mono noir</option>
+          </select>
+        </div>
+
+        <div class="settings-row">
+          <label for="languageSelect" data-i18n="settings.languageLabel">Idioma</label>
+          <select id="languageSelect" class="sel">
+            <option value="es" data-i18n="settings.languages.es">Español</option>
+            <option value="en" data-i18n="settings.languages.en">Inglés</option>
+            <option value="pt-br" data-i18n="settings.languages.pt-br">Portugués (Brasil)</option>
+            <option value="de" data-i18n="settings.languages.de">Alemán</option>
+            <option value="it" data-i18n="settings.languages.it">Italiano</option>
+            <option value="fr" data-i18n="settings.languages.fr">Francés</option>
+            <option value="ru" data-i18n="settings.languages.ru">Ruso</option>
+            <option value="ko" data-i18n="settings.languages.ko">Coreano</option>
+            <option value="ja" data-i18n="settings.languages.ja">Japonés</option>
+            <option value="zh" data-i18n="settings.languages.zh">Chino</option>
+          </select>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="settings-row" style="display:block">
+          <label for="transcriberModeSelect" id="transcriberModeLabel" style="display:block;font-size:0.92rem;font-weight:700;color:var(--text-main);margin-bottom:4px">
+            Motor de transcripción
+          </label>
+          <select id="transcriberModeSelect" class="sel" style="width:100%;max-width:none">
+            <option value="whisper">Whisper offline · Privacidad</option>
+            <option value="browser">Navegador · Más rápido</option>
+          </select>
+          <div id="transcriberModeHelp" class="meta" style="margin-top:8px;line-height:1.45">
+            Máxima privacidad: audio y texto se procesan localmente tras descargar el modelo.
+          </div>
+        </div>
+
+        <div class="settings-row" style="display:block">
+          <div id="whisperTitle" style="font-size:0.92rem;font-weight:700;color:var(--text-main);margin-bottom:4px">
+            Transcriptor offline · Whisper Small
+          </div>
+          <div id="whisperLead" class="meta" style="margin:0 0 10px 0;line-height:1.45">
+            Descarga el modelo una vez y luego dicta sin conexión.
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button id="btnDownloadWhisper" class="btn primary" type="button">
+              Descargar modelo
+            </button>
+            <button id="btnDeleteWhisper" class="btn ghost" type="button">
+              Eliminar modelo
+            </button>
+          </div>
+          <div id="whisperStatus" class="meta" aria-live="polite" style="margin-top:8px">
+            Modelo no descargado.
+          </div>
+          <div id="whisperProgressBox" style="margin-top:8px" hidden>
+            <div class="progress-bar" style="height:8px"><span id="whisperProgressFill" style="width:0%"></span></div>
+            <div id="whisperProgressText" class="meta" style="margin-top:6px">0%</div>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <button id="installBtn" class="btn primary" type="button" data-i18n="settings.installButton">
+            Instalar app
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== MAIN APP ====== -->
+    <main class="main-area" id="main" tabindex="-1">
+      <div class="app-shell" id="appShell">
+
+        <div class="command-bar" id="commandBar" role="region" aria-label="Acciones">
+          <div class="command-left">
+            <button id="btnClear" class="btn ghost small" type="button" data-i18n="actions.clear">Limpiar</button>
+            <button id="btnExport" class="btn ghost small" type="button" data-i18n="actions.export">Exportar PDF</button>
+
+            <div
+              id="commandTranscriberBox"
+              style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0"
+            >
+              <label
+                for="commandTranscriberModeSelect"
+                class="sr-only"
+                id="commandTranscriberModeLabel"
+              >Motor de transcripción</label>
+
+              <select
+                id="commandTranscriberModeSelect"
+                class="sel sel-small"
+                aria-label="Motor de transcripción"
+                style="min-width:210px"
+              >
+                <option value="whisper">Whisper offline · Privacidad</option>
+                <option value="browser">Navegador · Más rápido</option>
+              </select>
+
+              <span id="commandWhisperState" class="meta" aria-live="polite" hidden></span>
+
+              <button id="btnDownloadWhisperInline" class="btn ghost small" type="button" hidden>
+                Descargar modelo
+              </button>
+
+              <div
+                id="commandWhisperProgressBox"
+                style="display:flex;align-items:center;gap:8px"
+                hidden
+              >
+                <div class="progress-bar" style="height:8px;width:124px;min-width:124px">
+                  <span id="commandWhisperProgressFill" style="width:0%"></span>
+                </div>
+                <span id="commandWhisperProgressText" class="meta">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-right">
+            <span class="pill-status" id="progressPill">0/4</span>
+            <select id="jumpSelect" class="sel sel-small" aria-label="Ir a" data-i18n-aria-label="actions.jumpAria">
+              <option value="#contribSection" data-i18n="actions.jump.contrib">Aportes</option>
+              <option value="#keypointsSection" data-i18n="actions.jump.keypoints">Puntos clave</option>
+              <option value="#tasksSection" data-i18n="actions.jump.tasks">Quehaceres</option>
+              <option value="#observationsSection" data-i18n="actions.jump.observations">Observaciones</option>
+            </select>
+          </div>
+        </div>
+
+        <aside class="side-panel" aria-label="Configuración de la reunión">
+          <section class="panel-card" id="setupCard">
+            <h1 class="panel-title" data-i18n="setup.title">Configuración</h1>
+            <p class="panel-lead" data-i18n="setup.lead">Define los datos base y genera la estructura del acta.</p>
+
+            <div class="form-col">
+              <label class="field">
+                <span class="field-label" data-i18n="setup.meetingTitle">Título / Nombre de la reunión</span>
+                <input
+                  id="meetingTitle"
+                  class="text"
+                  type="text"
+                  placeholder="Sprint Review, Comité, etc."
+                  data-i18n-placeholder="setup.meetingTitlePh"
+                />
+              </label>
+
+              <div class="form-row">
+                <label class="field">
+                  <span class="field-label" data-i18n="setup.date">Fecha</span>
+                  <input id="meetingDate" class="text" type="date" />
+                </label>
+
+                <label class="field">
+                  <span class="field-label" data-i18n="setup.type">Tipo</span>
+                  <select id="meetingType" class="sel sel-field">
+                    <option value="meeting" data-i18n="setup.types.meeting">Reunión</option>
+                    <option value="catchup" data-i18n="setup.types.catchup">Seguimiento</option>
+                    <option value="workshop" data-i18n="setup.types.workshop">Taller</option>
+                    <option value="oneonone" data-i18n="setup.types.oneonone">1:1</option>
+                    <option value="retro" data-i18n="setup.types.retro">Retrospectiva</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="hr"></div>
+
+              <label class="field">
+                <span class="field-label" data-i18n="setup.participants">Integrantes</span>
+                <div class="add-row">
+                  <input
+                    id="participantInput"
+                    class="text"
+                    type="text"
+                    placeholder="Añadir integrante…"
+                    data-i18n-placeholder="setup.participantsPh"
+                  />
+                  <button id="btnAddParticipant" class="btn" type="button" data-i18n="setup.add">Añadir</button>
+                </div>
+              </label>
+
+              <div id="participantsList" class="chips" aria-live="polite"></div>
+
+              <div class="hr"></div>
+
+              <button id="btnGenerate" class="btn primary" type="button" data-i18n="setup.generate">
+                Generar estructura
+              </button>
+
+              <div class="meta" id="autoSaveStatus" aria-live="polite" data-i18n="setup.autosave">
+                Autosave ON · Local
+              </div>
+            </div>
+          </section>
+
+          <section class="panel-card progress-card" id="progressBox" aria-live="polite">
+            <div class="progress-title" data-i18n="progress.title">Progreso</div>
+            <div class="progress-bar"><span id="progressFill" style="width:0%"></span></div>
+            <div class="progress-stats">
+              <span id="progressCount">0</span> / <span id="progressTotal">4</span>
+              <span class="progress-caption" data-i18n="progress.caption">secciones listas</span>
+            </div>
+          </section>
+        </aside>
+
+        <section class="workspace" aria-label="Contenido">
+          <div class="workspace-inner">
+
+            <section class="section-card empty" id="emptyState">
+              <h1 class="section-title" data-i18n="empty.title">Empieza creando la reunión</h1>
+              <p class="lead" data-i18n="empty.body">
+                Añade integrantes y pulsa “Generar estructura”. Luego podrás dictar aportes, sacar puntos clave, asignar tareas y exportar.
+              </p>
+            </section>
+
+            <section class="section-card" id="contribSection" hidden>
+              <div class="section-head">
+                <h1 class="section-title" data-i18n="contrib.title">Aportes de la reunión</h1>
+                <p class="lead" data-i18n="contrib.lead">
+                  Cada aporte queda etiquetado por integrante y admite respuestas anidadas (estilo hilo).
+                </p>
+              </div>
+
+              <div class="card composer">
+                <div class="form-row">
+                  <label class="field grow">
+                    <span class="field-label" data-i18n="contrib.author">Autor</span>
+                    <select id="contribAuthor" class="sel sel-field"></select>
+                  </label>
+                </div>
+
+                <label class="field stack">
+                  <span class="field-label" data-i18n="contrib.text">Texto del aporte</span>
+                  <textarea
+                    id="contribText"
+                    class="textarea"
+                    rows="3"
+                    placeholder="Escribe o dicta tu aporte…"
+                    data-i18n-placeholder="contrib.textPh"
+                  ></textarea>
+                </label>
+
+                <div class="form-row actions-row">
+                  <button id="btnDictateTop" class="btn" type="button" data-i18n="contrib.dictate">🎙️ Dictar</button>
+                  <button id="btnAddContrib" class="btn primary" type="button" data-i18n="contrib.add">Añadir aporte</button>
+                </div>
+
+                <div id="dictationModeHelp" class="meta" aria-live="polite" data-i18n="dictation.whisperHelp">
+                  Pulsa una vez para grabar. Vuelve a pulsar para que se transcriba lo grabado.
+                </div>
+                <div id="dictateHint" class="meta" aria-live="polite"></div>
+              </div>
+
+              <div id="threads" class="threads" aria-live="polite"></div>
+            </section>
+
+            <section class="section-card" id="keypointsSection" hidden>
+              <div class="section-head">
+                <h1 class="section-title" data-i18n="keypoints.title">Puntos clave</h1>
+                <p class="lead" data-i18n="keypoints.lead">
+                  Extrae puntos a partir de los aportes (incluye replies) con deduplicación.
+                </p>
+              </div>
+
+              <div class="card">
+                <div class="form-row">
+                  <label class="field">
+                    <span class="field-label" data-i18n="keypoints.howmany">¿Cuántos puntos?</span>
+                    <input id="kpCount" class="text" type="number" min="1" max="15" value="5" />
+                  </label>
+
+                  <button id="btnExtractKP" class="btn primary" type="button" data-i18n="keypoints.extract">
+                    Extraer
+                  </button>
+                </div>
+
+                <ul id="keypointsList" class="kp" aria-live="polite"></ul>
+              </div>
+            </section>
+
+            <section class="section-card" id="tasksSection" hidden>
+              <div class="section-head">
+                <h1 class="section-title" data-i18n="tasks.title">Quehaceres y timelines</h1>
+                <p class="lead" data-i18n="tasks.lead">Asigna tareas por integrante con fecha objetivo.</p>
+              </div>
+
+              <div class="tasks">
+                <div class="card">
+                  <div class="form-row">
+                    <label class="field grow">
+                      <span class="field-label" data-i18n="tasks.task">Tarea</span>
+                      <input
+                        id="taskText"
+                        class="text"
+                        type="text"
+                        placeholder="Descripción de la tarea…"
+                        data-i18n-placeholder="tasks.taskPh"
+                      />
+                    </label>
+                  </div>
+
+                  <div class="form-row">
+                    <label class="field">
+                      <span class="field-label" data-i18n="tasks.assignee">Responsable</span>
+                      <select id="taskAssignee" class="sel sel-field"></select>
+                    </label>
+
+                    <label class="field">
+                      <span class="field-label" data-i18n="tasks.due">Fecha límite</span>
+                      <input id="taskDue" class="text" type="date" />
+                    </label>
+
+                    <label class="field">
+                      <span class="field-label" data-i18n="tasks.status">Estado</span>
+                      <select id="taskStatus" class="sel sel-field">
+                        <option value="pending" data-i18n="tasks.pending">Pendiente</option>
+                        <option value="done" data-i18n="tasks.done">Hecho</option>
+                      </select>
+                    </label>
+
+                    <button id="btnAddTask" class="btn primary" type="button" data-i18n="tasks.add">Añadir</button>
+                  </div>
+
+                  <div class="meta" data-i18n="tasks.hint">Tip: alterna estado con ✓ y vuelve con ↩︎.</div>
+                </div>
+
+                <div id="tasksList" class="task-list" aria-live="polite"></div>
+
+                <div class="hr"></div>
+                <h2 class="subhead" data-i18n="timeline.title">Timeline por integrante</h2>
+                <div id="timelineByPerson" class="timeline" aria-live="polite"></div>
+              </div>
+            </section>
+
+            <section class="section-card" id="observationsSection" hidden>
+              <div class="section-head">
+                <h1 class="section-title" data-i18n="observations.title">Observaciones</h1>
+                <p class="lead" data-i18n="observations.lead">
+                  Deja constancia de contratiempos, ambiente de la reunión, riesgos, incidencias o cualquier apunte relevante.
+                </p>
+              </div>
+
+              <div class="card">
+                <label class="field stack">
+                  <span class="field-label" data-i18n="observations.field">Observaciones finales</span>
+                  <textarea
+                    id="meetingObservations"
+                    class="textarea"
+                    rows="6"
+                    placeholder="Anota aquí incidencias, bloqueos, ambiente general, dependencias, acuerdos tácitos o cualquier aspecto relevante…"
+                    data-i18n-placeholder="observations.ph"
+                  ></textarea>
+                </label>
+
+                <div class="meta" data-i18n="observations.hint">
+                  Estas notas aparecerán al final del acta exportada.
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="brand-footer" id="siteFooter" role="contentinfo">
+      <div class="footer-left">
+        <div class="f-left-row1">
+          <strong data-i18n="footer.brand">OptimeFlow(s)®</strong>
+          <span class="sep">•</span>
+          <span id="footerAppName" data-i18n="footer.appName">Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</span>
+        </div>
+        <div class="f-left-row2">
+          <span id="f-year" data-i18n="footer.year">2025</span>
+          <span class="sep">•</span>
+          <a
+            id="f-author-link"
+            class="footer-author-link"
+            href="https://orcid.org/0009-0005-4079-7418"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="ORCID"
+          >
+            <span id="f-author" data-i18n="footer.author">Andrés Calvo Espinosa</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-center">
+        <button
+          type="button"
+          class="footer-logo-btn"
+          id="coherenceLink"
+          aria-label="Coherencia Universal"
+          data-i18n-aria-label="footer.coherenceButtonAria"
+        >
+          <img
+            class="tag-logo footer-logo heat"
+            src="assets/img/recapitula192.png"
+            sizes="(max-width: 600px) 40px, 28px"
+            alt="Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+            data-i18n-alt="footer.iconAlt"
+          >
+        </button>
+      </div>
+
+      <div class="footer-right">
+        <button
+          class="btn ghost"
+          id="licenseLink"
+          aria-label="Licencia MIT"
+          data-i18n-aria-label="footer.licenseButtonAria"
+          data-i18n="footer.licenseButton"
+        >
+          Licencia MIT
+        </button>
+        <button class="btn ghost" id="privacyLink" data-i18n="footer.privacyButton">
+          Privacidad
+        </button>
+      </div>
+    </footer>
+
+    <!-- ====== Overlay Licencia MIT ====== -->
+    <div class="overlay" id="licenseOverlay" hidden>
+      <div class="box">
+        <h2 data-i18n="licenseOverlay.title">Licencia MIT</h2>
+
+        <pre class="license-text" data-i18n="licenseOverlay.text">MIT License
+
+Copyright (c) 2025 Andrés Calvo Espinosa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</pre>
+
+        <div class="overlay-actions">
+          <button class="btn ghost" data-close="licenseOverlay" type="button" data-i18n="common.close">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== Overlay Política de privacidad ====== -->
+    <div class="overlay" id="privacyOverlay" hidden>
+      <div class="box">
+        <h2 id="ppTitle" data-i18n="privacy.title">Política de privacidad</h2>
+
+        <div id="ppBody" class="small" style="line-height:1.55" data-i18n-html="privacy.body">
+          <p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> se ejecuta 100% en tu navegador. No enviamos tus datos a ningún servidor.</p>
+        </div>
+
+        <div class="overlay-actions">
+          <button class="btn ghost" data-close="privacyOverlay" type="button" data-i18n="common.close">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== Overlay Coherencia Universal ====== -->
+    <div class="overlay" id="coherenceOverlay" hidden>
+      <div class="box">
+        <h2 data-i18n="coherence.title">Coherencia Universal</h2>
+        <p class="small" style="line-height:1.55" data-i18n="coherence.body">
+          Que esta obra sirva como agradecimiento y como compromiso: pensar, sentir y actuar en la misma dirección.
+        </p>
+        <div class="overlay-actions">
+          <button class="btn ghost" data-close="coherenceOverlay" type="button" data-i18n="common.close">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== Overlay Confirmación ====== -->
+    <div class="overlay" id="confirmOverlay" hidden>
+      <div class="box">
+        <h2 id="confirmTitle" data-i18n="confirm.title">Confirmación</h2>
+        <p id="confirmMessage" class="small" style="line-height:1.55"></p>
+        <div class="overlay-actions">
+          <button class="btn ghost" id="confirmCancel" type="button" data-close="confirmOverlay" data-i18n="common.cancel">Cancelar</button>
+          <button class="btn primary" id="confirmOk" type="button" data-i18n="common.confirm">Confirmar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <section id="printArea" class="print-area" hidden aria-hidden="true"></section>
+
+    <svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+      <filter id="heat-waves">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="1" seed="3">
+          <animate attributeName="baseFrequency"
+                   dur="7.5s"
+                   values="0.012 0.02; 0.02 0.04; 0.012 0.02; 0.012 0.02"
+                   keyTimes="0;0.3;0.6;1"
+                   calcMode="spline"
+                   keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0 0 1 1"
+                   repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale="0">
+          <animate attributeName="scale"
+                   dur="7.5s"
+                   values="0;28;0;0"
+                   keyTimes="0;0.3;0.6;1"
+                   calcMode="spline"
+                   keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0 0 1 1"
+                   repeatCount="indefinite" />
+        </feDisplacementMap>
+      </filter>
+    </svg>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,290 @@
+{
+  "a11y": {
+    "skip": "Перейти к содержимому"
+  },
+  "app": {
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "logoAlt": "Логотип OptimeFlow(s)",
+    "brandName": "OptimeFlow(s)",
+    "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "settings": {
+    "openButton": "Настройки",
+    "themeLabel": "Тема",
+    "themes": {
+      "system": "Системная",
+      "dark": "Тёмное ядро",
+      "midnight": "Полуночный синий",
+      "nebula": "Неоновая туманность",
+      "ocean": "Глубокий океан",
+      "forest": "Изумрудный лес",
+      "amber": "Тёплый янтарь",
+      "violet": "Королевский фиолетовый",
+      "mono": "Моно нуар"
+    },
+    "languageLabel": "Язык",
+    "languages": {
+      "es": "Испанский",
+      "en": "Английский",
+      "pt-br": "Португальский (Бразилия)",
+      "de": "Немецкий",
+      "it": "Итальянский",
+      "fr": "Французский",
+      "ru": "Русский",
+      "ko": "Корейский",
+      "ja": "Японский",
+      "zh": "Китайский",
+      "hi": "Хинди",
+      "ar": "Арабский"
+    },
+    "installButton": "Установить приложение"
+  },
+  "actions": {
+    "clear": "Очистить",
+    "export": "Экспортировать PDF",
+    "copy": "Скопировать для Gmail",
+    "jumpAria": "Перейти к разделу",
+    "jump": {
+      "contrib": "Вклады",
+      "keypoints": "Ключевые моменты",
+      "tasks": "Задачи",
+      "observations": "Наблюдения"
+    }
+  },
+  "export": {
+    "settingsTitle": "Экспорт протокола",
+    "headerHint": "Настройте шапку протокола, указав название организации и, при желании, логотип.",
+    "headerNameLabel": "Название компании / организации",
+    "headerNamePh": "Напр.: Globalogistics, комитет COCOLAB, Генеральное управление…",
+    "includeLogo": "Включить логотип",
+    "logoLabel": "Логотип",
+    "logoPick": "Выбрать",
+    "logoReset": "Убрать",
+    "logoStatusApp": "Логотип: используется логотип приложения",
+    "logoStatusCustom": "Логотип: пользовательский",
+    "logoStatusSet": "Логотип шапки настроен",
+    "logoStatusNone": "Логотип шапки отсутствует",
+    "logoAlt": "Логотип шапки",
+    "footerLabel": "Нижний колонтитул",
+    "footerPh": "Необязательный текст для нижнего колонтитула…",
+    "footerHint": "Совет: этот текст добавляется в конец протокола (полезно для указания организации, отдела, конфиденциальности и т. п.)."
+  },
+  "setup": {
+    "title": "Настройка",
+    "lead": "Задайте базовые данные и сгенерируйте структуру протокола.",
+    "meetingTitle": "Название встречи",
+    "meetingTitlePh": "Sprint Review, комитет и т. д.",
+    "date": "Дата",
+    "type": "Тип",
+    "types": {
+      "meeting": "Встреча",
+      "catchup": "Синхронизация",
+      "workshop": "Воркшоп",
+      "oneonone": "1:1",
+      "retro": "Ретроспектива"
+    },
+    "participants": "Участники",
+    "participantsPh": "Добавить участника…",
+    "add": "Добавить",
+    "generate": "Сгенерировать структуру",
+    "autosave": "Автосохранение ВКЛ · Локально",
+    "autosaveSavedAt": "Сохранено · {{time}}",
+    "removeParticipant": "Удалить участника",
+    "noParticipantsOption": "Сначала добавьте участников…"
+  },
+  "empty": {
+    "title": "Начните с создания встречи",
+    "body": "Добавьте участников и нажмите «Сгенерировать структуру». Затем можно надиктовывать вклады, выделять ключевые моменты, назначать задачи и экспортировать."
+  },
+  "progress": {
+    "title": "Прогресс",
+    "caption": "готовых разделов",
+    "pill": "{{done}}/{{total}}"
+  },
+  "contrib": {
+    "title": "Вклады встречи",
+    "lead": "Каждый вклад помечается участником и поддерживает вложенные ответы (в формате треда).",
+    "author": "Автор",
+    "text": "Текст вклада",
+    "textPh": "Введите или надиктуйте свой вклад…",
+    "dictate": "🎙️ Диктовать",
+    "add": "Добавить вклад",
+    "reply": "Ответить",
+    "emptyThreads": "Пока нет вкладов. Добавьте первый выше или надиктуйте его с помощью 🎙️."
+  },
+  "dictation": {
+    "listening": "🎙️ Слушаю… говорите естественно."
+  },
+  "keypoints": {
+    "title": "Ключевые моменты",
+    "lead": "Извлекайте пункты из вкладов (включая ответы) с удалением дубликатов.",
+    "howmany": "Сколько пунктов?",
+    "extract": "Извлечь",
+    "empty": "Пока нет ключевых моментов. Нажмите «Извлечь».",
+    "remove": "Удалить ключевой момент"
+  },
+  "tasks": {
+    "title": "Задачи и сроки",
+    "lead": "Назначайте задачи участникам с целевой датой.",
+    "task": "Задача",
+    "taskPh": "Описание задачи…",
+    "assignee": "Ответственный",
+    "due": "Срок",
+    "status": "Статус",
+    "pending": "В ожидании",
+    "done": "Готово",
+    "add": "Добавить",
+    "hint": "Совет: переключайте статус с помощью ✓ и возвращайте обратно через ↩︎.",
+    "empty": "Пока нет задач. Добавьте одну выше."
+  },
+  "observations": {
+    "title": "Наблюдения",
+    "lead": "Фиксируйте затруднения, атмосферу встречи, риски, инциденты или любые важные замечания.",
+    "field": "Итоговые наблюдения",
+    "ph": "Укажите здесь инциденты, блокеры, общую атмосферу, зависимости, негласные договорённости или любые другие важные аспекты…",
+    "hint": "Эти заметки появятся в конце экспортированного протокола."
+  },
+  "timeline": {
+    "title": "Сроки по участникам",
+    "empty": "Когда вы добавите задачи, здесь появится таймлайн по каждому человеку."
+  },
+  "print": {
+    "untitled": "Встреча без названия",
+    "none": "—",
+    "doc": {
+      "title": "ПРОТОКОЛ ВСТРЕЧИ"
+    },
+    "header": {
+      "reference": "Ссылка",
+      "version": "Версия",
+      "issueDate": "Дата выпуска"
+    },
+    "details": {
+      "meeting": "Комитет / Встреча",
+      "entity": "Организация / Команда",
+      "participantsCount": "Кол-во участников"
+    },
+    "meta": {
+      "date": "Дата",
+      "type": "Тип",
+      "participants": "Участники",
+      "createdAt": "Сгенерировано"
+    },
+    "sections": {
+      "summary": "Краткое резюме",
+      "contrib": "Ход встречи",
+      "keypoints": "Ключевые моменты и договорённости",
+      "tasks": "Задачи / выводы",
+      "observations": "Наблюдения",
+      "participants": "Участники"
+    },
+    "summary": {
+      "bullets": {
+        "contrib": "Зафиксировано вкладов: {{total}} (основных тредов: {{threads}})",
+        "keypoints": "Выделено ключевых моментов: {{n}}",
+        "tasks": "Задачи: {{total}} ({{done}} выполнено, {{pending}} в ожидании)"
+      },
+      "highlights": "Основные акценты"
+    },
+    "contrib": {
+      "kind": {
+        "root": "Выступление",
+        "reply": "Ответ"
+      },
+      "replyTo": "связано с пунктом №{{n}}",
+      "repliesLabel": "Связанные выступления"
+    },
+    "tasksTable": {
+      "id": "ID",
+      "task": "Задача / вывод",
+      "assignee": "Ответственный",
+      "due": "Срок",
+      "status": "Статус"
+    },
+    "observations": {
+      "empty": "Наблюдения не зарегистрированы."
+    },
+    "participantsTable": {
+      "number": "#",
+      "name": "Имя",
+      "role": "Роль / Должность",
+      "company": "Компания / Команда",
+      "signature": "Подпись"
+    },
+    "footer": "Создано с помощью OptimeFlow(s) · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "alerts": {
+    "needParticipants": "Добавьте хотя бы 1 участника, чтобы продолжить.",
+    "needAuthor": "Выберите автора.",
+    "needText": "Сначала введите текст.",
+    "needTextField": "Выберите текстовое поле для диктовки.",
+    "voiceNotAvail": "Диктовка недоступна в этом браузере.",
+    "voicePermissionDenied": "Разрешение на использование микрофона не было предоставлено.",
+    "voiceMicUnavailable": "Не удалось обнаружить доступный микрофон.",
+    "voiceNoSpeech": "Речь не обнаружена. Попробуйте ещё раз.",
+    "voiceNetwork": "Для браузерной диктовки на этом устройстве требуется подключение к интернету.",
+    "voiceGenericError": "Не удалось завершить диктовку. Попробуйте ещё раз.",
+    "noThreadsForKeypoints": "Сначала добавьте вклады, чтобы можно было извлечь ключевые моменты.",
+    "needTaskText": "Введите задачу.",
+    "needGenerateFirst": "Сначала сгенерируйте структуру (Настройка → Сгенерировать структуру).",
+    "clearConfirm": "Вы уверены, что хотите очистить все данные? Это действие нельзя отменить.",
+    "deleteContribConfirm": "Удалить этот вклад и все его ответы?",
+    "deleteTaskConfirm": "Удалить эту задачу?",
+    "printAreaMissing": "Область печати (printArea) не найдена.",
+    "copyNotSupported": "Не удалось автоматически скопировать в этом браузере. Попробуйте другой (Chrome/Edge) или скопируйте обычный текст.",
+    "logoTooBig": "Логотип слишком большой. Используйте более лёгкое изображение (идеально < 900 КБ).",
+    "logoReadFail": "Не удалось прочитать логотип. Попробуйте другой файл."
+  },
+  "toasts": {
+    "structureReady": "Структура готова ✅",
+    "participantAdded": "Участник добавлен: {{name}}",
+    "participantRemoved": "Участник удалён: {{name}}",
+    "contribAdded": "Вклад добавлен ✅",
+    "replyAdded": "Ответ добавлен ✅",
+    "deleted": "Удалено ✅",
+    "keypointsExtracted": "Ключевые моменты извлечены: {{n}}",
+    "keypointRemoved": "Ключевой момент удалён",
+    "taskAdded": "Задача добавлена ✅",
+    "taskToggled": "Статус обновлён ✅",
+    "taskRemoved": "Задача удалена ✅",
+    "cleared": "Данные очищены ✅",
+    "exportPreparing": "Подготовка PDF…",
+    "copyPreparing": "Копирование протокола…",
+    "exportCopied": "Протокол скопирован ✅ (вставьте его в Gmail)",
+    "exportSettingsSaved": "Экспорт обновлён ✅",
+    "logoUpdated": "Логотип обновлён ✅",
+    "logoReset": "Логотип удалён ✅"
+  },
+  "footer": {
+    "brand": "OptimeFlow(s)®",
+    "appName": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️",
+    "year": "2025",
+    "author": "Andrés Calvo Espinosa",
+    "coherenceButtonAria": "Универсальная согласованность",
+    "licenseButtonAria": "Лицензия MIT",
+    "licenseButton": "Лицензия MIT",
+    "privacyButton": "Конфиденциальность",
+    "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "licenseOverlay": {
+    "title": "Лицензия MIT",
+    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  "privacy": {
+    "title": "Политика конфиденциальности",
+    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> работает на 100% в вашем браузере. Мы не отправляем ваши данные ни на какой сервер.</p>"
+  },
+  "coherence": {
+    "title": "Универсальная согласованность",
+    "body": "Пусть это произведение станет и благодарностью, и обязательством: мыслить, чувствовать и действовать в одном направлении."
+  },
+  "confirm": {
+    "title": "Подтверждение"
+  },
+  "common": {
+    "close": "Закрыть",
+    "cancel": "Отмена",
+    "confirm": "Подтвердить",
+    "save": "Сохранить"
+  }
+}

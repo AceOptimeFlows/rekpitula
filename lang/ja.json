@@ -1,0 +1,290 @@
+{
+  "a11y": {
+    "skip": "コンテンツへスキップ"
+  },
+  "app": {
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "logoAlt": "OptimeFlow(s) のロゴ",
+    "brandName": "OptimeFlow(s)",
+    "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "settings": {
+    "openButton": "設定",
+    "themeLabel": "テーマ",
+    "themes": {
+      "system": "システム",
+      "dark": "ダークコア",
+      "midnight": "ミッドナイトブルー",
+      "nebula": "ネオンネビュラ",
+      "ocean": "ディープオーシャン",
+      "forest": "エメラルドフォレスト",
+      "amber": "ウォームアンバー",
+      "violet": "ロイヤルバイオレット",
+      "mono": "モノノワール"
+    },
+    "languageLabel": "言語",
+    "languages": {
+      "es": "スペイン語",
+      "en": "英語",
+      "pt-br": "ポルトガル語（ブラジル）",
+      "de": "ドイツ語",
+      "it": "イタリア語",
+      "ru": "ロシア語",
+      "fr": "フランス語",
+      "ko": "韓国語",
+      "ja": "日本語",
+      "zh": "中国語",
+      "hi": "ヒンディー語",
+      "ar": "アラビア語"
+    },
+    "installButton": "アプリをインストール"
+  },
+  "actions": {
+    "clear": "クリア",
+    "export": "PDFを書き出す",
+    "copy": "Gmail用にコピー",
+    "jumpAria": "セクションへ移動",
+    "jump": {
+      "contrib": "発言",
+      "keypoints": "要点",
+      "tasks": "タスク",
+      "observations": "所見"
+    }
+  },
+  "export": {
+    "settingsTitle": "議事録の書き出し",
+    "headerHint": "組織名と、必要に応じてロゴを設定して、議事録のヘッダーを構成します。",
+    "headerNameLabel": "会社 / 組織名",
+    "headerNamePh": "例：Globalogistics、COCOLAB委員会、総務本部…",
+    "includeLogo": "ロゴを含める",
+    "logoLabel": "ロゴ",
+    "logoPick": "選択",
+    "logoReset": "削除",
+    "logoStatusApp": "ロゴ：アプリのロゴを使用中",
+    "logoStatusCustom": "ロゴ：カスタム",
+    "logoStatusSet": "ヘッダーロゴが設定されています",
+    "logoStatusNone": "ヘッダーロゴなし",
+    "logoAlt": "ヘッダーロゴ",
+    "footerLabel": "フッター",
+    "footerPh": "フッター用の任意テキスト…",
+    "footerHint": "ヒント：このテキストは議事録の末尾に追加されます（組織名、部門名、機密性などに便利です）。"
+  },
+  "setup": {
+    "title": "設定",
+    "lead": "基本情報を定義して、議事録の構成を生成します。",
+    "meetingTitle": "会議タイトル / 名称",
+    "meetingTitlePh": "スプリントレビュー、委員会など",
+    "date": "日付",
+    "type": "種類",
+    "types": {
+      "meeting": "会議",
+      "catchup": "フォローアップ",
+      "workshop": "ワークショップ",
+      "oneonone": "1:1",
+      "retro": "レトロスペクティブ"
+    },
+    "participants": "参加者",
+    "participantsPh": "参加者を追加…",
+    "add": "追加",
+    "generate": "構成を生成",
+    "autosave": "自動保存 ON ・ ローカル",
+    "autosaveSavedAt": "保存済み ・ {{time}}",
+    "removeParticipant": "参加者を削除",
+    "noParticipantsOption": "まず参加者を追加してください…"
+  },
+  "empty": {
+    "title": "まず会議を作成しましょう",
+    "body": "参加者を追加して「構成を生成」を押してください。その後、発言の音声入力、要点の抽出、タスクの割り当て、書き出しができます。"
+  },
+  "progress": {
+    "title": "進行状況",
+    "caption": "準備できたセクション",
+    "pill": "{{done}}/{{total}}"
+  },
+  "contrib": {
+    "title": "会議の発言",
+    "lead": "各発言には参加者が紐づき、ネストされた返信（スレッド形式）に対応しています。",
+    "author": "作成者",
+    "text": "発言内容",
+    "textPh": "発言を入力または音声入力…",
+    "dictate": "🎙️ 音声入力",
+    "add": "発言を追加",
+    "reply": "返信",
+    "emptyThreads": "まだ発言がありません。上から最初の発言を追加するか、🎙️で音声入力してください。"
+  },
+  "dictation": {
+    "listening": "🎙️ 聞き取り中…自然に話してください。"
+  },
+  "keypoints": {
+    "title": "要点",
+    "lead": "発言（返信を含む）から重複を除いて要点を抽出します。",
+    "howmany": "要点はいくつ？",
+    "extract": "抽出",
+    "empty": "まだ要点がありません。「抽出」を押してください。",
+    "remove": "要点を削除"
+  },
+  "tasks": {
+    "title": "タスクとタイムライン",
+    "lead": "参加者ごとに期限付きのタスクを割り当てます。",
+    "task": "タスク",
+    "taskPh": "タスクの説明…",
+    "assignee": "担当者",
+    "due": "期限",
+    "status": "状態",
+    "pending": "未対応",
+    "done": "完了",
+    "add": "追加",
+    "hint": "ヒント：✓で状態を切り替え、↩︎で戻せます。",
+    "empty": "まだタスクがありません。上から追加してください。"
+  },
+  "observations": {
+    "title": "所見",
+    "lead": "問題点、会議の雰囲気、リスク、インシデント、その他の重要なメモを残します。",
+    "field": "最終所見",
+    "ph": "ここに、インシデント、ブロッカー、全体の雰囲気、依存関係、暗黙の合意、その他の重要な事項を記録してください…",
+    "hint": "これらのメモは、書き出された議事録の最後に表示されます。"
+  },
+  "timeline": {
+    "title": "参加者別タイムライン",
+    "empty": "タスクを追加すると、ここに参加者ごとのタイムラインが表示されます。"
+  },
+  "print": {
+    "untitled": "無題の会議",
+    "none": "—",
+    "doc": {
+      "title": "議事録"
+    },
+    "header": {
+      "reference": "参照",
+      "version": "版",
+      "issueDate": "発行日"
+    },
+    "details": {
+      "meeting": "委員会 / 会議",
+      "entity": "組織 / チーム",
+      "participantsCount": "参加者数"
+    },
+    "meta": {
+      "date": "日付",
+      "type": "種類",
+      "participants": "参加者",
+      "createdAt": "生成日時"
+    },
+    "sections": {
+      "summary": "要約",
+      "contrib": "会議の進行",
+      "keypoints": "要点と合意事項",
+      "tasks": "タスク / 結論",
+      "observations": "所見",
+      "participants": "参加者"
+    },
+    "summary": {
+      "bullets": {
+        "contrib": "記録された発言：{{total}}件（メインスレッド {{threads}}件）",
+        "keypoints": "抽出された要点：{{n}}件",
+        "tasks": "タスク：{{total}}件（完了 {{done}}件、未対応 {{pending}}件）"
+      },
+      "highlights": "ハイライト"
+    },
+    "contrib": {
+      "kind": {
+        "root": "発言",
+        "reply": "返信"
+      },
+      "replyTo": "項目 #{{n}} に関連",
+      "repliesLabel": "関連する発言"
+    },
+    "tasksTable": {
+      "id": "ID",
+      "task": "タスク / 結論",
+      "assignee": "担当者",
+      "due": "期限",
+      "status": "状態"
+    },
+    "observations": {
+      "empty": "記録された所見はありません。"
+    },
+    "participantsTable": {
+      "number": "#",
+      "name": "氏名",
+      "role": "役職 / 役割",
+      "company": "会社 / チーム",
+      "signature": "署名"
+    },
+    "footer": "OptimeFlow(s) により生成 · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "alerts": {
+    "needParticipants": "続行するには、少なくとも1人の参加者を追加してください。",
+    "needAuthor": "作成者を選択してください。",
+    "needText": "先に何か入力してください。",
+    "needTextField": "音声入力するテキスト欄を選択してください。",
+    "voiceNotAvail": "このブラウザーでは音声入力を利用できません。",
+    "voicePermissionDenied": "マイクの使用許可が与えられませんでした。",
+    "voiceMicUnavailable": "使用可能なマイクが見つかりませんでした。",
+    "voiceNoSpeech": "音声が検出されませんでした。もう一度お試しください。",
+    "voiceNetwork": "このデバイスでは、ブラウザーの音声入力にインターネット接続が必要です。",
+    "voiceGenericError": "音声入力を完了できませんでした。もう一度お試しください。",
+    "noThreadsForKeypoints": "要点を抽出するには、先に発言を追加してください。",
+    "needTaskText": "タスクを入力してください。",
+    "needGenerateFirst": "先に構成を生成してください（設定 → 構成を生成）。",
+    "clearConfirm": "本当にすべてのデータをクリアしますか？この操作は元に戻せません。",
+    "deleteContribConfirm": "この発言とすべての返信を削除しますか？",
+    "deleteTaskConfirm": "このタスクを削除しますか？",
+    "printAreaMissing": "印刷領域（printArea）が見つかりませんでした。",
+    "copyNotSupported": "このブラウザーでは自動コピーできませんでした。別のブラウザー（Chrome/Edge）を試すか、プレーンテキストをコピーしてください。",
+    "logoTooBig": "ロゴが大きすぎます。もっと軽い画像を使用してください（理想は 900KB 未満）。",
+    "logoReadFail": "ロゴを読み取れませんでした。別のファイルをお試しください。"
+  },
+  "toasts": {
+    "structureReady": "構成の準備ができました ✅",
+    "participantAdded": "参加者を追加しました：{{name}}",
+    "participantRemoved": "参加者を削除しました：{{name}}",
+    "contribAdded": "発言を追加しました ✅",
+    "replyAdded": "返信を追加しました ✅",
+    "deleted": "削除しました ✅",
+    "keypointsExtracted": "要点を抽出しました：{{n}}",
+    "keypointRemoved": "要点を削除しました",
+    "taskAdded": "タスクを追加しました ✅",
+    "taskToggled": "状態を更新しました ✅",
+    "taskRemoved": "タスクを削除しました ✅",
+    "cleared": "データをクリアしました ✅",
+    "exportPreparing": "PDFを準備中…",
+    "copyPreparing": "議事録をコピー中…",
+    "exportCopied": "議事録をコピーしました ✅（Gmail に貼り付けてください）",
+    "exportSettingsSaved": "書き出し設定を更新しました ✅",
+    "logoUpdated": "ロゴを更新しました ✅",
+    "logoReset": "ロゴを削除しました ✅"
+  },
+  "footer": {
+    "brand": "OptimeFlow(s)®",
+    "appName": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️",
+    "year": "2025",
+    "author": "Andrés Calvo Espinosa",
+    "coherenceButtonAria": "普遍的一貫性",
+    "licenseButtonAria": "MITライセンス",
+    "licenseButton": "MITライセンス",
+    "privacyButton": "プライバシー",
+    "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "licenseOverlay": {
+    "title": "MITライセンス",
+    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> は 100% あなたのブラウザー内で動作します。データをいかなるサーバーにも送信しません。</p>"
+  },
+  "coherence": {
+    "title": "普遍的一貫性",
+    "body": "この作品が感謝であり、同時に約束でもありますように。思考し、感じ、行動することが、同じ方向へと向かいますように。"
+  },
+  "confirm": {
+    "title": "確認"
+  },
+  "common": {
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "save": "保存"
+  }
+}

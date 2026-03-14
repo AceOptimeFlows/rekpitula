@@ -1,0 +1,290 @@
+{
+  "a11y": {
+    "skip": "Passer au contenu"
+  },
+  "app": {
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "logoAlt": "Logo d'OptimeFlow(s)",
+    "brandName": "OptimeFlow(s)",
+    "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "settings": {
+    "openButton": "Paramètres",
+    "themeLabel": "Thème",
+    "themes": {
+      "system": "Système",
+      "dark": "Noyau sombre",
+      "midnight": "Bleu minuit",
+      "nebula": "Nébuleuse néon",
+      "ocean": "Océan profond",
+      "forest": "Forêt émeraude",
+      "amber": "Ambre chaud",
+      "violet": "Violet royal",
+      "mono": "Mono noir"
+    },
+    "languageLabel": "Langue",
+    "languages": {
+      "es": "Espagnol",
+      "en": "Anglais",
+      "pt-br": "Portugais (Brésil)",
+      "de": "Allemand",
+      "it": "Italien",
+      "fr": "Français",
+      "ru": "Russe",
+      "ko": "Coréen",
+      "ja": "Japonais",
+      "zh": "Chinois",
+      "hi": "Hindi",
+      "ar": "Arabe"
+    },
+    "installButton": "Installer l'application"
+  },
+  "actions": {
+    "clear": "Effacer",
+    "export": "Exporter en PDF",
+    "copy": "Copier pour Gmail",
+    "jumpAria": "Aller à la section",
+    "jump": {
+      "contrib": "Contributions",
+      "keypoints": "Points clés",
+      "tasks": "Tâches",
+      "observations": "Observations"
+    }
+  },
+  "export": {
+    "settingsTitle": "Export du procès-verbal",
+    "headerHint": "Configurez l'en-tête du procès-verbal avec le nom de l'entité et, si vous le souhaitez, un logo.",
+    "headerNameLabel": "Nom de l'entreprise / entité",
+    "headerNamePh": "Ex. : Globalogistics, Comité COCOLAB, Direction générale…",
+    "includeLogo": "Inclure le logo",
+    "logoLabel": "Logo",
+    "logoPick": "Choisir",
+    "logoReset": "Retirer",
+    "logoStatusApp": "Logo : utilisation de celui de l'application",
+    "logoStatusCustom": "Logo : personnalisé",
+    "logoStatusSet": "Logo d'en-tête configuré",
+    "logoStatusNone": "Aucun logo d'en-tête",
+    "logoAlt": "Logo d'en-tête",
+    "footerLabel": "Pied de page",
+    "footerPh": "Texte optionnel pour le pied de page…",
+    "footerHint": "Astuce : ce texte est ajouté à la fin du procès-verbal (utile pour l'entité, le service, la confidentialité, etc.)."
+  },
+  "setup": {
+    "title": "Configuration",
+    "lead": "Définissez les données de base et générez la structure du procès-verbal.",
+    "meetingTitle": "Titre / Nom de la réunion",
+    "meetingTitlePh": "Sprint Review, Comité, etc.",
+    "date": "Date",
+    "type": "Type",
+    "types": {
+      "meeting": "Réunion",
+      "catchup": "Suivi",
+      "workshop": "Atelier",
+      "oneonone": "1:1",
+      "retro": "Rétrospective"
+    },
+    "participants": "Participants",
+    "participantsPh": "Ajouter un participant…",
+    "add": "Ajouter",
+    "generate": "Générer la structure",
+    "autosave": "Sauvegarde auto ON · Local",
+    "autosaveSavedAt": "Enregistré · {{time}}",
+    "removeParticipant": "Supprimer le participant",
+    "noParticipantsOption": "Ajoutez d'abord des participants…"
+  },
+  "empty": {
+    "title": "Commencez par créer la réunion",
+    "body": "Ajoutez des participants puis cliquez sur « Générer la structure ». Vous pourrez ensuite dicter des contributions, extraire des points clés, attribuer des tâches et exporter."
+  },
+  "progress": {
+    "title": "Progression",
+    "caption": "sections prêtes",
+    "pill": "{{done}}/{{total}}"
+  },
+  "contrib": {
+    "title": "Contributions de la réunion",
+    "lead": "Chaque contribution est étiquetée par participant et accepte des réponses imbriquées (style fil).",
+    "author": "Auteur",
+    "text": "Texte de la contribution",
+    "textPh": "Écrivez ou dictez votre contribution…",
+    "dictate": "🎙️ Dicter",
+    "add": "Ajouter une contribution",
+    "reply": "Répondre",
+    "emptyThreads": "Il n'y a pas encore de contributions. Ajoutez la première ci-dessus ou dictez-en une avec 🎙️."
+  },
+  "dictation": {
+    "listening": "🎙️ Écoute… parlez naturellement."
+  },
+  "keypoints": {
+    "title": "Points clés",
+    "lead": "Extrayez des points à partir des contributions (y compris les réponses) avec déduplication.",
+    "howmany": "Combien de points ?",
+    "extract": "Extraire",
+    "empty": "Il n'y a pas encore de points clés. Cliquez sur « Extraire ».",
+    "remove": "Supprimer le point clé"
+  },
+  "tasks": {
+    "title": "Tâches et échéances",
+    "lead": "Attribuez des tâches par participant avec une date cible.",
+    "task": "Tâche",
+    "taskPh": "Description de la tâche…",
+    "assignee": "Responsable",
+    "due": "Date limite",
+    "status": "Statut",
+    "pending": "En attente",
+    "done": "Terminé",
+    "add": "Ajouter",
+    "hint": "Astuce : changez le statut avec ✓ et revenez avec ↩︎.",
+    "empty": "Il n'y a pas encore de tâches. Ajoutez-en une ci-dessus."
+  },
+  "observations": {
+    "title": "Observations",
+    "lead": "Consignez les contretemps, l'ambiance de la réunion, les risques, les incidents ou toute note pertinente.",
+    "field": "Observations finales",
+    "ph": "Notez ici les incidents, blocages, ambiance générale, dépendances, accords tacites ou tout aspect pertinent…",
+    "hint": "Ces notes apparaîtront à la fin du procès-verbal exporté."
+  },
+  "timeline": {
+    "title": "Chronologie par participant",
+    "empty": "Lorsque vous ajouterez des tâches, vous verrez ici la chronologie par personne."
+  },
+  "print": {
+    "untitled": "Réunion sans titre",
+    "none": "—",
+    "doc": {
+      "title": "PROCÈS-VERBAL DE RÉUNION"
+    },
+    "header": {
+      "reference": "Référence",
+      "version": "Version",
+      "issueDate": "Date d'émission"
+    },
+    "details": {
+      "meeting": "Comité / Réunion",
+      "entity": "Entité / Équipe",
+      "participantsCount": "Nb. de participants"
+    },
+    "meta": {
+      "date": "Date",
+      "type": "Type",
+      "participants": "Participants",
+      "createdAt": "Généré"
+    },
+    "sections": {
+      "summary": "Résumé exécutif",
+      "contrib": "Déroulement de la réunion",
+      "keypoints": "Points clés et accords",
+      "tasks": "Tâches / conclusions",
+      "observations": "Observations",
+      "participants": "Participants"
+    },
+    "summary": {
+      "bullets": {
+        "contrib": "Contributions enregistrées : {{total}} ({{threads}} fils principaux)",
+        "keypoints": "Points clés identifiés : {{n}}",
+        "tasks": "Tâches : {{total}} ({{done}} terminées, {{pending}} en attente)"
+      },
+      "highlights": "Points saillants"
+    },
+    "contrib": {
+      "kind": {
+        "root": "Intervention",
+        "reply": "Réponse"
+      },
+      "replyTo": "associée au point n°{{n}}",
+      "repliesLabel": "Interventions associées"
+    },
+    "tasksTable": {
+      "id": "ID",
+      "task": "Tâche / conclusion",
+      "assignee": "Responsable",
+      "due": "Date limite",
+      "status": "Statut"
+    },
+    "observations": {
+      "empty": "Aucune observation enregistrée."
+    },
+    "participantsTable": {
+      "number": "#",
+      "name": "Nom",
+      "role": "Fonction / Poste",
+      "company": "Entreprise / Équipe",
+      "signature": "Signature"
+    },
+    "footer": "Généré avec OptimeFlow(s) · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "alerts": {
+    "needParticipants": "Ajoutez au moins 1 participant pour continuer.",
+    "needAuthor": "Sélectionnez un auteur.",
+    "needText": "Écrivez d'abord quelque chose.",
+    "needTextField": "Sélectionnez un champ de texte à dicter.",
+    "voiceNotAvail": "La dictée n'est pas disponible dans ce navigateur.",
+    "voicePermissionDenied": "L'autorisation du microphone n'a pas été accordée.",
+    "voiceMicUnavailable": "Aucun microphone disponible n'a été détecté.",
+    "voiceNoSpeech": "Aucune voix n'a été détectée. Réessayez.",
+    "voiceNetwork": "La dictée du navigateur nécessite une connexion sur cet appareil.",
+    "voiceGenericError": "La dictée n'a pas pu être effectuée. Réessayez.",
+    "noThreadsForKeypoints": "Ajoutez d'abord des contributions pour pouvoir extraire des points clés.",
+    "needTaskText": "Saisissez une tâche.",
+    "needGenerateFirst": "Générez d'abord la structure (Configuration → Générer la structure).",
+    "clearConfirm": "Voulez-vous vraiment effacer toutes les données ? Cette action est irréversible.",
+    "deleteContribConfirm": "Supprimer cette contribution et toutes ses réponses ?",
+    "deleteTaskConfirm": "Supprimer cette tâche ?",
+    "printAreaMissing": "La zone d'impression (printArea) est introuvable.",
+    "copyNotSupported": "La copie automatique n'a pas pu être effectuée dans ce navigateur. Essayez-en un autre (Chrome/Edge) ou copiez le texte brut.",
+    "logoTooBig": "Le logo est trop volumineux. Utilisez une image plus légère (idéalement < 900 Ko).",
+    "logoReadFail": "Le logo n'a pas pu être lu. Essayez un autre fichier."
+  },
+  "toasts": {
+    "structureReady": "Structure prête ✅",
+    "participantAdded": "Participant ajouté : {{name}}",
+    "participantRemoved": "Participant supprimé : {{name}}",
+    "contribAdded": "Contribution ajoutée ✅",
+    "replyAdded": "Réponse ajoutée ✅",
+    "deleted": "Supprimé ✅",
+    "keypointsExtracted": "Points clés extraits : {{n}}",
+    "keypointRemoved": "Point clé supprimé",
+    "taskAdded": "Tâche ajoutée ✅",
+    "taskToggled": "Statut mis à jour ✅",
+    "taskRemoved": "Tâche supprimée ✅",
+    "cleared": "Données effacées ✅",
+    "exportPreparing": "Préparation du PDF…",
+    "copyPreparing": "Copie du procès-verbal…",
+    "exportCopied": "Procès-verbal copié ✅ (collez-le dans Gmail)",
+    "exportSettingsSaved": "Export mis à jour ✅",
+    "logoUpdated": "Logo mis à jour ✅",
+    "logoReset": "Logo supprimé ✅"
+  },
+  "footer": {
+    "brand": "OptimeFlow(s)®",
+    "appName": "ReKπTúL@",
+    "year": "2025",
+    "author": "Andrés Calvo Espinosa",
+    "coherenceButtonAria": "Cohérence universelle",
+    "licenseButtonAria": "Licence MIT",
+    "licenseButton": "Licence MIT",
+    "privacyButton": "Confidentialité",
+    "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "licenseOverlay": {
+    "title": "Licence MIT",
+    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> fonctionne à 100 % dans votre navigateur. Nous n'envoyons aucune de vos données à un serveur.</p>"
+  },
+  "coherence": {
+    "title": "Cohérence universelle",
+    "body": "Que cette œuvre serve de remerciement et d'engagement : penser, ressentir et agir dans la même direction."
+  },
+  "confirm": {
+    "title": "Confirmation"
+  },
+  "common": {
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer"
+  }
+}

@@ -1,0 +1,290 @@
+{
+  "a11y": {
+    "skip": "Pular para o conteúdo"
+  },
+  "app": {
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "logoAlt": "Logo da OptimeFlow(s)",
+    "brandName": "OptimeFlow(s)",
+    "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "settings": {
+    "openButton": "Configurações",
+    "themeLabel": "Tema",
+    "themes": {
+      "system": "Sistema",
+      "dark": "Núcleo escuro",
+      "midnight": "Azul meia-noite",
+      "nebula": "Nebulosa neon",
+      "ocean": "Oceano profundo",
+      "forest": "Floresta esmeralda",
+      "amber": "Âmbar quente",
+      "violet": "Violeta real",
+      "mono": "Mono noir"
+    },
+    "languageLabel": "Idioma",
+    "languages": {
+      "es": "Espanhol",
+      "en": "Inglês",
+      "pt-br": "Português (Brasil)",
+      "de": "Alemão",
+      "it": "Italiano",
+      "fr": "Francês",
+      "ru": "Russo",
+      "ko": "Coreano",
+      "ja": "Japonês",
+      "zh": "Chinês",
+      "hi": "Hindi",
+      "ar": "Árabe"
+    },
+    "installButton": "Instalar app"
+  },
+  "actions": {
+    "clear": "Limpar",
+    "export": "Exportar PDF",
+    "copy": "Copiar para o Gmail",
+    "jumpAria": "Ir para a seção",
+    "jump": {
+      "contrib": "Contribuições",
+      "keypoints": "Pontos-chave",
+      "tasks": "Tarefas",
+      "observations": "Observações"
+    }
+  },
+  "export": {
+    "settingsTitle": "Exportação da ata",
+    "headerHint": "Configure o cabeçalho da ata com o nome da entidade e, se quiser, um logotipo.",
+    "headerNameLabel": "Nome da empresa / entidade",
+    "headerNamePh": "Ex.: Globalogistics, Comitê COCOLAB, Diretoria Geral…",
+    "includeLogo": "Incluir logotipo",
+    "logoLabel": "Logotipo",
+    "logoPick": "Escolher",
+    "logoReset": "Remover",
+    "logoStatusApp": "Logotipo: usando o do app",
+    "logoStatusCustom": "Logotipo: personalizado",
+    "logoStatusSet": "Logotipo do cabeçalho configurado",
+    "logoStatusNone": "Sem logotipo no cabeçalho",
+    "logoAlt": "Logotipo do cabeçalho",
+    "footerLabel": "Rodapé",
+    "footerPh": "Texto opcional para o rodapé…",
+    "footerHint": "Dica: este texto é adicionado ao final da ata (útil para entidade, área, confidencialidade etc.)."
+  },
+  "setup": {
+    "title": "Configuração",
+    "lead": "Defina os dados base e gere a estrutura da ata.",
+    "meetingTitle": "Título / Nome da reunião",
+    "meetingTitlePh": "Sprint Review, Comitê etc.",
+    "date": "Data",
+    "type": "Tipo",
+    "types": {
+      "meeting": "Reunião",
+      "catchup": "Acompanhamento",
+      "workshop": "Workshop",
+      "oneonone": "1:1",
+      "retro": "Retrospectiva"
+    },
+    "participants": "Participantes",
+    "participantsPh": "Adicionar participante…",
+    "add": "Adicionar",
+    "generate": "Gerar estrutura",
+    "autosave": "Salvamento automático ON · Local",
+    "autosaveSavedAt": "Salvo · {{time}}",
+    "removeParticipant": "Remover participante",
+    "noParticipantsOption": "Adicione participantes primeiro…"
+  },
+  "empty": {
+    "title": "Comece criando a reunião",
+    "body": "Adicione participantes e clique em “Gerar estrutura”. Depois você poderá ditar contribuições, extrair pontos-chave, atribuir tarefas e exportar."
+  },
+  "progress": {
+    "title": "Progresso",
+    "caption": "seções prontas",
+    "pill": "{{done}}/{{total}}"
+  },
+  "contrib": {
+    "title": "Contribuições da reunião",
+    "lead": "Cada contribuição fica identificada por participante e aceita respostas aninhadas (estilo thread).",
+    "author": "Autor",
+    "text": "Texto da contribuição",
+    "textPh": "Escreva ou dite sua contribuição…",
+    "dictate": "🎙️ Ditar",
+    "add": "Adicionar contribuição",
+    "reply": "Responder",
+    "emptyThreads": "Ainda não há contribuições. Adicione a primeira acima ou dite uma com 🎙️."
+  },
+  "dictation": {
+    "listening": "🎙️ Ouvindo… fale naturalmente."
+  },
+  "keypoints": {
+    "title": "Pontos-chave",
+    "lead": "Extraia pontos a partir das contribuições (incluindo respostas) com remoção de duplicatas.",
+    "howmany": "Quantos pontos?",
+    "extract": "Extrair",
+    "empty": "Ainda não há pontos-chave. Clique em “Extrair”.",
+    "remove": "Remover ponto-chave"
+  },
+  "tasks": {
+    "title": "Tarefas e prazos",
+    "lead": "Atribua tarefas por participante com data-alvo.",
+    "task": "Tarefa",
+    "taskPh": "Descrição da tarefa…",
+    "assignee": "Responsável",
+    "due": "Data limite",
+    "status": "Status",
+    "pending": "Pendente",
+    "done": "Concluída",
+    "add": "Adicionar",
+    "hint": "Dica: alterne o status com ✓ e volte com ↩︎.",
+    "empty": "Ainda não há tarefas. Adicione uma acima."
+  },
+  "observations": {
+    "title": "Observações",
+    "lead": "Registre contratempos, clima da reunião, riscos, incidentes ou qualquer anotação relevante.",
+    "field": "Observações finais",
+    "ph": "Anote aqui incidentes, bloqueios, clima geral, dependências, acordos tácitos ou qualquer aspecto relevante…",
+    "hint": "Estas notas aparecerão no final da ata exportada."
+  },
+  "timeline": {
+    "title": "Linha do tempo por participante",
+    "empty": "Quando você adicionar tarefas, verá aqui a linha do tempo por pessoa."
+  },
+  "print": {
+    "untitled": "Reunião sem título",
+    "none": "—",
+    "doc": {
+      "title": "ATA DA REUNIÃO"
+    },
+    "header": {
+      "reference": "Referência",
+      "version": "Versão",
+      "issueDate": "Data de emissão"
+    },
+    "details": {
+      "meeting": "Comitê / Reunião",
+      "entity": "Entidade / Equipe",
+      "participantsCount": "N.º de participantes"
+    },
+    "meta": {
+      "date": "Data",
+      "type": "Tipo",
+      "participants": "Participantes",
+      "createdAt": "Gerado"
+    },
+    "sections": {
+      "summary": "Resumo executivo",
+      "contrib": "Desenvolvimento da reunião",
+      "keypoints": "Pontos-chave e acordos",
+      "tasks": "Tarefas / conclusões",
+      "observations": "Observações",
+      "participants": "Participantes"
+    },
+    "summary": {
+      "bullets": {
+        "contrib": "Contribuições registradas: {{total}} ({{threads}} tópicos principais)",
+        "keypoints": "Pontos-chave identificados: {{n}}",
+        "tasks": "Tarefas: {{total}} ({{done}} concluídas, {{pending}} pendentes)"
+      },
+      "highlights": "Destaques"
+    },
+    "contrib": {
+      "kind": {
+        "root": "Intervenção",
+        "reply": "Resposta"
+      },
+      "replyTo": "associada ao ponto #{{n}}",
+      "repliesLabel": "Intervenções associadas"
+    },
+    "tasksTable": {
+      "id": "ID",
+      "task": "Tarefa / conclusão",
+      "assignee": "Responsável",
+      "due": "Data limite",
+      "status": "Status"
+    },
+    "observations": {
+      "empty": "Sem observações registradas."
+    },
+    "participantsTable": {
+      "number": "#",
+      "name": "Nome",
+      "role": "Cargo / Função",
+      "company": "Empresa / Equipe",
+      "signature": "Assinatura"
+    },
+    "footer": "Gerado com OptimeFlow(s) · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "alerts": {
+    "needParticipants": "Adicione pelo menos 1 participante para continuar.",
+    "needAuthor": "Selecione um autor.",
+    "needText": "Escreva algo primeiro.",
+    "needTextField": "Selecione um campo de texto para ditar.",
+    "voiceNotAvail": "O ditado não está disponível neste navegador.",
+    "voicePermissionDenied": "A permissão do microfone não foi concedida.",
+    "voiceMicUnavailable": "Nenhum microfone disponível foi detectado.",
+    "voiceNoSpeech": "Nenhuma fala foi detectada. Tente novamente.",
+    "voiceNetwork": "O ditado do navegador precisa de conexão neste dispositivo.",
+    "voiceGenericError": "Não foi possível concluir o ditado. Tente novamente.",
+    "noThreadsForKeypoints": "Primeiro adicione contribuições para poder extrair pontos-chave.",
+    "needTaskText": "Escreva uma tarefa.",
+    "needGenerateFirst": "Primeiro gere a estrutura (Configuração → Gerar estrutura).",
+    "clearConfirm": "Tem certeza de que deseja limpar todos os dados? Isto não pode ser desfeito.",
+    "deleteContribConfirm": "Excluir esta contribuição e todas as suas respostas?",
+    "deleteTaskConfirm": "Excluir esta tarefa?",
+    "printAreaMissing": "A área de impressão (printArea) não foi encontrada.",
+    "copyNotSupported": "Não foi possível copiar automaticamente neste navegador. Tente outro (Chrome/Edge) ou copie o texto sem formatação.",
+    "logoTooBig": "O logotipo é grande demais. Use uma imagem mais leve (ideal < 900KB).",
+    "logoReadFail": "Não foi possível ler o logotipo. Tente outro arquivo."
+  },
+  "toasts": {
+    "structureReady": "Estrutura pronta ✅",
+    "participantAdded": "Participante adicionado: {{name}}",
+    "participantRemoved": "Participante removido: {{name}}",
+    "contribAdded": "Contribuição adicionada ✅",
+    "replyAdded": "Resposta adicionada ✅",
+    "deleted": "Excluído ✅",
+    "keypointsExtracted": "Pontos-chave extraídos: {{n}}",
+    "keypointRemoved": "Ponto-chave removido",
+    "taskAdded": "Tarefa adicionada ✅",
+    "taskToggled": "Status atualizado ✅",
+    "taskRemoved": "Tarefa removida ✅",
+    "cleared": "Dados limpos ✅",
+    "exportPreparing": "Preparando PDF…",
+    "copyPreparing": "Copiando ata…",
+    "exportCopied": "Ata copiada ✅ (cole no Gmail)",
+    "exportSettingsSaved": "Exportação atualizada ✅",
+    "logoUpdated": "Logotipo atualizado ✅",
+    "logoReset": "Logotipo removido ✅"
+  },
+  "footer": {
+    "brand": "OptimeFlow(s)®",
+    "appName": "ReKπTúL@",
+    "year": "2025",
+    "author": "Andrés Calvo Espinosa",
+    "coherenceButtonAria": "Coerência Universal",
+    "licenseButtonAria": "Licença MIT",
+    "licenseButton": "Licença MIT",
+    "privacyButton": "Privacidade",
+    "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+  },
+  "licenseOverlay": {
+    "title": "Licença MIT",
+    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+  },
+  "privacy": {
+    "title": "Política de privacidade",
+    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> funciona 100% no seu navegador. Não enviamos seus dados a nenhum servidor.</p>"
+  },
+  "coherence": {
+    "title": "Coerência Universal",
+    "body": "Que esta obra sirva como agradecimento e como compromisso: pensar, sentir e agir na mesma direção."
+  },
+  "confirm": {
+    "title": "Confirmação"
+  },
+  "common": {
+    "close": "Fechar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Salvar"
+  }
+}

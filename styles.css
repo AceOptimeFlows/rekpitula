@@ -761,16 +761,27 @@ html, body{
 /* Mobile / foldables / coarse-pointer portrait */
 @media (max-width: 1180px), (pointer: coarse) and (orientation: portrait){
   .main-area{
+    display:block;
     overflow-y:auto;
     overflow-x:hidden;
   }
 
   .app-shell{
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
     height:auto;
     min-height:0;
     overflow:visible;
+  }
+
+  .command-bar,
+  .side-panel,
+  .workspace{
+    width:100%;
+    min-width:0;
+    flex:0 0 auto;
   }
 
   .command-bar{
@@ -787,13 +798,17 @@ html, body{
 
   .side-panel,
   .workspace{
-    grid-column:1;
-    min-width:0;
+    grid-column:auto;
+    grid-row:auto;
     overflow:visible;
+    min-height:auto;
   }
 
-  .side-panel{ grid-row:2; }
-  .workspace{ grid-row:3; }
+  .side-panel > *,
+  .workspace-inner > *{
+    width:100%;
+    min-width:0;
+  }
 
   .workspace-inner{
     min-width:0;

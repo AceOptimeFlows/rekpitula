@@ -1203,13 +1203,14 @@ body.standalone-print #printArea {
     const css = buildFormalPrintCSS();
     const docLang = currentLangAttr();
     const docDir = currentDir();
-    const vars = `:root{--doc-margin:${palette.marginColor};--doc-contour:${palette.contourColor};--doc-fill:${palette.tableColor};--doc-text:${palette.textColor};--doc-fill-text:${palette.fillTextColor};--doc-muted:${palette.mutedColor};}`;
+    const cssVars = `--doc-margin:${palette.marginColor};--doc-contour:${palette.contourColor};--doc-fill:${palette.tableColor};--doc-text:${palette.textColor};--doc-fill-text:${palette.fillTextColor};--doc-muted:${palette.mutedColor};`;
+    const vars = `:root{${cssVars}}`;
 
     return `
-      <style>${vars}</style>
       <style>${css}</style>
+      <style>${vars}</style>
 
-      <article class="formal-sheet" lang="${escHtml(docLang)}" dir="${escHtml(docDir)}">
+      <article class="formal-sheet" lang="${escHtml(docLang)}" dir="${escHtml(docDir)}" style="${escHtml(cssVars)}">
         <table class="sheet-top" role="presentation">
           <tr>
             <td class="brand-cell">

@@ -515,11 +515,11 @@
         <button
           class="btn ghost"
           id="licenseLink"
-          aria-label="Licencia MIT"
+          aria-label="Licencias"
           data-i18n-aria-label="footer.licenseButtonAria"
           data-i18n="footer.licenseButton"
         >
-          Licencia MIT
+          Licencias
         </button>
         <button class="btn ghost" id="privacyLink" data-i18n="footer.privacyButton">
           Privacidad
@@ -527,12 +527,14 @@
       </div>
     </footer>
 
-    <!-- ====== Overlay Licencia MIT ====== -->
+    <!-- ====== Overlay Licencias ====== -->
     <div class="overlay" id="licenseOverlay" hidden>
       <div class="box">
-        <h2 data-i18n="licenseOverlay.title">Licencia MIT</h2>
+        <h2 data-i18n="licenseOverlay.title">Licencias</h2>
 
-        <pre class="license-text" data-i18n="licenseOverlay.text">MIT License
+        <div class="small" style="line-height:1.55" data-i18n-html="licenseOverlay.body">
+          <p><b>Código propio de la app.</b> El código desarrollado específicamente para esta aplicación se distribuye bajo la licencia MIT.</p>
+<pre class="license-text">MIT License
 
 Copyright (c) 2025 Andrés Calvo Espinosa
 
@@ -553,6 +555,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.</pre>
+<h3>Código y componentes de terceros</h3>
+<ul>
+  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>
+  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>
+  <li><b>ONNX Runtime</b>: MIT</li>
+  <li><b>OpenAI Whisper (proyecto original)</b>: MIT</li>
+</ul>
+<p>Estas licencias de terceros no cambian la licencia MIT del código propio de la app, pero sí debes conservar los avisos y textos de licencia aplicables cuando redistribuyas la aplicación o sus componentes.</p>
+<p>En la práctica: puedes publicar tu código bajo MIT, pero la distribución final de la app debe incluir también un apartado de licencias de terceros o los archivos de licencia y NOTICE que correspondan a los componentes incluidos.</p>
+        </div>
 
         <div class="overlay-actions">
           <button class="btn ghost" data-close="licenseOverlay" type="button" data-i18n="common.close">Cerrar</button>
@@ -563,10 +575,32 @@ SOFTWARE.</pre>
     <!-- ====== Overlay Política de privacidad ====== -->
     <div class="overlay" id="privacyOverlay" hidden>
       <div class="box">
-        <h2 id="ppTitle" data-i18n="privacy.title">Política de privacidad</h2>
+        <h2 id="ppTitle" data-i18n="privacy.title">Privacidad real de la app</h2>
 
         <div id="ppBody" class="small" style="line-height:1.55" data-i18n-html="privacy.body">
-          <p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> se ejecuta 100% en tu navegador. No enviamos tus datos a ningún servidor.</p>
+          <p><b>Resumen.</b> Esta aplicación está diseñada para ejecutar el trabajo principal en tu navegador. El contenido del acta no se envía a un backend propio de la aplicación según el código revisado.</p>
+<h3>Qué se guarda localmente en tu navegador</h3>
+<ul>
+  <li>El título, la fecha, el tipo de reunión, los participantes, los aportes, las tareas, los puntos clave y las observaciones.</li>
+  <li>Preferencias como idioma, tema, motor de transcripción y ajustes de exportación.</li>
+  <li>Si subes un logotipo para el PDF, ese archivo también puede quedar guardado localmente como parte de la configuración de exportación.</li>
+</ul>
+<h3>Qué no se comparte por defecto</h3>
+<p>El código revisado no muestra una API propia ni una subida del contenido del acta a servidores de la aplicación. Tampoco se aprecia analítica propia para el contenido que escribes o dictas.</p>
+<h3>Transcripción según el modo elegido</h3>
+<p><b>Whisper offline.</b> El audio se captura en el navegador y se procesa localmente en el dispositivo con el modelo descargado. Una vez descargados el runtime y el modelo, la transcripción funciona de forma local y no hay una subida del audio a un servicio de transcripción desde el código revisado.</p>
+<p><b>Navegador.</b> La app usa el motor de reconocimiento del propio navegador. En este modo la app no implementa una subida propia de audio, pero el tratamiento real puede ser local o remoto según el navegador, el sistema operativo y la plataforma. Por eso no debe asumirse que este modo sea siempre 100% local en todos los dispositivos.</p>
+<h3>Cuándo sí puede haber conexiones externas</h3>
+<ul>
+  <li>Cuando se descarga por primera vez el runtime o el modelo necesarios para la transcripción offline.</li>
+  <li>Cuando usas el modo de transcripción del navegador en dispositivos o navegadores que dependan de servicios de voz de la plataforma.</li>
+  <li>Cuando abres enlaces externos de la interfaz.</li>
+  <li>Cuando copias el acta y decides pegarla en Gmail u otro servicio externo.</li>
+</ul>
+<h3>Exportación y uso offline</h3>
+<p>La exportación a PDF se genera localmente en el navegador y se envía al diálogo de impresión del propio navegador. La app puede funcionar sin conexión gracias al almacenamiento local y al service worker, pero eso no equivale a cifrado local ni a borrado automático.</p>
+<h3>Importante</h3>
+<p>Como la información queda guardada localmente en el navegador o en el perfil del dispositivo, cualquier persona con acceso a ese navegador o a ese perfil podría verla. Si compartes equipo, conviene borrar los datos de la app al terminar.</p>
         </div>
 
         <div class="overlay-actions">

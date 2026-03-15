@@ -1,11 +1,4 @@
-/* export.js — Exportación PDF formal (A4) + Copiar para Gmail
-   - Intercepta el click en #btnExport (captura) para evitar el export básico de app.js
-   - Lee el estado desde localStorage (ReKPiTu:state:v1)
-   - Genera HTML + CSS formal tipo acta corporativa en #printArea y ejecuta window.print()
-   - Configura encabezado: imagen + nombre de empresa / entidad
-   - Pie de página persistente
-   - Inserta un botón "Copiar para Gmail" que copia HTML + texto al portapapeles
-*/
+/* export.js — Exportación PDF formal (A4) + Copiar para Gmail */
 (function () {
   'use strict';
 
@@ -13,6 +6,13 @@
   const LANG_KEY = APP_KEY + ':lang';
   const STATE_KEY = APP_KEY + ':state:v1';
   const EXPORT_KEY = APP_KEY + ':export:v1';
+
+  const EMAIL_LOGO_MAX_W = 160;
+  const EMAIL_LOGO_MAX_H = 48;
+  const DEFAULT_EXPORT_MARGIN_COLOR = '#dbe2ea';
+  const DEFAULT_EXPORT_CONTOUR_COLOR = '#222222';
+  const DEFAULT_EXPORT_TABLE_COLOR = '#efefef';
+  const DEFAULT_EXPORT_TEXT_COLOR = '#111111';
 
   // =========================
   // Safe storage
@@ -161,13 +161,101 @@
   }
 
   // =========================
+  // Colors
+  // =========================
+  function normalizeHexColor(raw, fallback) {
+    const value = String(raw || '').trim();
+    const base = String(fallback || DEFAULT_EXPORT_CONTOUR_COLOR).trim().toLowerCase();
+
+    if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)) {
+      if (value.length === 4) {
+        return ('#' + value.slice(1).split('').map((ch) => ch + ch).join('')).toLowerCase();
+      }
+      return value.toLowerCase();
+    }
+
+    return base;
+  }
+
+  function hexToRgb(hex) {
+    const normalized = normalizeHexColor(hex, '#000000');
+    const clean = normalized.slice(1);
+    return {
+      r: parseInt(clean.slice(0, 2), 16),
+      g: parseInt(clean.slice(2, 4), 16),
+      b: parseInt(clean.slice(4, 6), 16)
+    };
+  }
+
+  function rgbToHex(r, g, b) {
+    const clamp = (n) => Math.max(0, Math.min(255, Math.round(Number(n) || 0)));
+    return '#' + [clamp(r), clamp(g), clamp(b)].map((n) => n.toString(16).padStart(2, '0')).join('');
+  }
+
+  function mixHexColors(colorA, colorB, weightB) {
+    const a = hexToRgb(colorA);
+    const b = hexToRgb(colorB);
+    const w = Math.max(0, Math.min(1, Number(weightB) || 0));
+    const wa = 1 - w;
+
+    return rgbToHex(
+      a.r * wa + b.r * w,
+      a.g * wa + b.g * w,
+      a.b * wa + b.b * w
+    );
+  }
+
+  function relativeLuminance(color) {
+    const rgb = hexToRgb(color);
+    const transform = (channel) => {
+      const c = channel / 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    };
+
+    const r = transform(rgb.r);
+    const g = transform(rgb.g);
+    const b = transform(rgb.b);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
+  function contrastRatio(colorA, colorB) {
+    const lumA = relativeLuminance(colorA);
+    const lumB = relativeLuminance(colorB);
+    const lighter = Math.max(lumA, lumB);
+    const darker = Math.min(lumA, lumB);
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+
+  function getReadableFillTextColor(fillColor, preferredTextColor) {
+    const fill = normalizeHexColor(fillColor, DEFAULT_EXPORT_TABLE_COLOR);
+    const preferred = normalizeHexColor(preferredTextColor, DEFAULT_EXPORT_TEXT_COLOR);
+
+    if (contrastRatio(fill, preferred) >= 4.5) return preferred;
+
+    const dark = '#111111';
+    const light = '#ffffff';
+    return contrastRatio(fill, dark) >= contrastRatio(fill, light) ? dark : light;
+  }
+
+  function getMutedTextColor(textColor) {
+    const normalized = normalizeHexColor(textColor, DEFAULT_EXPORT_TEXT_COLOR);
+    return relativeLuminance(normalized) > 0.55
+      ? mixHexColors(normalized, '#000000', 0.38)
+      : mixHexColors(normalized, '#ffffff', 0.42);
+  }
+
+  // =========================
   // Export settings
   // =========================
   function defaultExportCfg() {
     return {
       headerName: '',
       headerLogoDataUrl: '',
-      footerText: ''
+      footerText: '',
+      marginColor: DEFAULT_EXPORT_MARGIN_COLOR,
+      contourColor: DEFAULT_EXPORT_CONTOUR_COLOR,
+      tableColor: DEFAULT_EXPORT_TABLE_COLOR,
+      textColor: DEFAULT_EXPORT_TEXT_COLOR
     };
   }
 
@@ -195,10 +283,22 @@
       const footerText =
         (typeof data.footerText === 'string') ? data.footerText : base.footerText;
 
+      const marginColor = normalizeHexColor(
+        data.marginColor,
+        normalizeHexColor(data.borderColor, base.marginColor)
+      );
+      const contourColor = normalizeHexColor(data.contourColor, base.contourColor);
+      const tableColor = normalizeHexColor(data.tableColor, base.tableColor);
+      const textColor = normalizeHexColor(data.textColor, base.textColor);
+
       return {
         headerName,
         headerLogoDataUrl,
-        footerText
+        footerText,
+        marginColor,
+        contourColor,
+        tableColor,
+        textColor
       };
     } catch {
       return defaultExportCfg();
@@ -206,7 +306,17 @@
   }
 
   function saveExportCfg(cfg) {
-    try { safeSet(EXPORT_KEY, JSON.stringify(cfg || defaultExportCfg())); } catch { /* ignore */ }
+    try {
+      const base = defaultExportCfg();
+      const next = Object.assign({}, base, cfg || {});
+      next.marginColor = normalizeHexColor(next.marginColor, base.marginColor);
+      next.contourColor = normalizeHexColor(next.contourColor, base.contourColor);
+      next.tableColor = normalizeHexColor(next.tableColor, base.tableColor);
+      next.textColor = normalizeHexColor(next.textColor, base.textColor);
+      safeSet(EXPORT_KEY, JSON.stringify(next));
+    } catch {
+      /* ignore */
+    }
   }
 
   function getHeaderName(cfg) {
@@ -227,8 +337,24 @@
     return /^data:/i.test(v);
   }
 
-  const EMAIL_LOGO_MAX_W = 160;
-  const EMAIL_LOGO_MAX_H = 48;
+  function buildExportPalette(cfg) {
+    const base = defaultExportCfg();
+    const marginColor = normalizeHexColor(cfg && cfg.marginColor, base.marginColor);
+    const contourColor = normalizeHexColor(cfg && cfg.contourColor, base.contourColor);
+    const tableColor = normalizeHexColor(cfg && cfg.tableColor, base.tableColor);
+    const textColor = normalizeHexColor(cfg && cfg.textColor, base.textColor);
+    const fillTextColor = getReadableFillTextColor(tableColor, textColor);
+    const mutedColor = getMutedTextColor(textColor);
+
+    return {
+      marginColor,
+      contourColor,
+      tableColor,
+      textColor,
+      fillTextColor,
+      mutedColor
+    };
+  }
 
   function resolveHeaderLogoForPrint(cfg) {
     const src = getHeaderLogo(cfg);
@@ -398,7 +524,6 @@
     ];
 
     const lis = bullets.map(s => `<li>${escHtml(String(s || ''))}</li>`).join('');
-
     const highlights = kp.slice(0, 3).map(k => `<li>${escHtml(String(k || '').trim())}</li>`).join('');
 
     return `
@@ -406,16 +531,12 @@
         <ul class="formal-list">
           ${lis}
         </ul>
-        ${
-          kp.length
-            ? `
-              <div class="subcaption">${escHtml(T('print.summary.highlights'))}</div>
-              <ul class="formal-list compact">
-                ${highlights}
-              </ul>
-            `
-            : ''
-        }
+        ${kp.length ? `
+          <div class="subcaption">${escHtml(T('print.summary.highlights'))}</div>
+          <ul class="formal-list compact">
+            ${highlights}
+          </ul>
+        ` : ''}
       </div>
     `;
   }
@@ -613,17 +734,26 @@
   // =========================
   function buildFormalPrintCSS() {
     return `
+:root {
+  --doc-margin: ${DEFAULT_EXPORT_MARGIN_COLOR};
+  --doc-contour: ${DEFAULT_EXPORT_CONTOUR_COLOR};
+  --doc-fill: ${DEFAULT_EXPORT_TABLE_COLOR};
+  --doc-text: ${DEFAULT_EXPORT_TEXT_COLOR};
+  --doc-fill-text: ${DEFAULT_EXPORT_TEXT_COLOR};
+  --doc-muted: #666666;
+}
+
 @page {
   size: A4;
-  margin: 10mm;
+  margin: 0;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  color: #111;
-  background: #e2e8f0;
+  color: var(--doc-text);
+  background: var(--doc-margin);
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
 }
@@ -638,16 +768,24 @@ body {
   margin: 0;
   padding: 0;
   overflow: visible;
+  box-sizing: border-box;
+  background: var(--doc-margin);
 }
 
 #printArea .formal-sheet {
   width: 100%;
   max-width: none;
   margin: 0 auto;
-  background: #fff;
-  color: #111;
+  background: #ffffff;
+  color: var(--doc-text);
   font: 10.8pt/1.42 Georgia, "Times New Roman", Times, serif;
   overflow: visible;
+  box-sizing: border-box;
+}
+
+body.print-mode #printArea,
+body.standalone-print #printArea {
+  padding: 10mm 11mm 10mm 11mm;
 }
 
 @media screen {
@@ -657,19 +795,18 @@ body {
   }
 
   body {
-    background: #dbe2ea;
+    background: var(--doc-margin);
     padding: 16px;
     box-sizing: border-box;
   }
 
   #printArea {
-    max-width: 820px;
+    max-width: 900px;
     margin: 0 auto;
   }
 
   #printArea .formal-sheet {
-    max-width: 820px;
-    padding: 24px;
+    padding: 0;
     box-shadow: 0 18px 50px rgba(0,0,0,.22);
   }
 }
@@ -677,7 +814,7 @@ body {
 @media print {
   html,
   body {
-    background: #fff !important;
+    background: var(--doc-margin) !important;
     overflow: visible !important;
   }
 
@@ -689,8 +826,10 @@ body {
   #printArea {
     max-width: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 10mm 11mm 10mm 11mm !important;
     overflow: visible !important;
+    background: var(--doc-margin) !important;
+    box-sizing: border-box !important;
   }
 
   #printArea .formal-sheet {
@@ -707,33 +846,34 @@ body {
   border-collapse: collapse;
   table-layout: fixed;
   margin: 0 0 8px 0;
-  border: 1.2px solid #222;
+  border: 1.2px solid var(--doc-contour);
 }
 
 #printArea .sheet-top > tbody > tr > td {
-  border: 1.2px solid #222;
+  border: 1.2px solid var(--doc-contour);
   vertical-align: middle;
   padding: 0;
 }
 
 #printArea .sheet-top .brand-cell {
-  width: 25%;
+  width: 24%;
   padding: 8px 6px;
   text-align: center;
 }
 
 #printArea .sheet-top .title-cell {
-  width: 47%;
+  width: 42%;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16pt;
   font-weight: 800;
   letter-spacing: .2px;
   padding: 8px 10px;
+  color: var(--doc-text);
 }
 
 #printArea .sheet-top .right-cell {
-  width: 28%;
+  width: 34%;
   padding: 0;
 }
 
@@ -760,6 +900,7 @@ body {
   text-align: center;
   word-break: break-word;
   overflow-wrap: anywhere;
+  color: var(--doc-text);
 }
 
 #printArea .mini-head {
@@ -769,22 +910,29 @@ body {
 }
 
 #printArea .mini-head td {
-  border: 1.2px solid #222;
-  padding: 3px 5px;
+  border: 1.2px solid var(--doc-contour);
+  padding: 4px 6px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 9pt;
+  font-size: 8.8pt;
+  line-height: 1.15;
   text-align: center;
   vertical-align: middle;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  color: var(--doc-text);
 }
 
 #printArea .mini-head .mini-k {
-  background: #efefef;
+  background: var(--doc-fill);
+  color: var(--doc-fill-text);
   font-weight: 800;
   text-transform: uppercase;
 }
 
 #printArea .mini-head .mini-v {
   font-weight: 700;
+  color: var(--doc-text);
 }
 
 #printArea .meta-table {
@@ -792,30 +940,33 @@ body {
   border-collapse: collapse;
   table-layout: fixed;
   margin: 0 0 8px 0;
-  border: 1.2px solid #222;
+  border: 1.2px solid var(--doc-contour);
 }
 
 #printArea .meta-table th,
 #printArea .meta-table td {
-  border: 1.2px solid #222;
+  border: 1.2px solid var(--doc-contour);
   padding: 4px 6px;
   vertical-align: top;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 9.4pt;
   overflow-wrap: anywhere;
   word-break: break-word;
+  color: var(--doc-text);
 }
 
 #printArea .meta-table th {
-  background: #efefef;
+  background: var(--doc-fill);
+  color: var(--doc-fill-text);
   font-weight: 800;
   text-align: left;
 }
 
 #printArea .section-band {
   margin: 10px 0 0 0;
-  border: 1.2px solid #222;
-  background: #efefef;
+  border: 1.2px solid var(--doc-contour);
+  background: var(--doc-fill);
+  color: var(--doc-fill-text);
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 10.6pt;
@@ -827,12 +978,13 @@ body {
 }
 
 #printArea .section-body {
-  border: 1.2px solid #222;
+  border: 1.2px solid var(--doc-contour);
   border-top: none;
   padding: 8px 9px;
   overflow: visible;
   break-before: avoid-page;
   page-break-before: avoid;
+  background: #ffffff;
 }
 
 #printArea .section-body.section-body-table {
@@ -853,6 +1005,7 @@ body {
   font-size: 9.6pt;
   font-weight: 800;
   text-transform: uppercase;
+  color: var(--doc-text);
 }
 
 #printArea .formal-list,
@@ -866,6 +1019,7 @@ body {
   margin: 3px 0;
   text-align: justify;
   text-justify: inter-word;
+  color: var(--doc-text);
 }
 
 #printArea .formal-list.compact li {
@@ -885,13 +1039,13 @@ body {
 #printArea .entry.reply {
   margin-left: calc(var(--d) * 7mm);
   padding-left: 7px;
-  border-left: 2px solid #bbb;
+  border-left: 2px solid var(--doc-contour);
 }
 
 #printArea .entry-head {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 9.1pt;
-  color: #222;
+  color: var(--doc-text);
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -905,19 +1059,17 @@ body {
   font-weight: 800;
 }
 
-#printArea .entry-sep {
-  color: #777;
-}
-
+#printArea .entry-sep,
 #printArea .entry-ref,
 #printArea .entry-time {
-  color: #444;
+  color: var(--doc-muted);
 }
 
 #printArea .entry-body .para {
   margin: 0 0 6px 0;
   text-align: justify;
   text-justify: inter-word;
+  color: var(--doc-text);
 }
 
 #printArea .entry-body .para:last-child,
@@ -929,13 +1081,14 @@ body {
   margin: 0 0 7px 0;
   text-align: justify;
   text-justify: inter-word;
+  color: var(--doc-text);
 }
 
 #printArea .formal-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  border: 1.2px solid #222;
+  border: 1.2px solid var(--doc-contour);
   page-break-inside: auto;
   break-inside: auto;
 }
@@ -954,17 +1107,19 @@ body {
 
 #printArea .formal-table th,
 #printArea .formal-table td {
-  border: 1.2px solid #222;
+  border: 1.2px solid var(--doc-contour);
   padding: 5px 6px;
   vertical-align: top;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 9pt;
   overflow-wrap: anywhere;
   word-break: break-word;
+  color: var(--doc-text);
 }
 
 #printArea .formal-table th {
-  background: #efefef;
+  background: var(--doc-fill);
+  color: var(--doc-fill-text);
   font-weight: 800;
   text-align: center;
 }
@@ -991,7 +1146,7 @@ body {
 
 #printArea .empty-cell {
   text-align: center !important;
-  color: #666;
+  color: var(--doc-muted);
 }
 
 #printArea .nowrap {
@@ -999,19 +1154,19 @@ body {
 }
 
 #printArea .muted {
-  color: #666;
+  color: var(--doc-muted);
 }
 
 #printArea .doc-footer {
   margin-top: 8px;
-  border-top: 1.2px solid #222;
+  border-top: 1.2px solid var(--doc-contour);
   padding-top: 5px;
   display: flex;
   justify-content: space-between;
   gap: 12px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 8.8pt;
-  color: #333;
+  color: var(--doc-muted);
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -1042,14 +1197,16 @@ body {
     const headerName = getHeaderName(cfg);
     const logoSrc = resolveHeaderLogoForPrint(cfg);
     const logoAlt = headerName || T('export.logoAlt') || 'Logo';
-
     const entityLabel = headerName || T('print.none');
+    const palette = buildExportPalette(cfg);
 
     const css = buildFormalPrintCSS();
     const docLang = currentLangAttr();
     const docDir = currentDir();
+    const vars = `:root{--doc-margin:${palette.marginColor};--doc-contour:${palette.contourColor};--doc-fill:${palette.tableColor};--doc-text:${palette.textColor};--doc-fill-text:${palette.fillTextColor};--doc-muted:${palette.mutedColor};}`;
 
     return `
+      <style>${vars}</style>
       <style>${css}</style>
 
       <article class="formal-sheet" lang="${escHtml(docLang)}" dir="${escHtml(docDir)}">
@@ -1068,6 +1225,10 @@ body {
 
             <td class="right-cell">
               <table class="mini-head" role="presentation">
+                <colgroup>
+                  <col style="width:62%">
+                  <col style="width:38%">
+                </colgroup>
                 <tr>
                   <td class="mini-k">${escHtml(T('print.header.reference'))}</td>
                   <td class="mini-v">${escHtml(ref)}</td>
@@ -1255,10 +1416,14 @@ body {
   // =========================
   // Email HTML
   // =========================
-  function renderThreadsEmailHTML(state) {
+  function renderThreadsEmailHTML(state, palette) {
     const nodes = Array.isArray(state.threads) ? state.threads : [];
+    const contourColor = escHtml(palette.contourColor);
+    const textColor = escHtml(palette.textColor);
+    const mutedColor = escHtml(palette.mutedColor);
+
     if (!nodes.length) {
-      return `<div style="padding:8px 10px; border:1px solid #222; border-top:none; color:#666;">${escHtml(T('print.none'))}</div>`;
+      return `<div style="padding:8px 10px; border:1px solid ${contourColor}; border-top:none; color:${mutedColor}; background:#ffffff;">${escHtml(T('print.none'))}</div>`;
     }
 
     let rootNo = 0;
@@ -1267,8 +1432,8 @@ body {
       const author = escHtml(n && n.author ? n.author : '—');
       const ts = n && n.ts ? fmtDateTime(n.ts) : '';
       const body = textToParagraphsHtml(n && n.text ? n.text : '')
-        .replace(/class="para"/g, 'style="margin:0 0 7px 0; text-align:justify;"')
-        .replace(/class="muted"/g, 'style="color:#666;"');
+        .replace(/class="para"/g, `style="margin:0 0 7px 0; text-align:justify; color:${textColor};"`)
+        .replace(/class="muted"/g, `style="color:${mutedColor};"`);
 
       const kind = depth === 0 ? T('print.contrib.kind.root') : T('print.contrib.kind.reply');
       const label = depth === 0 ? `${rootNum}.` : '—';
@@ -1276,16 +1441,16 @@ body {
       const indent = Math.min(depth, 6) * 24;
 
       return `
-        <div style="margin:0 0 10px 0; padding-left:${indent}px;">
-          <div style="font-family:Arial,Helvetica,sans-serif; font-size:12px; margin-bottom:4px;">
+        <div style="margin:0 0 10px 0; padding-left:${indent}px; color:${textColor};">
+          <div style="font-family:Arial,Helvetica,sans-serif; font-size:12px; margin-bottom:4px; color:${textColor};">
             <b>${escHtml(label)}</b>
             <span style="margin-left:6px;"><b>${escHtml(kind)}</b></span>
-            <span style="margin:0 6px;">•</span>
+            <span style="margin:0 6px; color:${mutedColor};">•</span>
             <b>${author}</b>
-            ${ts ? `<span style="margin:0 6px;">•</span><span>${escHtml(ts)}</span>` : ''}
-            ${replyTo ? `<span style="margin:0 6px;">•</span><span>${escHtml(replyTo)}</span>` : ''}
+            ${ts ? `<span style="margin:0 6px; color:${mutedColor};">•</span><span style="color:${mutedColor};">${escHtml(ts)}</span>` : ''}
+            ${replyTo ? `<span style="margin:0 6px; color:${mutedColor};">•</span><span style="color:${mutedColor};">${escHtml(replyTo)}</span>` : ''}
           </div>
-          <div style="font-family:Georgia,'Times New Roman',Times,serif; font-size:14px; line-height:1.5;">
+          <div style="font-family:Georgia,'Times New Roman',Times,serif; font-size:14px; line-height:1.5; color:${textColor};">
             ${body}
           </div>
         </div>
@@ -1308,16 +1473,21 @@ body {
       return out;
     }
 
-    return `<div style="padding:10px; border:1px solid #222; border-top:none;">${walk(nodes, 0, 0)}</div>`;
+    return `<div style="padding:10px; border:1px solid ${contourColor}; border-top:none; color:${textColor}; background:#ffffff;">${walk(nodes, 0, 0)}</div>`;
   }
 
-  function renderTasksEmailHTML(state) {
+  function renderTasksEmailHTML(state, palette) {
     const tasks = Array.isArray(state.tasks) ? state.tasks : [];
     const thId = escHtml(T('print.tasksTable.id'));
     const thTask = escHtml(T('print.tasksTable.task'));
     const thAssignee = escHtml(T('print.tasksTable.assignee'));
     const thDue = escHtml(T('print.tasksTable.due'));
     const thStatus = escHtml(T('print.tasksTable.status'));
+    const contourColor = escHtml(palette.contourColor);
+    const tableColor = escHtml(palette.tableColor);
+    const textColor = escHtml(palette.textColor);
+    const fillTextColor = escHtml(palette.fillTextColor);
+    const mutedColor = escHtml(palette.mutedColor);
 
     const rows = tasks.length
       ? tasks.map((tk, i) => {
@@ -1330,29 +1500,29 @@ body {
 
           return `
             <tr>
-              <td style="border:1px solid #222;padding:6px 7px;white-space:nowrap;">${escHtml(id)}</td>
-              <td style="border:1px solid #222;padding:6px 7px;">${taskText}</td>
-              <td style="border:1px solid #222;padding:6px 7px;">${who}</td>
-              <td style="border:1px solid #222;padding:6px 7px;white-space:nowrap;">${due}</td>
-              <td style="border:1px solid #222;padding:6px 7px;white-space:nowrap;">${label}</td>
+              <td style="border:1px solid ${contourColor};padding:6px 7px;white-space:nowrap;color:${textColor};">${escHtml(id)}</td>
+              <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${taskText}</td>
+              <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${who}</td>
+              <td style="border:1px solid ${contourColor};padding:6px 7px;white-space:nowrap;color:${textColor};">${due}</td>
+              <td style="border:1px solid ${contourColor};padding:6px 7px;white-space:nowrap;color:${textColor};">${label}</td>
             </tr>
           `;
         }).join('')
       : `
         <tr>
-          <td colspan="5" style="border:1px solid #222;padding:6px 7px;text-align:center;color:#666;">${escHtml(T('print.none'))}</td>
+          <td colspan="5" style="border:1px solid ${contourColor};padding:6px 7px;text-align:center;color:${mutedColor};">${escHtml(T('print.none'))}</td>
         </tr>
       `;
 
     return `
-      <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #222;border-top:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;">
+      <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid ${contourColor};border-top:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:${textColor};background:#ffffff;">
         <thead>
           <tr>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thId}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thTask}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thAssignee}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thDue}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thStatus}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thId}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thTask}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thAssignee}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thDue}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thStatus}</th>
           </tr>
         </thead>
         <tbody>
@@ -1362,7 +1532,7 @@ body {
     `;
   }
 
-  function renderParticipantsEmailHTML(state, cfg) {
+  function renderParticipantsEmailHTML(state, cfg, palette) {
     const participants = Array.isArray(state && state.meeting && state.meeting.participants)
       ? state.meeting.participants
       : [];
@@ -1374,36 +1544,40 @@ body {
     const thSignature = escHtml(T('print.participantsTable.signature'));
 
     const defaultCompany = escHtml(getHeaderName(cfg) || T('print.none'));
+    const contourColor = escHtml(palette.contourColor);
+    const tableColor = escHtml(palette.tableColor);
+    const textColor = escHtml(palette.textColor);
+    const fillTextColor = escHtml(palette.fillTextColor);
 
     const rows = participants.length
       ? participants.map((name, i) => `
           <tr>
-            <td style="border:1px solid #222;padding:6px 7px;white-space:nowrap;">${escHtml(String(i + 1))}</td>
-            <td style="border:1px solid #222;padding:6px 7px;">${escHtml(String(name || '').trim() || '—')}</td>
-            <td style="border:1px solid #222;padding:6px 7px;">&nbsp;</td>
-            <td style="border:1px solid #222;padding:6px 7px;">${defaultCompany}</td>
-            <td style="border:1px solid #222;padding:6px 7px;">&nbsp;</td>
+            <td style="border:1px solid ${contourColor};padding:6px 7px;white-space:nowrap;color:${textColor};">${escHtml(String(i + 1))}</td>
+            <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${escHtml(String(name || '').trim() || '—')}</td>
+            <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">&nbsp;</td>
+            <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${defaultCompany}</td>
+            <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">&nbsp;</td>
           </tr>
         `).join('')
       : `
         <tr>
-          <td style="border:1px solid #222;padding:6px 7px;">1</td>
-          <td style="border:1px solid #222;padding:6px 7px;">${escHtml(T('print.none'))}</td>
-          <td style="border:1px solid #222;padding:6px 7px;">&nbsp;</td>
-          <td style="border:1px solid #222;padding:6px 7px;">${defaultCompany}</td>
-          <td style="border:1px solid #222;padding:6px 7px;">&nbsp;</td>
+          <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">1</td>
+          <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${escHtml(T('print.none'))}</td>
+          <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">&nbsp;</td>
+          <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${defaultCompany}</td>
+          <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">&nbsp;</td>
         </tr>
       `;
 
     return `
-      <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid #222;border-top:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;">
+      <table role="presentation" style="width:100%;border-collapse:collapse;border:1px solid ${contourColor};border-top:none;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:${textColor};background:#ffffff;">
         <thead>
           <tr>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thN}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thName}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thRole}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thCompany}</th>
-            <th style="border:1px solid #222;background:#efefef;padding:6px 7px;text-align:center;">${thSignature}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thN}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thName}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thRole}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thCompany}</th>
+            <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:6px 7px;text-align:center;">${thSignature}</th>
           </tr>
         </thead>
         <tbody>
@@ -1438,6 +1612,13 @@ body {
     const ref = buildDocReference(state);
 
     const footerText = String((cfg && cfg.footerText) ? cfg.footerText : '').trim() || T('print.footer');
+    const palette = buildExportPalette(cfg);
+    const marginColor = escHtml(palette.marginColor);
+    const contourColor = escHtml(palette.contourColor);
+    const tableColor = escHtml(palette.tableColor);
+    const textColor = escHtml(palette.textColor);
+    const fillTextColor = escHtml(palette.fillTextColor);
+    const mutedColor = escHtml(palette.mutedColor);
     const kp = Array.isArray(state.keypoints) ? state.keypoints : [];
     const tasks = Array.isArray(state.tasks) ? state.tasks : [];
     const done = tasks.filter(t => String(t.status || '') === 'done').length;
@@ -1446,17 +1627,17 @@ body {
     const observations = String(state.meeting && state.meeting.observations ? state.meeting.observations : '').trim();
 
     const summaryBullets = `
-      <ul style="margin:0;padding-left:18px;">
-        <li style="margin:4px 0;text-align:justify;">${escHtml(T('print.summary.bullets.contrib', { total: countThreadNodes(state.threads), threads: (state.threads || []).length }))}</li>
-        <li style="margin:4px 0;text-align:justify;">${escHtml(T('print.summary.bullets.keypoints', { n: kp.length }))}</li>
-        <li style="margin:4px 0;text-align:justify;">${escHtml(T('print.summary.bullets.tasks', { total: tasks.length, done, pending }))}</li>
+      <ul style="margin:0;padding-left:18px;color:${textColor};">
+        <li style="margin:4px 0;text-align:justify;color:${textColor};">${escHtml(T('print.summary.bullets.contrib', { total: countThreadNodes(state.threads), threads: (state.threads || []).length }))}</li>
+        <li style="margin:4px 0;text-align:justify;color:${textColor};">${escHtml(T('print.summary.bullets.keypoints', { n: kp.length }))}</li>
+        <li style="margin:4px 0;text-align:justify;color:${textColor};">${escHtml(T('print.summary.bullets.tasks', { total: tasks.length, done, pending }))}</li>
       </ul>
     `;
 
-    const highlights = kp.slice(0, 3).map(x => `<li style="margin:4px 0;text-align:justify;">${escHtml(String(x || '').trim())}</li>`).join('');
+    const highlights = kp.slice(0, 3).map(x => `<li style="margin:4px 0;text-align:justify;color:${textColor};">${escHtml(String(x || '').trim())}</li>`).join('');
     const highlightsBlock = kp.length
       ? `
-        <div style="margin-top:10px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;">
+        <div style="margin-top:10px;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;color:${textColor};">
           ${escHtml(T('print.summary.highlights'))}
         </div>
         <ul style="margin:6px 0 0 0;padding-left:18px;">
@@ -1466,90 +1647,94 @@ body {
       : '';
 
     const keypointsBlock = kp.length
-      ? `<ol style="margin:0;padding-left:18px;">${kp.map(x => `<li style="margin:4px 0;text-align:justify;">${escHtml(String(x || '').trim())}</li>`).join('')}</ol>`
-      : `<div style="padding:8px 10px;border:1px solid #222;border-top:none;color:#666;">${escHtml(T('print.none'))}</div>`;
+      ? `<div style="border:1px solid ${contourColor};border-top:none;background:#ffffff;padding:9px 10px;"><ol style="margin:0;padding-left:18px;color:${textColor};">${kp.map(x => `<li style="margin:4px 0;text-align:justify;color:${textColor};">${escHtml(String(x || '').trim())}</li>`).join('')}</ol></div>`
+      : `<div style="padding:8px 10px;border:1px solid ${contourColor};border-top:none;color:${mutedColor};background:#ffffff;">${escHtml(T('print.none'))}</div>`;
 
     const observationsBlock = observations
-      ? `<div style="padding:10px;border:1px solid #222;border-top:none;font-family:Georgia,'Times New Roman',Times,serif;font-size:14px;line-height:1.5;">${textToParagraphsHtml(observations).replace(/class="para"/g, 'style="margin:0 0 7px 0;text-align:justify;"').replace(/class="muted"/g, 'style="color:#666;"')}</div>`
-      : `<div style="padding:8px 10px;border:1px solid #222;border-top:none;color:#666;">${escHtml(T('print.observations.empty'))}</div>`;
+      ? `<div style="padding:10px;border:1px solid ${contourColor};border-top:none;font-family:Georgia,'Times New Roman',Times,serif;font-size:14px;line-height:1.5;color:${textColor};background:#ffffff;">${textToParagraphsHtml(observations).replace(/class=\"para\"/g, `style=\"margin:0 0 7px 0;text-align:justify;color:${textColor};\"`).replace(/class=\"muted\"/g, `style=\"color:${mutedColor};\"`)}</div>`
+      : `<div style="padding:8px 10px;border:1px solid ${contourColor};border-top:none;color:${mutedColor};background:#ffffff;">${escHtml(T('print.observations.empty'))}</div>`;
 
     return `
-<div lang="${escHtml(currentLangAttr())}" dir="${escHtml(currentDir())}" style="font-family:Arial,Helvetica,sans-serif;color:#111;line-height:1.45;">
-  <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid #222;">
+<div lang="${escHtml(currentLangAttr())}" dir="${escHtml(currentDir())}" style="font-family:Arial,Helvetica,sans-serif;color:${textColor};line-height:1.45;background:${marginColor};padding:12px;box-sizing:border-box;">
+  <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid ${contourColor};color:${textColor};background:#ffffff;">
     <tr>
-      <td style="width:25%;border:1px solid #222;padding:8px;vertical-align:middle;text-align:center;">
+      <td style="width:24%;border:1px solid ${contourColor};padding:8px;vertical-align:middle;text-align:center;color:${textColor};">
         ${logoDataUrl ? `<img src="${escHtml(logoDataUrl)}" alt="${escHtml(logoAlt)}"${logoWidthPx ? ` width="${escHtml(String(logoWidthPx))}"` : ''}${logoHeightPx ? ` height="${escHtml(String(logoHeightPx))}"` : ''} style="display:block;margin:0 auto 6px auto;max-width:${EMAIL_LOGO_MAX_W}px;width:${logoWidthPx ? escHtml(String(logoWidthPx)) + 'px' : 'auto'};${logoHeightPx ? `height:${escHtml(String(logoHeightPx))}px;` : 'height:auto;'}max-height:${EMAIL_LOGO_MAX_H}px;object-fit:contain;">` : ''}
-        ${headerName ? `<div style="font-weight:700;font-size:13px;word-break:break-word;overflow-wrap:anywhere;">${escHtml(headerName)}</div>` : ''}
+        ${headerName ? `<div style="font-weight:700;font-size:13px;word-break:break-word;overflow-wrap:anywhere;color:${textColor};">${escHtml(headerName)}</div>` : ''}
       </td>
-      <td style="width:47%;border:1px solid #222;padding:10px 12px;vertical-align:middle;text-align:center;font-size:24px;font-weight:800;">
+      <td style="width:42%;border:1px solid ${contourColor};padding:10px 12px;vertical-align:middle;text-align:center;font-size:24px;font-weight:800;color:${textColor};">
         ${escHtml(T('print.doc.title'))}
       </td>
-      <td style="width:28%;border:1px solid #222;padding:0;vertical-align:middle;">
-        <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;">
+      <td style="width:34%;border:1px solid ${contourColor};padding:0;vertical-align:middle;color:${textColor};">
+        <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;color:${textColor};">
+          <colgroup>
+            <col style="width:62%">
+            <col style="width:38%">
+          </colgroup>
           <tr>
-            <td style="border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:700;text-transform:uppercase;font-size:12px;">${escHtml(T('print.header.reference'))}</td>
-            <td style="border:1px solid #222;padding:4px 6px;text-align:center;font-weight:700;font-size:12px;">${escHtml(ref)}</td>
+            <td style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:700;text-transform:uppercase;font-size:12px;line-height:1.15;word-break:break-word;overflow-wrap:anywhere;">${escHtml(T('print.header.reference'))}</td>
+            <td style="border:1px solid ${contourColor};padding:4px 6px;text-align:center;font-weight:700;font-size:12px;color:${textColor};">${escHtml(ref)}</td>
           </tr>
           <tr>
-            <td style="border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:700;text-transform:uppercase;font-size:12px;">${escHtml(T('print.header.version'))}</td>
-            <td style="border:1px solid #222;padding:4px 6px;text-align:center;font-weight:700;font-size:12px;">v1</td>
+            <td style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:700;text-transform:uppercase;font-size:12px;line-height:1.15;word-break:break-word;overflow-wrap:anywhere;">${escHtml(T('print.header.version'))}</td>
+            <td style="border:1px solid ${contourColor};padding:4px 6px;text-align:center;font-weight:700;font-size:12px;color:${textColor};">v1</td>
           </tr>
           <tr>
-            <td style="border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:700;text-transform:uppercase;font-size:12px;">${escHtml(T('print.header.issueDate'))}</td>
-            <td style="border:1px solid #222;padding:4px 6px;text-align:center;font-weight:700;font-size:12px;">${escHtml(issueDate || T('print.none'))}</td>
+            <td style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:700;text-transform:uppercase;font-size:12px;line-height:1.15;word-break:break-word;overflow-wrap:anywhere;">${escHtml(T('print.header.issueDate'))}</td>
+            <td style="border:1px solid ${contourColor};padding:4px 6px;text-align:center;font-weight:700;font-size:12px;color:${textColor};">${escHtml(issueDate || T('print.none'))}</td>
           </tr>
         </table>
       </td>
     </tr>
   </table>
 
-  <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid #222;margin-top:10px;">
+  <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid ${contourColor};margin-top:10px;color:${textColor};background:#ffffff;">
     <tr>
-      <th style="border:1px solid #222;background:#efefef;padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.details.meeting'))}</th>
-      <td style="border:1px solid #222;padding:5px 7px;font-size:13px;">${escHtml(safeTitle)}</td>
-      <th style="border:1px solid #222;background:#efefef;padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.meta.date'))}</th>
-      <td style="border:1px solid #222;padding:5px 7px;font-size:13px;">${escHtml(date || T('print.none'))}</td>
+      <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.details.meeting'))}</th>
+      <td style="border:1px solid ${contourColor};padding:5px 7px;font-size:13px;color:${textColor};">${escHtml(safeTitle)}</td>
+      <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.meta.date'))}</th>
+      <td style="border:1px solid ${contourColor};padding:5px 7px;font-size:13px;color:${textColor};">${escHtml(date || T('print.none'))}</td>
     </tr>
     <tr>
-      <th style="border:1px solid #222;background:#efefef;padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.meta.type'))}</th>
-      <td style="border:1px solid #222;padding:5px 7px;font-size:13px;">${escHtml(typeLabel || T('print.none'))}</td>
-      <th style="border:1px solid #222;background:#efefef;padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.details.participantsCount'))}</th>
-      <td style="border:1px solid #222;padding:5px 7px;font-size:13px;">${escHtml(participantsCount)}</td>
+      <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.meta.type'))}</th>
+      <td style="border:1px solid ${contourColor};padding:5px 7px;font-size:13px;color:${textColor};">${escHtml(typeLabel || T('print.none'))}</td>
+      <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.details.participantsCount'))}</th>
+      <td style="border:1px solid ${contourColor};padding:5px 7px;font-size:13px;color:${textColor};">${escHtml(participantsCount)}</td>
     </tr>
     <tr>
-      <th style="border:1px solid #222;background:#efefef;padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.details.entity'))}</th>
-      <td style="border:1px solid #222;padding:5px 7px;font-size:13px;">${escHtml(headerName || T('print.none'))}</td>
-      <th style="border:1px solid #222;background:#efefef;padding:5px 7px;text-align:left;font-size:13px;">${escHtml(createdAtLabel)}</th>
-      <td style="border:1px solid #222;padding:5px 7px;font-size:13px;">${escHtml(createdAt || T('print.none'))}</td>
+      <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.details.entity'))}</th>
+      <td style="border:1px solid ${contourColor};padding:5px 7px;font-size:13px;color:${textColor};">${escHtml(headerName || T('print.none'))}</td>
+      <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:5px 7px;text-align:left;font-size:13px;">${escHtml(createdAtLabel)}</th>
+      <td style="border:1px solid ${contourColor};padding:5px 7px;font-size:13px;color:${textColor};">${escHtml(createdAt || T('print.none'))}</td>
     </tr>
     <tr>
-      <th style="border:1px solid #222;background:#efefef;padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.meta.participants'))}</th>
-      <td colspan="3" style="border:1px solid #222;padding:5px 7px;font-size:13px;">${escHtml(participantsLine || T('print.none'))}</td>
+      <th style="border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:5px 7px;text-align:left;font-size:13px;">${escHtml(T('print.meta.participants'))}</th>
+      <td colspan="3" style="border:1px solid ${contourColor};padding:5px 7px;font-size:13px;color:${textColor};">${escHtml(participantsLine || T('print.none'))}</td>
     </tr>
   </table>
 
-  <div style="margin-top:12px;border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">1. ${escHtml(T('print.sections.summary'))}</div>
-  <div style="border:1px solid #222;border-top:none;padding:9px 10px;font-family:Georgia,'Times New Roman',Times,serif;font-size:14px;">
+  <div style="margin-top:12px;border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">1. ${escHtml(T('print.sections.summary'))}</div>
+  <div style="border:1px solid ${contourColor};border-top:none;padding:9px 10px;font-family:Georgia,'Times New Roman',Times,serif;font-size:14px;color:${textColor};background:#ffffff;">
     ${summaryBullets}
     ${highlightsBlock}
   </div>
 
-  <div style="margin-top:12px;border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">2. ${escHtml(T('print.sections.contrib'))}</div>
-  ${renderThreadsEmailHTML(state)}
+  <div style="margin-top:12px;border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">2. ${escHtml(T('print.sections.contrib'))}</div>
+  ${renderThreadsEmailHTML(state, palette)}
 
-  <div style="margin-top:12px;border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">3. ${escHtml(T('print.sections.keypoints'))}</div>
+  <div style="margin-top:12px;border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">3. ${escHtml(T('print.sections.keypoints'))}</div>
   ${keypointsBlock}
 
-  <div style="margin-top:12px;border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">4. ${escHtml(T('print.sections.tasks'))}</div>
-  ${renderTasksEmailHTML(state)}
+  <div style="margin-top:12px;border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">4. ${escHtml(T('print.sections.tasks'))}</div>
+  ${renderTasksEmailHTML(state, palette)}
 
-  <div style="margin-top:12px;border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">5. ${escHtml(T('print.sections.observations'))}</div>
+  <div style="margin-top:12px;border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">5. ${escHtml(T('print.sections.observations'))}</div>
   ${observationsBlock}
 
-  <div style="margin-top:12px;border:1px solid #222;background:#efefef;padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">6. ${escHtml(T('print.sections.participants'))}</div>
-  ${renderParticipantsEmailHTML(state, cfg)}
+  <div style="margin-top:12px;border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">6. ${escHtml(T('print.sections.participants'))}</div>
+  ${renderParticipantsEmailHTML(state, cfg, palette)}
 
-  <div style="margin-top:10px;border-top:1px solid #222;padding-top:6px;font-size:12px;color:#333;">
+  <div style="margin-top:10px;border-top:1px solid ${contourColor};padding-top:6px;font-size:12px;color:${mutedColor};">
     ${escHtml(footerText)}
   </div>
 </div>
@@ -1640,6 +1825,9 @@ body {
     ]);
   }
 
+  // =========================
+  // Print targets
+  // =========================
   function shouldUsePopupPrintTarget() {
     try {
       const coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
@@ -1667,7 +1855,7 @@ body {
   <meta name="color-scheme" content="light only" />
   <title>${escHtml(title)}</title>
 </head>
-<body>
+<body class="print-mode standalone-print">
   <section id="printArea" aria-hidden="false">${content}</section>
 </body>
 </html>`;
@@ -1808,28 +1996,30 @@ body {
     const fileTitle = sanitizeFilename(`${safeMeeting}${date ? ' · ' + date : ''}`);
 
     const preferPopup = shouldUsePopupPrintTarget();
-    const popupShell = preferPopup ? openPrintPopupShell() : null;
     const standaloneDoc = buildStandalonePrintDocument(state, cfg, fileTitle);
 
     try { document.title = fileTitle; } catch { /* ignore */ }
 
-    if (preferPopup && popupShell) {
+    if (preferPopup) {
+      const popupShell = openPrintPopupShell();
+      if (popupShell) {
+        try {
+          await printUsingPopup(popupShell, standaloneDoc);
+          try { document.title = oldTitle; } catch { /* ignore */ }
+          return;
+        } catch (err) {
+          console.error('[ReKPiTu][export][popup]', err);
+          try { popupShell.close(); } catch { /* ignore */ }
+        }
+      }
+
       try {
-        await printUsingPopup(popupShell, standaloneDoc);
+        await printUsingIframe(standaloneDoc);
         try { document.title = oldTitle; } catch { /* ignore */ }
         return;
       } catch (err) {
-        console.error('[ReKPiTu][export][popup]', err);
-        try { popupShell.close(); } catch { /* ignore */ }
+        console.error('[ReKPiTu][export][iframe]', err);
       }
-    }
-
-    try {
-      await printUsingIframe(standaloneDoc);
-      try { document.title = oldTitle; } catch { /* ignore */ }
-      return;
-    } catch (err) {
-      console.error('[ReKPiTu][export][iframe]', err);
     }
 
     printArea.innerHTML = buildFormalPrintHTML(state, cfg);
@@ -1910,6 +2100,41 @@ body {
   }
 
   // =========================
+  // Settings sheet scroll fix
+  // =========================
+  function injectSettingsSheetScrollFix() {
+    if ($id('settingsSheetScrollFix')) return;
+
+    const style = document.createElement('style');
+    style.id = 'settingsSheetScrollFix';
+    style.textContent = `
+#settingsSheet {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+#settingsSheet .settings-card {
+  max-height: calc(100dvh - 86px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 700px) {
+  #settingsSheet {
+    align-items: flex-start;
+  }
+
+  #settingsSheet .settings-card {
+    width: min(100%, 360px);
+  }
+}
+`;
+
+    document.head.appendChild(style);
+  }
+
+  // =========================
   // UI injection
   // =========================
   let _logoFileInput = null;
@@ -1934,6 +2159,23 @@ body {
 
     const custom = getHeaderLogo(cfg);
     el.textContent = custom ? T('export.logoStatusSet') : T('export.logoStatusNone');
+  }
+
+  function setColorControlValue(inputId, valueId, color) {
+    const input = $id(inputId);
+    const valueEl = $id(valueId);
+    const normalized = normalizeHexColor(color, '#000000');
+
+    if (input) input.value = normalized;
+    if (valueEl) valueEl.textContent = normalized.toUpperCase();
+  }
+
+  function syncExportColorControls(cfg) {
+    const palette = buildExportPalette(cfg || defaultExportCfg());
+    setColorControlValue('exportMarginColorInput', 'exportMarginColorValue', palette.marginColor);
+    setColorControlValue('exportContourColorInput', 'exportContourColorValue', palette.contourColor);
+    setColorControlValue('exportTableColorInput', 'exportTableColorValue', palette.tableColor);
+    setColorControlValue('exportTextColorInput', 'exportTextColorValue', palette.textColor);
   }
 
   function injectCopyButton() {
@@ -2016,6 +2258,50 @@ body {
       <div class="meta" id="exportFooterHint" data-i18n="export.footerHint" style="margin-top:4px;">
         ${escHtml(T('export.footerHint'))}
       </div>
+
+      <div class="settings-row" style="justify-content:flex-start;margin-top:10px;">
+        <strong data-i18n="export.colorsTitle">${escHtml(T('export.colorsTitle'))}</strong>
+      </div>
+
+      <div class="meta" data-i18n="export.colorsHint" style="margin-top:2px;">
+        ${escHtml(T('export.colorsHint'))}
+      </div>
+
+      <div class="settings-row" style="margin-top:10px;align-items:center;flex-wrap:wrap;">
+        <label for="exportMarginColorInput" data-i18n="export.marginColorLabel">${escHtml(T('export.marginColorLabel'))}</label>
+        <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+          <input id="exportMarginColorInput" type="color" value="${escHtml(DEFAULT_EXPORT_MARGIN_COLOR)}" title="${escHtml(T('export.marginColorLabel'))}" style="width:46px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;">
+          <span id="exportMarginColorValue" class="meta">${escHtml(DEFAULT_EXPORT_MARGIN_COLOR.toUpperCase())}</span>
+        </div>
+      </div>
+
+      <div class="settings-row" style="margin-top:6px;align-items:center;flex-wrap:wrap;">
+        <label for="exportContourColorInput" data-i18n="export.contourColorLabel">${escHtml(T('export.contourColorLabel'))}</label>
+        <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+          <input id="exportContourColorInput" type="color" value="${escHtml(DEFAULT_EXPORT_CONTOUR_COLOR)}" title="${escHtml(T('export.contourColorLabel'))}" style="width:46px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;">
+          <span id="exportContourColorValue" class="meta">${escHtml(DEFAULT_EXPORT_CONTOUR_COLOR.toUpperCase())}</span>
+        </div>
+      </div>
+
+      <div class="settings-row" style="margin-top:6px;align-items:center;flex-wrap:wrap;">
+        <label for="exportTableColorInput" data-i18n="export.tableColorLabel">${escHtml(T('export.tableColorLabel'))}</label>
+        <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+          <input id="exportTableColorInput" type="color" value="${escHtml(DEFAULT_EXPORT_TABLE_COLOR)}" title="${escHtml(T('export.tableColorLabel'))}" style="width:46px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;">
+          <span id="exportTableColorValue" class="meta">${escHtml(DEFAULT_EXPORT_TABLE_COLOR.toUpperCase())}</span>
+        </div>
+      </div>
+
+      <div class="settings-row" style="margin-top:6px;align-items:center;flex-wrap:wrap;">
+        <label for="exportTextColorInput" data-i18n="export.textColorLabel">${escHtml(T('export.textColorLabel'))}</label>
+        <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+          <input id="exportTextColorInput" type="color" value="${escHtml(DEFAULT_EXPORT_TEXT_COLOR)}" title="${escHtml(T('export.textColorLabel'))}" style="width:46px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;">
+          <span id="exportTextColorValue" class="meta">${escHtml(DEFAULT_EXPORT_TEXT_COLOR.toUpperCase())}</span>
+        </div>
+      </div>
+
+      <div class="settings-row" style="margin-top:8px;justify-content:flex-end;">
+        <button id="btnResetExportColors" class="btn ghost small" type="button" data-i18n="export.colorsReset">${escHtml(T('export.colorsReset'))}</button>
+      </div>
     `;
 
     card.appendChild(wrap);
@@ -2026,8 +2312,13 @@ body {
     const pickBtn = $id('btnPickLogo');
     const resetBtn = $id('btnResetLogo');
     const footerEl = $id('exportFooterInput');
+    const marginColorEl = $id('exportMarginColorInput');
+    const contourColorEl = $id('exportContourColorInput');
+    const tableColorEl = $id('exportTableColorInput');
+    const textColorEl = $id('exportTextColorInput');
+    const resetColorsBtn = $id('btnResetExportColors');
 
-    if (!nameEl && !pickBtn && !resetBtn && !footerEl) return;
+    if (!nameEl && !pickBtn && !resetBtn && !footerEl && !marginColorEl && !contourColorEl && !tableColorEl && !textColorEl && !resetColorsBtn) return;
 
     const cfg = loadExportCfg();
 
@@ -2035,23 +2326,36 @@ body {
     if (footerEl) footerEl.value = String(cfg.footerText || '');
 
     setLogoStatus(cfg);
+    syncExportColorControls(cfg);
 
     const fileInput = getHiddenLogoFileInput();
 
-    nameEl && nameEl.addEventListener('input', () => {
+    function updateColorSetting(key, value) {
       const next = loadExportCfg();
-      next.headerName = String(nameEl.value || '').slice(0, 80);
+      const base = defaultExportCfg();
+      next[key] = normalizeHexColor(value, base[key]);
       saveExportCfg(next);
-    });
+      syncExportColorControls(next);
+    }
 
-    nameEl && nameEl.addEventListener('change', () => {
-      showToast(T('toasts.exportSettingsSaved'));
-    });
+    if (nameEl) {
+      nameEl.addEventListener('input', () => {
+        const next = loadExportCfg();
+        next.headerName = String(nameEl.value || '').slice(0, 80);
+        saveExportCfg(next);
+      });
 
-    pickBtn && pickBtn.addEventListener('click', () => {
-      try { fileInput.value = ''; } catch { /* ignore */ }
-      fileInput.click();
-    });
+      nameEl.addEventListener('change', () => {
+        showToast(T('toasts.exportSettingsSaved'));
+      });
+    }
+
+    if (pickBtn) {
+      pickBtn.addEventListener('click', () => {
+        try { fileInput.value = ''; } catch { /* ignore */ }
+        fileInput.click();
+      });
+    }
 
     fileInput.addEventListener('change', async () => {
       const f = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
@@ -2083,30 +2387,66 @@ body {
 
       const next = loadExportCfg();
       next.headerLogoDataUrl = dataUrl;
-
       saveExportCfg(next);
       setLogoStatus(next);
       showToast(T('toasts.logoUpdated'));
     });
 
-    resetBtn && resetBtn.addEventListener('click', () => {
-      const next = loadExportCfg();
-      next.headerLogoDataUrl = '';
-      saveExportCfg(next);
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        const next = loadExportCfg();
+        next.headerLogoDataUrl = '';
+        saveExportCfg(next);
+        setLogoStatus(next);
+        showToast(T('toasts.logoReset'));
+      });
+    }
 
-      setLogoStatus(next);
-      showToast(T('toasts.logoReset'));
-    });
+    if (footerEl) {
+      footerEl.addEventListener('input', () => {
+        const next = loadExportCfg();
+        next.footerText = String(footerEl.value || '').slice(0, 140);
+        saveExportCfg(next);
+      });
 
-    footerEl && footerEl.addEventListener('input', () => {
-      const next = loadExportCfg();
-      next.footerText = String(footerEl.value || '').slice(0, 140);
-      saveExportCfg(next);
-    });
+      footerEl.addEventListener('change', () => {
+        showToast(T('toasts.exportSettingsSaved'));
+      });
+    }
 
-    footerEl && footerEl.addEventListener('change', () => {
-      showToast(T('toasts.exportSettingsSaved'));
-    });
+    if (marginColorEl) {
+      marginColorEl.addEventListener('input', () => updateColorSetting('marginColor', marginColorEl.value));
+      marginColorEl.addEventListener('change', () => showToast(T('toasts.exportSettingsSaved')));
+    }
+
+    if (contourColorEl) {
+      contourColorEl.addEventListener('input', () => updateColorSetting('contourColor', contourColorEl.value));
+      contourColorEl.addEventListener('change', () => showToast(T('toasts.exportSettingsSaved')));
+    }
+
+    if (tableColorEl) {
+      tableColorEl.addEventListener('input', () => updateColorSetting('tableColor', tableColorEl.value));
+      tableColorEl.addEventListener('change', () => showToast(T('toasts.exportSettingsSaved')));
+    }
+
+    if (textColorEl) {
+      textColorEl.addEventListener('input', () => updateColorSetting('textColor', textColorEl.value));
+      textColorEl.addEventListener('change', () => showToast(T('toasts.exportSettingsSaved')));
+    }
+
+    if (resetColorsBtn) {
+      resetColorsBtn.addEventListener('click', () => {
+        const next = loadExportCfg();
+        const base = defaultExportCfg();
+        next.marginColor = base.marginColor;
+        next.contourColor = base.contourColor;
+        next.tableColor = base.tableColor;
+        next.textColor = base.textColor;
+        saveExportCfg(next);
+        syncExportColorControls(next);
+        showToast(T('toasts.exportColorsRestored'));
+      });
+    }
   }
 
   // =========================
@@ -2139,6 +2479,7 @@ body {
   // Init
   // =========================
   document.addEventListener('DOMContentLoaded', () => {
+    injectSettingsSheetScrollFix();
     injectCopyButton();
     injectExportSettingsUI();
 
@@ -2152,6 +2493,7 @@ body {
         window.i18n.onChange(() => {
           const cfg = loadExportCfg();
           setLogoStatus(cfg);
+          syncExportColorControls(cfg);
         });
       }
     } catch { /* ignore */ }

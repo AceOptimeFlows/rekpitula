@@ -67,7 +67,14 @@
     "logoAlt": "Logotipo del encabezado",
     "footerLabel": "Pie de página",
     "footerPh": "Texto opcional para el pie de página…",
-    "footerHint": "Tip: este texto se añade al final del acta (útil para entidad, área, confidencialidad, etc.)."
+    "footerHint": "Tip: este texto se añade al final del acta (útil para entidad, área, confidencialidad, etc.).",
+    "colorsTitle": "Colores del documento",
+    "colorsHint": "Estos colores se aplican al PDF exportado y a la copia para Gmail.",
+    "marginColorLabel": "Color de los márgenes",
+    "contourColorLabel": "Color de contornos",
+    "tableColorLabel": "Color de tablas y cabeceras",
+    "textColorLabel": "Color de los textos",
+    "colorsReset": "Restaurar colores"
   },
   "setup": {
     "title": "Configuración",
@@ -290,7 +297,8 @@
     "exportCopied": "Acta copiada ✅ (pégala en Gmail)",
     "exportSettingsSaved": "Exportación actualizada ✅",
     "logoUpdated": "Logo actualizado ✅",
-    "logoReset": "Logo eliminado ✅"
+    "logoReset": "Logo eliminado ✅",
+    "exportColorsRestored": "Colores del PDF restaurados ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",

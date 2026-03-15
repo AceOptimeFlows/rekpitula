@@ -8,7 +8,7 @@
 
 'use strict';
 
-const SW_VERSION = 'v.1.0';
+const SW_VERSION = 'v1.0';
 const STATIC_CACHE = `rekpitu-static-${SW_VERSION}`;
 const RUNTIME_CACHE = `rekpitu-runtime-${SW_VERSION}`;
 const REMOTE_CACHE = `rekpitu-remote-${SW_VERSION}`;

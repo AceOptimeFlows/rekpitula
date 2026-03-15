@@ -227,16 +227,97 @@
     return /^data:/i.test(v);
   }
 
+  const EMAIL_LOGO_MAX_W = 160;
+  const EMAIL_LOGO_MAX_H = 48;
+
   function resolveHeaderLogoForPrint(cfg) {
     const src = getHeaderLogo(cfg);
     return src || '';
   }
 
+  function fitInsideBox(width, height, maxWidth, maxHeight) {
+    const w = Math.max(1, Number(width) || 1);
+    const h = Math.max(1, Number(height) || 1);
+    const mw = Math.max(1, Number(maxWidth) || w);
+    const mh = Math.max(1, Number(maxHeight) || h);
+    const scale = Math.min(mw / w, mh / h, 1);
+
+    return {
+      width: Math.max(1, Math.round(w * scale)),
+      height: Math.max(1, Math.round(h * scale))
+    };
+  }
+
+  async function loadImageElement(src) {
+    return await new Promise((resolve, reject) => {
+      try {
+        const img = new Image();
+        img.decoding = 'async';
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Image load failed'));
+        img.src = src;
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  async function normalizeEmailLogoAsset(src) {
+    const value = String(src || '').trim();
+    if (!value) return { src: '', width: 0, height: 0 };
+
+    if (!looksDataUrl(value)) {
+      return {
+        src: value,
+        width: EMAIL_LOGO_MAX_W,
+        height: 0
+      };
+    }
+
+    try {
+      const img = await loadImageElement(value);
+      const dims = fitInsideBox(
+        img.naturalWidth || img.width,
+        img.naturalHeight || img.height,
+        EMAIL_LOGO_MAX_W,
+        EMAIL_LOGO_MAX_H
+      );
+
+      const canvas = document.createElement('canvas');
+      canvas.width = dims.width;
+      canvas.height = dims.height;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        return {
+          src: value,
+          width: dims.width,
+          height: dims.height
+        };
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      return {
+        src: canvas.toDataURL('image/png'),
+        width: canvas.width,
+        height: canvas.height
+      };
+    } catch {
+      return {
+        src: value,
+        width: EMAIL_LOGO_MAX_W,
+        height: 0
+      };
+    }
+  }
+
   async function resolveHeaderLogoForEmail(cfg) {
     const src = getHeaderLogo(cfg);
-    if (!src) return '';
-    if (looksDataUrl(src) || looksAbsoluteUrl(src)) return src;
-    return '';
+    if (!src) return { src: '', width: 0, height: 0 };
+    if (looksDataUrl(src) || looksAbsoluteUrl(src)) return await normalizeEmailLogoAsset(src);
+    return { src: '', width: 0, height: 0 };
   }
 
   // =========================
@@ -440,8 +521,8 @@
       `;
 
     return `
-      <div class="section-body">
-        <table class="formal-table">
+      <div class="section-body section-body-table">
+        <table class="formal-table tasks-table">
           <thead>
             <tr>
               <th class="nowrap">${thId}</th>
@@ -508,7 +589,7 @@
       `;
 
     return `
-      <div class="section-body">
+      <div class="section-body section-body-table">
         <table class="formal-table participants-table">
           <thead>
             <tr>
@@ -534,48 +615,90 @@
     return `
 @page {
   size: A4;
-  margin: 14mm 12mm 14mm 12mm;
+  margin: 10mm;
 }
 
-@media print {
-  html, body {
-    background: #fff !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: #111;
+  background: #e2e8f0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
-body.print-mode {
-  background: #dbe2ea !important;
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #printArea {
-  padding: 0 !important;
-  margin: 0 !important;
-  max-width: none !important;
-}
-
-body.print-mode #printArea {
-  padding: 10mm !important;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
 }
 
 #printArea .formal-sheet {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
   background: #fff;
   color: #111;
-  font: 11.2pt/1.45 Georgia, "Times New Roman", Times, serif;
+  font: 10.8pt/1.42 Georgia, "Times New Roman", Times, serif;
+  overflow: visible;
 }
 
-body.print-mode #printArea .formal-sheet {
-  max-width: 210mm;
-  margin: 0 auto;
-  padding: 12mm;
-  box-shadow: 0 18px 50px rgba(0,0,0,.22);
+@media screen {
+  html,
+  body {
+    min-height: 100vh;
+  }
+
+  body {
+    background: #dbe2ea;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  #printArea {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  #printArea .formal-sheet {
+    max-width: 820px;
+    padding: 24px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.22);
+  }
 }
 
 @media print {
+  html,
+  body {
+    background: #fff !important;
+    overflow: visible !important;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #printArea {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
   #printArea .formal-sheet {
+    max-width: none !important;
+    margin: 0 !important;
     padding: 0 !important;
     box-shadow: none !important;
+    overflow: visible !important;
   }
 }
 
@@ -583,7 +706,7 @@ body.print-mode #printArea .formal-sheet {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   border: 1.2px solid #222;
 }
 
@@ -595,7 +718,7 @@ body.print-mode #printArea .formal-sheet {
 
 #printArea .sheet-top .brand-cell {
   width: 25%;
-  padding: 10px 8px;
+  padding: 8px 6px;
   text-align: center;
 }
 
@@ -603,10 +726,10 @@ body.print-mode #printArea .formal-sheet {
   width: 47%;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 18pt;
+  font-size: 16pt;
   font-weight: 800;
   letter-spacing: .2px;
-  padding: 10px 12px;
+  padding: 8px 10px;
 }
 
 #printArea .sheet-top .right-cell {
@@ -618,7 +741,7 @@ body.print-mode #printArea .formal-sheet {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 #printArea .logo-img {
@@ -632,10 +755,11 @@ body.print-mode #printArea .formal-sheet {
 
 #printArea .brand-name {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 10.5pt;
+  font-size: 10pt;
   font-weight: 700;
   text-align: center;
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 #printArea .mini-head {
@@ -646,9 +770,9 @@ body.print-mode #printArea .formal-sheet {
 
 #printArea .mini-head td {
   border: 1.2px solid #222;
-  padding: 4px 6px;
+  padding: 3px 5px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 9.5pt;
+  font-size: 9pt;
   text-align: center;
   vertical-align: middle;
 }
@@ -667,17 +791,19 @@ body.print-mode #printArea .formal-sheet {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   border: 1.2px solid #222;
 }
 
 #printArea .meta-table th,
 #printArea .meta-table td {
   border: 1.2px solid #222;
-  padding: 5px 7px;
+  padding: 4px 6px;
   vertical-align: top;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 10pt;
+  font-size: 9.4pt;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 #printArea .meta-table th {
@@ -687,27 +813,44 @@ body.print-mode #printArea .formal-sheet {
 }
 
 #printArea .section-band {
-  margin: 12px 0 0 0;
+  margin: 10px 0 0 0;
   border: 1.2px solid #222;
   background: #efefef;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 11.2pt;
+  font-size: 10.6pt;
   font-weight: 800;
   text-transform: uppercase;
   padding: 4px 6px;
+  break-after: avoid-page;
+  page-break-after: avoid;
 }
 
 #printArea .section-body {
   border: 1.2px solid #222;
   border-top: none;
-  padding: 9px 10px;
+  padding: 8px 9px;
+  overflow: visible;
+  break-before: avoid-page;
+  page-break-before: avoid;
+}
+
+#printArea .section-body.section-body-table {
+  padding: 0;
+  overflow: visible;
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+#printArea .section-body.section-body-table .formal-table {
+  border: none;
+  margin: 0;
 }
 
 #printArea .subcaption {
-  margin: 10px 0 4px 0;
+  margin: 8px 0 4px 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 10pt;
+  font-size: 9.6pt;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -720,7 +863,7 @@ body.print-mode #printArea .formal-sheet {
 
 #printArea .formal-list li,
 #printArea .formal-ol li {
-  margin: 4px 0;
+  margin: 3px 0;
   text-align: justify;
   text-justify: inter-word;
 }
@@ -730,7 +873,7 @@ body.print-mode #printArea .formal-sheet {
 }
 
 #printArea .entry {
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -740,18 +883,18 @@ body.print-mode #printArea .formal-sheet {
 }
 
 #printArea .entry.reply {
-  margin-left: calc(var(--d) * 8mm);
-  padding-left: 8px;
+  margin-left: calc(var(--d) * 7mm);
+  padding-left: 7px;
   border-left: 2px solid #bbb;
 }
 
 #printArea .entry-head {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 9.6pt;
+  font-size: 9.1pt;
   color: #222;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
   align-items: baseline;
   margin-bottom: 4px;
 }
@@ -772,23 +915,20 @@ body.print-mode #printArea .formal-sheet {
 }
 
 #printArea .entry-body .para {
-  margin: 0 0 7px 0;
+  margin: 0 0 6px 0;
   text-align: justify;
   text-justify: inter-word;
 }
 
-#printArea .entry-body .para:last-child {
+#printArea .entry-body .para:last-child,
+#printArea .text-block .para:last-child {
   margin-bottom: 0;
 }
 
 #printArea .text-block .para {
-  margin: 0 0 8px 0;
+  margin: 0 0 7px 0;
   text-align: justify;
   text-justify: inter-word;
-}
-
-#printArea .text-block .para:last-child {
-  margin-bottom: 0;
 }
 
 #printArea .formal-table {
@@ -796,15 +936,31 @@ body.print-mode #printArea .formal-sheet {
   border-collapse: collapse;
   table-layout: fixed;
   border: 1.2px solid #222;
+  page-break-inside: auto;
+  break-inside: auto;
+}
+
+#printArea .formal-table thead {
+  display: table-header-group;
+}
+
+#printArea .formal-table tbody {
+  display: table-row-group;
+}
+
+#printArea .formal-table tfoot {
+  display: table-footer-group;
 }
 
 #printArea .formal-table th,
 #printArea .formal-table td {
   border: 1.2px solid #222;
-  padding: 6px 7px;
+  padding: 5px 6px;
   vertical-align: top;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 9.7pt;
+  font-size: 9pt;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 #printArea .formal-table th {
@@ -822,8 +978,15 @@ body.print-mode #printArea .formal-sheet {
   page-break-inside: avoid;
 }
 
+#printArea .participants-table,
+#printArea .tasks-table {
+  page-break-inside: auto;
+  break-inside: auto;
+}
+
 #printArea .participants-table td:last-child {
   height: 18px;
+  min-height: 18px;
 }
 
 #printArea .empty-cell {
@@ -840,15 +1003,17 @@ body.print-mode #printArea .formal-sheet {
 }
 
 #printArea .doc-footer {
-  margin-top: 10px;
+  margin-top: 8px;
   border-top: 1.2px solid #222;
-  padding-top: 6px;
+  padding-top: 5px;
   display: flex;
   justify-content: space-between;
   gap: 12px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 9pt;
+  font-size: 8.8pt;
   color: #333;
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 `;
   }
@@ -1250,7 +1415,10 @@ body.print-mode #printArea .formal-sheet {
 
   async function buildEmailHTML(state, cfg) {
     const headerName = getHeaderName(cfg);
-    const logoDataUrl = await resolveHeaderLogoForEmail(cfg);
+    const logoAsset = await resolveHeaderLogoForEmail(cfg);
+    const logoDataUrl = logoAsset && logoAsset.src ? logoAsset.src : '';
+    const logoWidthPx = logoAsset && logoAsset.width ? logoAsset.width : EMAIL_LOGO_MAX_W;
+    const logoHeightPx = logoAsset && logoAsset.height ? logoAsset.height : 0;
     const logoAlt = headerName || T('export.logoAlt') || 'Logo';
 
     const meetingTitle = (state.meeting && state.meeting.title) ? String(state.meeting.title) : '';
@@ -1310,8 +1478,8 @@ body.print-mode #printArea .formal-sheet {
   <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid #222;">
     <tr>
       <td style="width:25%;border:1px solid #222;padding:8px;vertical-align:middle;text-align:center;">
-        ${logoDataUrl ? `<img src="${escHtml(logoDataUrl)}" alt="${escHtml(logoAlt)}" style="display:block;margin:0 auto 6px auto;max-height:48px;max-width:100%;height:auto;width:auto;">` : ''}
-        ${headerName ? `<div style="font-weight:700;font-size:13px;word-break:break-word;">${escHtml(headerName)}</div>` : ''}
+        ${logoDataUrl ? `<img src="${escHtml(logoDataUrl)}" alt="${escHtml(logoAlt)}"${logoWidthPx ? ` width="${escHtml(String(logoWidthPx))}"` : ''}${logoHeightPx ? ` height="${escHtml(String(logoHeightPx))}"` : ''} style="display:block;margin:0 auto 6px auto;max-width:${EMAIL_LOGO_MAX_W}px;width:${logoWidthPx ? escHtml(String(logoWidthPx)) + 'px' : 'auto'};${logoHeightPx ? `height:${escHtml(String(logoHeightPx))}px;` : 'height:auto;'}max-height:${EMAIL_LOGO_MAX_H}px;object-fit:contain;">` : ''}
+        ${headerName ? `<div style="font-weight:700;font-size:13px;word-break:break-word;overflow-wrap:anywhere;">${escHtml(headerName)}</div>` : ''}
       </td>
       <td style="width:47%;border:1px solid #222;padding:10px 12px;vertical-align:middle;text-align:center;font-size:24px;font-weight:800;">
         ${escHtml(T('print.doc.title'))}
@@ -1472,8 +1640,7 @@ body.print-mode #printArea .formal-sheet {
     ]);
   }
 
-
-  function shouldUseIsolatedPrintTarget() {
+  function shouldUsePopupPrintTarget() {
     try {
       const coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
       const standalone = !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
@@ -1497,9 +1664,10 @@ body.print-mode #printArea .formal-sheet {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light only" />
   <title>${escHtml(title)}</title>
 </head>
-<body class="print-mode">
+<body>
   <section id="printArea" aria-hidden="false">${content}</section>
 </body>
 </html>`;
@@ -1510,7 +1678,7 @@ body.print-mode #printArea .formal-sheet {
       const win = window.open('', '_blank');
       if (!win) return null;
       win.document.open();
-      win.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Preparing print document</title></head><body style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:16px;background:#fff;color:#111;">Preparing document…</body></html>');
+      win.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Preparing document</title></head><body style="margin:0;padding:16px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#111;">Preparing document…</body></html>');
       win.document.close();
       return win;
     } catch {
@@ -1518,65 +1686,46 @@ body.print-mode #printArea .formal-sheet {
     }
   }
 
-  async function waitForDocumentReady(doc, timeoutMs) {
-    const targetDoc = doc || document;
-    const timeout = Math.max(300, parseInt(String(timeoutMs || 2000), 10) || 2000);
+  async function waitForDocumentReady(targetDoc, timeoutMs) {
+    const doc = targetDoc || document;
+    const timeout = Math.max(300, parseInt(String(timeoutMs || 2200), 10) || 2200);
 
-    if (targetDoc.readyState === 'interactive' || targetDoc.readyState === 'complete') return;
+    if (doc.readyState === 'interactive' || doc.readyState === 'complete') return;
 
     await new Promise((resolve) => {
       let timer = null;
 
       const done = () => {
         if (timer) clearTimeout(timer);
-        try { targetDoc.removeEventListener('readystatechange', onChange); } catch { /* ignore */ }
+        try { doc.removeEventListener('readystatechange', onChange); } catch { /* ignore */ }
         resolve();
       };
 
       const onChange = () => {
-        if (targetDoc.readyState === 'interactive' || targetDoc.readyState === 'complete') done();
+        if (doc.readyState === 'interactive' || doc.readyState === 'complete') done();
       };
 
       timer = setTimeout(done, timeout);
-      try { targetDoc.addEventListener('readystatechange', onChange); } catch { setTimeout(done, timeout); }
+      try { doc.addEventListener('readystatechange', onChange); } catch { setTimeout(done, timeout); }
     });
   }
 
   async function printUsingPopup(printWin, docHtml) {
     if (!printWin) return false;
 
-    let cleaned = false;
-    const cleanup = () => {
-      if (cleaned) return;
-      cleaned = true;
-      try { printWin.close(); } catch { /* ignore */ }
-    };
+    printWin.document.open();
+    printWin.document.write(docHtml);
+    printWin.document.close();
 
-    try {
-      printWin.document.open();
-      printWin.document.write(docHtml);
-      printWin.document.close();
+    await waitForDocumentReady(printWin.document, 2600);
+    await waitForImages(printWin.document, 2400);
 
-      await waitForDocumentReady(printWin.document, 2600);
-      await waitForImages(printWin.document, 2400);
+    setTimeout(() => {
+      try { printWin.focus(); } catch { /* ignore */ }
+      try { printWin.print(); } catch { /* ignore */ }
+    }, 220);
 
-      try { printWin.addEventListener('afterprint', cleanup, { once: true }); } catch { /* ignore */ }
-      setTimeout(cleanup, 60000);
-
-      setTimeout(() => {
-        try {
-          printWin.focus();
-          printWin.print();
-        } catch {
-          cleanup();
-        }
-      }, 120);
-
-      return true;
-    } catch (err) {
-      cleanup();
-      throw err;
-    }
+    return true;
   }
 
   async function printUsingIframe(docHtml) {
@@ -1585,8 +1734,8 @@ body.print-mode #printArea .formal-sheet {
     iframe.style.position = 'fixed';
     iframe.style.right = '0';
     iframe.style.bottom = '0';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
+    iframe.style.width = '1px';
+    iframe.style.height = '1px';
     iframe.style.border = '0';
     iframe.style.opacity = '0';
     iframe.style.pointerEvents = 'none';
@@ -1604,7 +1753,7 @@ body.print-mode #printArea .formal-sheet {
     try {
       const frameWindow = iframe.contentWindow;
       const frameDoc = frameWindow ? frameWindow.document : iframe.contentDocument;
-      if (!frameDoc) throw new Error('Print iframe unavailable');
+      if (!frameDoc || !frameWindow) throw new Error('Print iframe unavailable');
 
       frameDoc.open();
       frameDoc.write(docHtml);
@@ -1613,21 +1762,17 @@ body.print-mode #printArea .formal-sheet {
       await waitForDocumentReady(frameDoc, 2600);
       await waitForImages(frameDoc, 2400);
 
-      try { if (frameWindow) frameWindow.addEventListener('afterprint', cleanup, { once: true }); } catch { /* ignore */ }
+      try { frameWindow.addEventListener('afterprint', cleanup, { once: true }); } catch { /* ignore */ }
       setTimeout(cleanup, 60000);
 
       setTimeout(() => {
         try {
-          if (frameWindow) {
-            frameWindow.focus();
-            frameWindow.print();
-          } else {
-            cleanup();
-          }
+          frameWindow.focus();
+          frameWindow.print();
         } catch {
           cleanup();
         }
-      }, 120);
+      }, 220);
 
       return true;
     } catch (err) {
@@ -1661,31 +1806,30 @@ body.print-mode #printArea .formal-sheet {
     const safeMeeting = meetingTitle.trim() ? meetingTitle.trim() : T('print.untitled');
     const date = (state.meeting && state.meeting.date) ? fmtDate(state.meeting.date) : '';
     const fileTitle = sanitizeFilename(`${safeMeeting}${date ? ' · ' + date : ''}`);
-    const useIsolatedTarget = shouldUseIsolatedPrintTarget();
-    const popupShell = useIsolatedTarget ? openPrintPopupShell() : null;
+
+    const preferPopup = shouldUsePopupPrintTarget();
+    const popupShell = preferPopup ? openPrintPopupShell() : null;
+    const standaloneDoc = buildStandalonePrintDocument(state, cfg, fileTitle);
 
     try { document.title = fileTitle; } catch { /* ignore */ }
 
-    if (useIsolatedTarget) {
-      const standaloneDoc = buildStandalonePrintDocument(state, cfg, fileTitle);
-
+    if (preferPopup && popupShell) {
       try {
-        if (popupShell) {
-          await printUsingPopup(popupShell, standaloneDoc);
-          try { document.title = oldTitle; } catch { /* ignore */ }
-          return;
-        }
-      } catch (err) {
-        console.error('[ReKPiTu][export][popup]', err);
-      }
-
-      try {
-        await printUsingIframe(standaloneDoc);
+        await printUsingPopup(popupShell, standaloneDoc);
         try { document.title = oldTitle; } catch { /* ignore */ }
         return;
       } catch (err) {
-        console.error('[ReKPiTu][export][iframe]', err);
+        console.error('[ReKPiTu][export][popup]', err);
+        try { popupShell.close(); } catch { /* ignore */ }
       }
+    }
+
+    try {
+      await printUsingIframe(standaloneDoc);
+      try { document.title = oldTitle; } catch { /* ignore */ }
+      return;
+    } catch (err) {
+      console.error('[ReKPiTu][export][iframe]', err);
     }
 
     printArea.innerHTML = buildFormalPrintHTML(state, cfg);
@@ -1694,7 +1838,7 @@ body.print-mode #printArea .formal-sheet {
 
     document.body.classList.add('print-mode');
 
-    await waitForImages(printArea, 1800);
+    await waitForImages(printArea, 2200);
 
     let restored = false;
     const mql = (typeof window.matchMedia === 'function') ? window.matchMedia('print') : null;
@@ -1734,8 +1878,12 @@ body.print-mode #printArea .formal-sheet {
     }
 
     setTimeout(() => {
-      try { window.print(); } catch { restore(); }
-    }, 60);
+      try {
+        window.print();
+      } catch {
+        restore();
+      }
+    }, 120);
   }
 
   // =========================

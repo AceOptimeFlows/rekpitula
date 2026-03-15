@@ -227,76 +227,16 @@
     return /^data:/i.test(v);
   }
 
-  const EMAIL_LOGO_MAX_W = 160;
-  const EMAIL_LOGO_MAX_H = 48;
-
   function resolveHeaderLogoForPrint(cfg) {
     const src = getHeaderLogo(cfg);
     return src || '';
   }
 
-  function fitInsideBox(width, height, maxWidth, maxHeight) {
-    const w = Math.max(1, Number(width) || 1);
-    const h = Math.max(1, Number(height) || 1);
-    const mw = Math.max(1, Number(maxWidth) || w);
-    const mh = Math.max(1, Number(maxHeight) || h);
-    const scale = Math.min(mw / w, mh / h, 1);
-    return {
-      width: Math.max(1, Math.round(w * scale)),
-      height: Math.max(1, Math.round(h * scale))
-    };
-  }
-
-  async function loadImageElement(src) {
-    return await new Promise((resolve, reject) => {
-      try {
-        const img = new Image();
-        img.decoding = 'async';
-        img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error('Image load failed'));
-        img.src = src;
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
-
-  async function normalizeEmailLogoAsset(src) {
-    const value = String(src || '').trim();
-    if (!value) return { src: '', width: 0, height: 0 };
-
-    if (!looksDataUrl(value)) {
-      return { src: value, width: EMAIL_LOGO_MAX_W, height: 0 };
-    }
-
-    try {
-      const img = await loadImageElement(value);
-      const dims = fitInsideBox(img.naturalWidth || img.width, img.naturalHeight || img.height, EMAIL_LOGO_MAX_W, EMAIL_LOGO_MAX_H);
-      const canvas = document.createElement('canvas');
-      canvas.width = dims.width;
-      canvas.height = dims.height;
-
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return { src: value, width: dims.width, height: dims.height };
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      return {
-        src: canvas.toDataURL('image/png'),
-        width: canvas.width,
-        height: canvas.height
-      };
-    } catch {
-      return { src: value, width: EMAIL_LOGO_MAX_W, height: 0 };
-    }
-  }
-
   async function resolveHeaderLogoForEmail(cfg) {
     const src = getHeaderLogo(cfg);
-    if (!src) return { src: '', width: 0, height: 0 };
-    if (looksDataUrl(src) || looksAbsoluteUrl(src)) return await normalizeEmailLogoAsset(src);
-    return { src: '', width: 0, height: 0 };
+    if (!src) return '';
+    if (looksDataUrl(src) || looksAbsoluteUrl(src)) return src;
+    return '';
   }
 
   // =========================
@@ -609,27 +549,6 @@ body.print-mode {
   background: #dbe2ea !important;
 }
 
-body.print-mode,
-body.print-mode .page-root {
-  height: auto !important;
-  min-height: 0 !important;
-  overflow: visible !important;
-}
-
-body.print-mode .page-root {
-  display: block !important;
-}
-
-@media print {
-  html,
-  body,
-  .page-root {
-    height: auto !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-}
-
 #printArea {
   padding: 0 !important;
   margin: 0 !important;
@@ -638,7 +557,6 @@ body.print-mode .page-root {
 
 body.print-mode #printArea {
   padding: 10mm !important;
-  overflow: visible !important;
 }
 
 #printArea .formal-sheet {
@@ -902,14 +820,6 @@ body.print-mode #printArea .formal-sheet {
 #printArea .formal-table tr {
   break-inside: avoid;
   page-break-inside: avoid;
-}
-
-#printArea .participants-table {
-  page-break-inside: auto;
-}
-
-#printArea .participants-table thead {
-  display: table-header-group;
 }
 
 #printArea .participants-table td:last-child {
@@ -1340,10 +1250,7 @@ body.print-mode #printArea .formal-sheet {
 
   async function buildEmailHTML(state, cfg) {
     const headerName = getHeaderName(cfg);
-    const logoAsset = await resolveHeaderLogoForEmail(cfg);
-    const logoDataUrl = logoAsset && logoAsset.src ? logoAsset.src : '';
-    const logoWidthPx = logoAsset && logoAsset.width ? logoAsset.width : EMAIL_LOGO_MAX_W;
-    const logoHeightPx = logoAsset && logoAsset.height ? logoAsset.height : 0;
+    const logoDataUrl = await resolveHeaderLogoForEmail(cfg);
     const logoAlt = headerName || T('export.logoAlt') || 'Logo';
 
     const meetingTitle = (state.meeting && state.meeting.title) ? String(state.meeting.title) : '';
@@ -1403,7 +1310,7 @@ body.print-mode #printArea .formal-sheet {
   <table role="presentation" style="width:100%;border-collapse:collapse;table-layout:fixed;border:1px solid #222;">
     <tr>
       <td style="width:25%;border:1px solid #222;padding:8px;vertical-align:middle;text-align:center;">
-        ${logoDataUrl ? `<img src="${escHtml(logoDataUrl)}" alt="${escHtml(logoAlt)}"${logoWidthPx ? ` width="${escHtml(String(logoWidthPx))}"` : ''}${logoHeightPx ? ` height="${escHtml(String(logoHeightPx))}"` : ''} style="display:block;margin:0 auto 6px auto;max-width:${EMAIL_LOGO_MAX_W}px;width:${logoWidthPx ? escHtml(String(logoWidthPx)) + 'px' : 'auto'};${logoHeightPx ? `height:${escHtml(String(logoHeightPx))}px;` : 'height:auto;'}max-height:${EMAIL_LOGO_MAX_H}px;object-fit:contain;">` : ''}
+        ${logoDataUrl ? `<img src="${escHtml(logoDataUrl)}" alt="${escHtml(logoAlt)}" style="display:block;margin:0 auto 6px auto;max-height:48px;max-width:100%;height:auto;width:auto;">` : ''}
         ${headerName ? `<div style="font-weight:700;font-size:13px;word-break:break-word;">${escHtml(headerName)}</div>` : ''}
       </td>
       <td style="width:47%;border:1px solid #222;padding:10px 12px;vertical-align:middle;text-align:center;font-size:24px;font-weight:800;">
@@ -1565,6 +1472,170 @@ body.print-mode #printArea .formal-sheet {
     ]);
   }
 
+
+  function shouldUseIsolatedPrintTarget() {
+    try {
+      const coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+      const standalone = !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+      const ua = String((navigator && navigator.userAgent) || '');
+      const mobileUA = /Android|iPhone|iPad|iPod|Mobile|Silk|Kindle|BlackBerry|Opera Mini|IEMobile/i.test(ua);
+      const smallViewport = Math.min(window.innerWidth || 0, window.innerHeight || 0) <= 980;
+      return coarse || standalone || mobileUA || smallViewport;
+    } catch {
+      return false;
+    }
+  }
+
+  function buildStandalonePrintDocument(state, cfg, fileTitle) {
+    const docLang = currentLangAttr();
+    const docDir = currentDir();
+    const title = sanitizeFilename(fileTitle || T('print.untitled'));
+    const content = buildFormalPrintHTML(state, cfg);
+
+    return `<!doctype html>
+<html lang="${escHtml(docLang)}" dir="${escHtml(docDir)}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+  <title>${escHtml(title)}</title>
+</head>
+<body class="print-mode">
+  <section id="printArea" aria-hidden="false">${content}</section>
+</body>
+</html>`;
+  }
+
+  function openPrintPopupShell() {
+    try {
+      const win = window.open('', '_blank');
+      if (!win) return null;
+      win.document.open();
+      win.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Preparing print document</title></head><body style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:16px;background:#fff;color:#111;">Preparing document…</body></html>');
+      win.document.close();
+      return win;
+    } catch {
+      return null;
+    }
+  }
+
+  async function waitForDocumentReady(doc, timeoutMs) {
+    const targetDoc = doc || document;
+    const timeout = Math.max(300, parseInt(String(timeoutMs || 2000), 10) || 2000);
+
+    if (targetDoc.readyState === 'interactive' || targetDoc.readyState === 'complete') return;
+
+    await new Promise((resolve) => {
+      let timer = null;
+
+      const done = () => {
+        if (timer) clearTimeout(timer);
+        try { targetDoc.removeEventListener('readystatechange', onChange); } catch { /* ignore */ }
+        resolve();
+      };
+
+      const onChange = () => {
+        if (targetDoc.readyState === 'interactive' || targetDoc.readyState === 'complete') done();
+      };
+
+      timer = setTimeout(done, timeout);
+      try { targetDoc.addEventListener('readystatechange', onChange); } catch { setTimeout(done, timeout); }
+    });
+  }
+
+  async function printUsingPopup(printWin, docHtml) {
+    if (!printWin) return false;
+
+    let cleaned = false;
+    const cleanup = () => {
+      if (cleaned) return;
+      cleaned = true;
+      try { printWin.close(); } catch { /* ignore */ }
+    };
+
+    try {
+      printWin.document.open();
+      printWin.document.write(docHtml);
+      printWin.document.close();
+
+      await waitForDocumentReady(printWin.document, 2600);
+      await waitForImages(printWin.document, 2400);
+
+      try { printWin.addEventListener('afterprint', cleanup, { once: true }); } catch { /* ignore */ }
+      setTimeout(cleanup, 60000);
+
+      setTimeout(() => {
+        try {
+          printWin.focus();
+          printWin.print();
+        } catch {
+          cleanup();
+        }
+      }, 120);
+
+      return true;
+    } catch (err) {
+      cleanup();
+      throw err;
+    }
+  }
+
+  async function printUsingIframe(docHtml) {
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('aria-hidden', 'true');
+    iframe.style.position = 'fixed';
+    iframe.style.right = '0';
+    iframe.style.bottom = '0';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = '0';
+    iframe.style.opacity = '0';
+    iframe.style.pointerEvents = 'none';
+    iframe.style.visibility = 'hidden';
+
+    document.body.appendChild(iframe);
+
+    let cleaned = false;
+    const cleanup = () => {
+      if (cleaned) return;
+      cleaned = true;
+      try { iframe.remove(); } catch { /* ignore */ }
+    };
+
+    try {
+      const frameWindow = iframe.contentWindow;
+      const frameDoc = frameWindow ? frameWindow.document : iframe.contentDocument;
+      if (!frameDoc) throw new Error('Print iframe unavailable');
+
+      frameDoc.open();
+      frameDoc.write(docHtml);
+      frameDoc.close();
+
+      await waitForDocumentReady(frameDoc, 2600);
+      await waitForImages(frameDoc, 2400);
+
+      try { if (frameWindow) frameWindow.addEventListener('afterprint', cleanup, { once: true }); } catch { /* ignore */ }
+      setTimeout(cleanup, 60000);
+
+      setTimeout(() => {
+        try {
+          if (frameWindow) {
+            frameWindow.focus();
+            frameWindow.print();
+          } else {
+            cleanup();
+          }
+        } catch {
+          cleanup();
+        }
+      }, 120);
+
+      return true;
+    } catch (err) {
+      cleanup();
+      throw err;
+    }
+  }
+
   // =========================
   // Export PDF
   // =========================
@@ -1590,8 +1661,32 @@ body.print-mode #printArea .formal-sheet {
     const safeMeeting = meetingTitle.trim() ? meetingTitle.trim() : T('print.untitled');
     const date = (state.meeting && state.meeting.date) ? fmtDate(state.meeting.date) : '';
     const fileTitle = sanitizeFilename(`${safeMeeting}${date ? ' · ' + date : ''}`);
+    const useIsolatedTarget = shouldUseIsolatedPrintTarget();
+    const popupShell = useIsolatedTarget ? openPrintPopupShell() : null;
 
     try { document.title = fileTitle; } catch { /* ignore */ }
+
+    if (useIsolatedTarget) {
+      const standaloneDoc = buildStandalonePrintDocument(state, cfg, fileTitle);
+
+      try {
+        if (popupShell) {
+          await printUsingPopup(popupShell, standaloneDoc);
+          try { document.title = oldTitle; } catch { /* ignore */ }
+          return;
+        }
+      } catch (err) {
+        console.error('[ReKPiTu][export][popup]', err);
+      }
+
+      try {
+        await printUsingIframe(standaloneDoc);
+        try { document.title = oldTitle; } catch { /* ignore */ }
+        return;
+      } catch (err) {
+        console.error('[ReKPiTu][export][iframe]', err);
+      }
+    }
 
     printArea.innerHTML = buildFormalPrintHTML(state, cfg);
     printArea.hidden = false;

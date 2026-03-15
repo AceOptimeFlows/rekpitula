@@ -3,7 +3,7 @@
     "skip": "본문으로 건너뛰기"
   },
   "app": {
-    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — 오프라인 PWA",
     "logoAlt": "OptimeFlow(s) 로고",
     "brandName": "OptimeFlow(s)",
     "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
@@ -15,25 +15,25 @@
       "system": "시스템",
       "dark": "다크 코어",
       "midnight": "미드나이트 블루",
-      "nebula": "네온 네뷸라",
-      "ocean": "딥 오션",
-      "forest": "에메랄드 포레스트",
+      "nebula": "네온 성운",
+      "ocean": "심해",
+      "forest": "에메랄드 숲",
       "amber": "웜 앰버",
       "violet": "로열 바이올렛",
-      "mono": "모노 느와르"
+      "mono": "모노 누아르"
     },
     "languageLabel": "언어",
     "languages": {
       "es": "스페인어",
       "en": "영어",
-      "pt-br": "포르투갈어(브라질)",
+      "pt-br": "포르투갈어 (브라질)",
       "de": "독일어",
       "it": "이탈리아어",
       "fr": "프랑스어",
-      "ru": "러시아어", 
       "ko": "한국어",
       "ja": "일본어",
       "zh": "중국어",
+      "ru": "러시아어",
       "hi": "힌디어",
       "ar": "아랍어"
     },
@@ -42,19 +42,19 @@
   "actions": {
     "clear": "지우기",
     "export": "PDF 내보내기",
-    "copy": "Gmail용으로 복사",
+    "copy": "Gmail용 복사",
     "jumpAria": "섹션으로 이동",
     "jump": {
-      "contrib": "기여 내용",
+      "contrib": "발언",
       "keypoints": "핵심 포인트",
       "tasks": "할 일",
-      "observations": "관찰 사항"
+      "observations": "비고"
     }
   },
   "export": {
     "settingsTitle": "회의록 내보내기",
-    "headerHint": "기관명과 원하는 경우 로고를 사용해 회의록 머리글을 설정하세요.",
-    "headerNameLabel": "회사 / 기관 이름",
+    "headerHint": "문서 헤더에 기관명을 설정하고, 원하면 로고도 추가하세요.",
+    "headerNameLabel": "회사 / 기관명",
     "headerNamePh": "예: Globalogistics, COCOLAB 위원회, 총괄본부…",
     "includeLogo": "로고 포함",
     "logoLabel": "로고",
@@ -62,18 +62,25 @@
     "logoReset": "제거",
     "logoStatusApp": "로고: 앱 로고 사용 중",
     "logoStatusCustom": "로고: 사용자 지정",
-    "logoStatusSet": "머리글 로고가 설정되었습니다",
-    "logoStatusNone": "머리글 로고 없음",
-    "logoAlt": "머리글 로고",
+    "logoStatusSet": "헤더 로고가 설정되었습니다",
+    "logoStatusNone": "헤더 로고 없음",
+    "logoAlt": "헤더 로고",
     "footerLabel": "바닥글",
-    "footerPh": "바닥글에 들어갈 선택 텍스트…",
-    "footerHint": "팁: 이 텍스트는 회의록 끝에 추가됩니다(기관명, 부서, 기밀 여부 등에 유용)."
+    "footerPh": "선택형 바닥글 텍스트…",
+    "footerHint": "팁: 이 텍스트는 회의록 끝에 추가됩니다(기관, 부서, 기밀성 표기 등에 유용).",
+    "colorsTitle": "문서 색상",
+    "colorsHint": "이 색상은 내보낸 PDF와 Gmail용 복사본에 적용됩니다.",
+    "marginColorLabel": "여백 색상",
+    "contourColorLabel": "윤곽선 색상",
+    "tableColorLabel": "표 및 헤더 색상",
+    "textColorLabel": "텍스트 색상",
+    "colorsReset": "색상 복원"
   },
   "setup": {
-    "title": "구성",
-    "lead": "기본 정보를 정하고 회의록 구조를 생성하세요.",
+    "title": "설정",
+    "lead": "기본 정보를 입력하고 회의록 구조를 생성하세요.",
     "meetingTitle": "회의 제목 / 이름",
-    "meetingTitlePh": "스프린트 리뷰, 위원회 등",
+    "meetingTitlePh": "Sprint Review, 위원회 등",
     "date": "날짜",
     "type": "유형",
     "types": {
@@ -89,64 +96,101 @@
     "generate": "구조 생성",
     "autosave": "자동 저장 ON · 로컬",
     "autosaveSavedAt": "저장됨 · {{time}}",
-    "removeParticipant": "참석자 삭제",
+    "removeParticipant": "참석자 제거",
     "noParticipantsOption": "먼저 참석자를 추가하세요…"
   },
   "empty": {
     "title": "먼저 회의를 만들어 보세요",
-    "body": "참석자를 추가하고 “구조 생성”을 누르세요. 그다음 발언을 받아쓰기하고, 핵심 포인트를 뽑고, 작업을 배정하고, 내보낼 수 있습니다."
+    "body": "참석자를 추가하고 “구조 생성”을 누르세요. 그런 다음 발언 받아쓰기, 핵심 포인트 추출, 할 일 지정, 내보내기를 할 수 있습니다."
   },
   "progress": {
-    "title": "진행률",
-    "caption": "준비된 섹션",
+    "title": "진행 상황",
+    "caption": "섹션 완료",
     "pill": "{{done}}/{{total}}"
   },
   "contrib": {
-    "title": "회의 기여 내용",
-    "lead": "각 기여 내용은 참석자별로 태그되며, 중첩된 답글(스레드 형식)을 지원합니다.",
+    "title": "회의 발언",
+    "lead": "각 발언은 참석자별로 표시되며 중첩 답글(스레드 스타일)을 지원합니다.",
     "author": "작성자",
-    "text": "기여 내용",
-    "textPh": "기여 내용을 입력하거나 받아쓰세요…",
+    "text": "발언 내용",
+    "textPh": "직접 입력하거나 받아쓰세요…",
     "dictate": "🎙️ 받아쓰기",
-    "add": "기여 추가",
+    "add": "발언 추가",
     "reply": "답글",
-    "emptyThreads": "아직 기여 내용이 없습니다. 위에서 첫 항목을 추가하거나 🎙️로 받아쓰세요."
+    "emptyThreads": "아직 발언이 없습니다. 위에서 첫 발언을 추가하거나 🎙️으로 받아쓰세요."
   },
   "dictation": {
-    "listening": "🎙️ 듣는 중… 자연스럽게 말씀하세요."
+    "listening": "🎙️ 듣는 중… 자연스럽게 말씀하세요.",
+    "whisperHelp": "한 번 누르면 녹음합니다. 다시 누르면 녹음 내용을 전사합니다.",
+    "browserHelp": "한 번 눌러 받아쓰기를 시작하고, 다시 눌러 중지하세요."
+  },
+  "transcription": {
+    "modeLabel": "전사 엔진",
+    "modeWhisper": "Whisper 오프라인 · 개인정보 보호",
+    "modeBrowser": "브라우저 · 더 빠름",
+    "modeHintWhisper": "최대 수준의 개인정보 보호: 모델 다운로드 후 오디오와 텍스트가 기기에서 로컬 처리됩니다.",
+    "modeHintBrowser": "더 빠르게 시작: 브라우저 음성 엔진을 사용하며 플랫폼 또는 브라우저 서비스에 의존할 수 있습니다.",
+    "title": "오프라인 전사기 · Whisper Small",
+    "lead": "모델을 한 번 다운로드하면 이후에는 오프라인으로 받아쓸 수 있습니다.",
+    "download": "모델 다운로드",
+    "delete": "모델 삭제",
+    "statusMissing": "모델이 다운로드되지 않았습니다.",
+    "statusReady": "오프라인 받아쓰기를 위한 모델 준비 완료.",
+    "statusChecking": "로컬 모델 확인 중…",
+    "statusPreparingRuntime": "로컬 런타임 준비 중…",
+    "statusDownloading": "모델 다운로드 중…",
+    "statusLoading": "로컬 모델 불러오는 중…",
+    "statusRecording": "오디오 녹음 중… 끝내려면 다시 누르세요.",
+    "statusProcessing": "로컬에서 전사 중…",
+    "statusDeleted": "모델이 삭제되었습니다.",
+    "browserStatusListening": "브라우저 받아쓰기 활성화됨… 지금 말씀하세요.",
+    "toastReady": "Whisper Small 모델이 준비되었습니다.",
+    "toastDeleted": "모델이 삭제되었습니다.",
+    "errModelMissing": "설정에서 먼저 Whisper Small을 다운로드하세요.",
+    "errMicDenied": "마이크 권한이 거부되었습니다.",
+    "errMicUnavailable": "마이크를 사용할 수 없습니다.",
+    "errProcessing": "로컬 전사에 실패했습니다.",
+    "errTooShort": "충분한 음성이 감지되지 않았습니다.",
+    "errDownload": "모델을 다운로드할 수 없습니다.",
+    "errUnsupported": "이 브라우저는 오프라인 로컬 전사를 지원하지 않습니다.",
+    "errLibrary": "로컬 전사 엔진을 불러올 수 없습니다.",
+    "commandSelectAria": "전사 엔진",
+    "commandDownload": "Whisper 다운로드",
+    "commandReady": "Whisper 준비됨",
+    "commandMissing": "Whisper가 다운로드되지 않음"
   },
   "keypoints": {
     "title": "핵심 포인트",
-    "lead": "중복 제거와 함께 기여 내용(답글 포함)에서 포인트를 추출합니다.",
-    "howmany": "포인트 몇 개?",
+    "lead": "발언(답글 포함)에서 중복을 제거해 포인트를 추출합니다.",
+    "howmany": "몇 개의 포인트?",
     "extract": "추출",
     "empty": "아직 핵심 포인트가 없습니다. “추출”을 누르세요.",
     "remove": "핵심 포인트 삭제"
   },
   "tasks": {
     "title": "할 일과 타임라인",
-    "lead": "참석자별로 목표 날짜와 함께 작업을 배정하세요.",
-    "task": "작업",
-    "taskPh": "작업 설명…",
+    "lead": "참석자별로 목표 날짜가 있는 할 일을 지정하세요.",
+    "task": "할 일",
+    "taskPh": "할 일 설명…",
     "assignee": "담당자",
     "due": "마감일",
     "status": "상태",
-    "pending": "대기 중",
+    "pending": "진행 전",
     "done": "완료",
     "add": "추가",
-    "hint": "팁: ✓로 상태를 바꾸고 ↩︎로 되돌릴 수 있습니다.",
-    "empty": "아직 작업이 없습니다. 위에서 하나 추가하세요."
+    "hint": "팁: ✓로 상태를 전환하고 ↩︎로 되돌릴 수 있습니다.",
+    "empty": "아직 할 일이 없습니다. 위에서 추가하세요."
   },
   "observations": {
-    "title": "관찰 사항",
+    "title": "비고",
     "lead": "문제 상황, 회의 분위기, 위험, 이슈 또는 기타 중요한 메모를 남기세요.",
-    "field": "최종 관찰 사항",
-    "ph": "여기에 이슈, 막힘, 전반적인 분위기, 의존성, 암묵적 합의 또는 기타 중요한 사항을 적어두세요…",
-    "hint": "이 메모는 내보낸 회의록의 마지막에 표시됩니다."
+    "field": "최종 비고",
+    "ph": "여기에 이슈, 장애물, 전반적인 분위기, 의존성, 암묵적 합의 또는 기타 중요한 사항을 기록하세요…",
+    "hint": "이 메모는 내보낸 회의록 마지막에 표시됩니다."
   },
   "timeline": {
     "title": "참석자별 타임라인",
-    "empty": "작업을 추가하면 여기에서 사람별 타임라인을 볼 수 있습니다."
+    "empty": "할 일을 추가하면 여기에 사람별 타임라인이 표시됩니다."
   },
   "print": {
     "untitled": "제목 없는 회의",
@@ -173,16 +217,16 @@
     "sections": {
       "summary": "요약",
       "contrib": "회의 진행 내용",
-      "keypoints": "핵심 포인트 및 합의",
-      "tasks": "작업 / 결론",
-      "observations": "관찰 사항",
+      "keypoints": "핵심 포인트 및 합의 사항",
+      "tasks": "할 일 / 결론",
+      "observations": "비고",
       "participants": "참석자"
     },
     "summary": {
       "bullets": {
-        "contrib": "기록된 기여 내용: {{total}}개 (주 스레드 {{threads}}개)",
-        "keypoints": "식별된 핵심 포인트: {{n}}개",
-        "tasks": "작업: {{total}}개 (완료 {{done}}개, 대기 {{pending}}개)"
+        "contrib": "기록된 발언: {{total}} (주요 스레드 {{threads}}개)",
+        "keypoints": "식별된 핵심 포인트: {{n}}",
+        "tasks": "할 일: {{total}} (완료 {{done}}, 진행 전 {{pending}})"
       },
       "highlights": "주요 사항"
     },
@@ -191,18 +235,18 @@
         "root": "발언",
         "reply": "답글"
       },
-      "replyTo": "항목 #{{n}}와 연결됨",
+      "replyTo": "항목 #{{n}}에 연결됨",
       "repliesLabel": "연결된 발언"
     },
     "tasksTable": {
       "id": "ID",
-      "task": "작업 / 결론",
+      "task": "할 일 / 결론",
       "assignee": "담당자",
       "due": "마감일",
       "status": "상태"
     },
     "observations": {
-      "empty": "기록된 관찰 사항이 없습니다."
+      "empty": "기록된 비고 없음."
     },
     "participantsTable": {
       "number": "#",
@@ -211,27 +255,27 @@
       "company": "회사 / 팀",
       "signature": "서명"
     },
-    "footer": "OptimeFlow(s)로 생성됨 · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+    "footer": "OptimeFlow(s) · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ 로 생성됨"
   },
   "alerts": {
     "needParticipants": "계속하려면 최소 1명의 참석자를 추가하세요.",
     "needAuthor": "작성자를 선택하세요.",
     "needText": "먼저 내용을 입력하세요.",
-    "needTextField": "받아쓸 텍스트 필드를 선택하세요.",
+    "needTextField": "받아쓰기를 위한 텍스트 필드를 선택하세요.",
     "voiceNotAvail": "이 브라우저에서는 받아쓰기를 사용할 수 없습니다.",
-    "voicePermissionDenied": "마이크 권한이 허용되지 않았습니다.",
-    "voiceMicUnavailable": "사용 가능한 마이크를 찾지 못했습니다.",
+    "voicePermissionDenied": "마이크 권한이 부여되지 않았습니다.",
+    "voiceMicUnavailable": "사용 가능한 마이크를 찾을 수 없습니다.",
     "voiceNoSpeech": "음성이 감지되지 않았습니다. 다시 시도하세요.",
-    "voiceNetwork": "이 기기에서 브라우저 받아쓰기를 사용하려면 인터넷 연결이 필요합니다.",
+    "voiceNetwork": "이 기기에서는 브라우저 받아쓰기에 인터넷 연결이 필요합니다.",
     "voiceGenericError": "받아쓰기를 완료할 수 없습니다. 다시 시도하세요.",
-    "noThreadsForKeypoints": "먼저 기여 내용을 추가해야 핵심 포인트를 추출할 수 있습니다.",
-    "needTaskText": "작업을 입력하세요.",
-    "needGenerateFirst": "먼저 구조를 생성하세요 (구성 → 구조 생성).",
-    "clearConfirm": "정말 모든 데이터를 지우시겠어요? 이 작업은 되돌릴 수 없습니다.",
-    "deleteContribConfirm": "이 기여 내용과 모든 답글을 삭제할까요?",
-    "deleteTaskConfirm": "이 작업을 삭제할까요?",
+    "noThreadsForKeypoints": "핵심 포인트를 추출하려면 먼저 발언을 추가하세요.",
+    "needTaskText": "할 일을 입력하세요.",
+    "needGenerateFirst": "먼저 구조를 생성하세요(설정 → 구조 생성).",
+    "clearConfirm": "모든 데이터를 정말 지우시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+    "deleteContribConfirm": "이 발언과 모든 답글을 삭제할까요?",
+    "deleteTaskConfirm": "이 할 일을 삭제할까요?",
     "printAreaMissing": "인쇄 영역(printArea)을 찾을 수 없습니다.",
-    "copyNotSupported": "이 브라우저에서는 자동 복사를 할 수 없습니다. 다른 브라우저(Chrome/Edge)에서 시도하거나 일반 텍스트를 복사하세요.",
+    "copyNotSupported": "이 브라우저에서는 자동 복사를 사용할 수 없습니다. 다른 브라우저(Chrome/Edge)를 사용하거나 일반 텍스트를 직접 복사하세요.",
     "logoTooBig": "로고가 너무 큽니다. 더 가벼운 이미지를 사용하세요(권장 < 900KB).",
     "logoReadFail": "로고를 읽을 수 없습니다. 다른 파일을 시도하세요."
   },
@@ -239,44 +283,45 @@
     "structureReady": "구조 준비 완료 ✅",
     "participantAdded": "참석자 추가됨: {{name}}",
     "participantRemoved": "참석자 삭제됨: {{name}}",
-    "contribAdded": "기여 내용 추가됨 ✅",
+    "contribAdded": "발언 추가됨 ✅",
     "replyAdded": "답글 추가됨 ✅",
     "deleted": "삭제됨 ✅",
     "keypointsExtracted": "핵심 포인트 추출됨: {{n}}",
     "keypointRemoved": "핵심 포인트 삭제됨",
-    "taskAdded": "작업 추가됨 ✅",
+    "taskAdded": "할 일 추가됨 ✅",
     "taskToggled": "상태 업데이트됨 ✅",
-    "taskRemoved": "작업 삭제됨 ✅",
+    "taskRemoved": "할 일 삭제됨 ✅",
     "cleared": "데이터 삭제됨 ✅",
     "exportPreparing": "PDF 준비 중…",
     "copyPreparing": "회의록 복사 중…",
     "exportCopied": "회의록이 복사되었습니다 ✅ (Gmail에 붙여넣기)",
-    "exportSettingsSaved": "내보내기 설정이 업데이트되었습니다 ✅",
-    "logoUpdated": "로고가 업데이트되었습니다 ✅",
-    "logoReset": "로고가 제거되었습니다 ✅"
+    "exportSettingsSaved": "내보내기 설정 업데이트됨 ✅",
+    "logoUpdated": "로고 업데이트됨 ✅",
+    "logoReset": "로고 삭제됨 ✅",
+    "exportColorsRestored": "PDF 색상 복원됨 ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",
-    "appName": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️",
+    "appName": "ReKπTúL@",
     "year": "2025",
     "author": "Andrés Calvo Espinosa",
     "coherenceButtonAria": "보편적 일관성",
-    "licenseButtonAria": "MIT 라이선스",
-    "licenseButton": "MIT 라이선스",
+    "licenseButtonAria": "라이선스",
+    "licenseButton": "라이선스",
     "privacyButton": "개인정보 보호",
     "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
   "licenseOverlay": {
-    "title": "MIT 라이선스",
-    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    "title": "라이선스",
+    "body": "<p><b>앱 자체 코드.</b> 이 애플리케이션을 위해 특별히 개발된 코드는 MIT 라이선스로 배포됩니다.</p>\n<pre class=\"license-text\">MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre>\n<h3>서드파티 코드 및 구성 요소</h3>\n<ul>\n  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>\n  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>\n  <li><b>ONNX Runtime</b>: MIT</li>\n  <li><b>OpenAI Whisper (원본 프로젝트)</b>: MIT</li>\n</ul>\n<p>이러한 서드파티 라이선스는 앱 자체 코드의 MIT 라이선스를 바꾸지 않지만, 애플리케이션이나 그 구성 요소를 재배포할 때는 해당 고지와 라이선스 문구를 유지해야 합니다.</p>\n<p>실무적으로는 코드 자체는 MIT로 공개할 수 있지만, 최종 배포본에는 포함된 구성 요소에 해당하는 서드파티 라이선스 항목 또는 LICENSE 및 NOTICE 파일도 함께 포함해야 합니다.</p>"
   },
   "privacy": {
-    "title": "개인정보 처리방침",
-    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b>는 100% 사용자의 브라우저에서 실행됩니다. 사용자의 데이터는 어떤 서버로도 전송되지 않습니다.</p>"
+    "title": "앱의 실제 개인정보 보호",
+    "body": "<p><b>요약.</b> 이 애플리케이션은 주요 작업을 브라우저 안에서 수행하도록 설계되었습니다. 검토한 코드 기준으로 회의록 내용은 앱 자체 백엔드로 전송되지 않습니다.</p>\n<h3>브라우저에 로컬로 저장되는 항목</h3>\n<ul>\n  <li>제목, 날짜, 회의 유형, 참석자, 발언, 할 일, 핵심 포인트, 비고.</li>\n  <li>언어, 테마, 전사 엔진, 내보내기 설정과 같은 환경설정.</li>\n  <li>PDF용 로고를 업로드하면 그 파일도 내보내기 설정의 일부로 로컬에 저장될 수 있습니다.</li>\n</ul>\n<h3>기본적으로 공유되지 않는 항목</h3>\n<p>검토한 코드에는 회의록 내용을 앱 서버로 업로드하는 자체 API가 보이지 않습니다. 사용자가 입력하거나 받아쓴 내용에 대한 자체 분석 도구도 확인되지 않았습니다.</p>\n<h3>선택한 모드에 따른 전사 방식</h3>\n<p><b>Whisper 오프라인.</b> 오디오는 브라우저에서 수집되어 다운로드한 모델로 기기 안에서 로컬 처리됩니다. 런타임과 모델을 다운로드한 후에는 전사가 로컬에서 동작하며, 검토한 코드상 오디오를 전사 서비스로 업로드하는 동작은 없습니다.</p>\n<p><b>브라우저.</b> 앱은 브라우저 자체의 음성 인식 엔진을 사용합니다. 이 모드에서 앱이 별도의 오디오 업로드를 구현하지는 않지만, 실제 처리는 브라우저, 운영체제, 플랫폼에 따라 로컬일 수도 원격일 수도 있습니다. 따라서 모든 기기에서 이 모드가 항상 100% 로컬이라고 가정해서는 안 됩니다.</p>\n<h3>외부 연결이 발생할 수 있는 경우</h3>\n<ul>\n  <li>오프라인 전사에 필요한 런타임이나 모델을 처음 다운로드할 때.</li>\n  <li>플랫폼의 음성 서비스에 의존하는 기기나 브라우저에서 브라우저 전사 모드를 사용할 때.</li>\n  <li>인터페이스의 외부 링크를 열 때.</li>\n  <li>회의록을 복사한 뒤 Gmail 또는 다른 외부 서비스에 붙여넣기로 결정할 때.</li>\n</ul>\n<h3>내보내기와 오프라인 사용</h3>\n<p>PDF 내보내기는 브라우저 안에서 로컬로 생성되어 브라우저의 인쇄 대화상자로 전달됩니다. 앱은 로컬 저장소와 서비스 워커 덕분에 오프라인으로 동작할 수 있지만, 이것이 로컬 암호화나 자동 삭제를 의미하지는 않습니다.</p>\n<h3>중요</h3>\n<p>정보는 브라우저 또는 기기 프로필에 로컬로 저장되므로, 해당 브라우저나 프로필에 접근할 수 있는 사람은 내용을 볼 수 있습니다. 공용 기기를 사용한다면 작업 후 앱 데이터를 삭제하는 것이 좋습니다.</p>"
   },
   "coherence": {
     "title": "보편적 일관성",
-    "body": "이 작품이 감사의 표현이자 약속이 되기를 바랍니다. 생각하고, 느끼고, 행동하는 방향이 하나가 되기를."
+    "body": "이 작품이 감사의 표현이자 다짐이 되기를 바랍니다. 생각하고, 느끼고, 행동하는 방향이 하나가 되도록."
   },
   "confirm": {
     "title": "확인"

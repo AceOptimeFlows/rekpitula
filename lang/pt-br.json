@@ -30,10 +30,10 @@
       "de": "Alemão",
       "it": "Italiano",
       "fr": "Francês",
-      "ru": "Russo",
       "ko": "Coreano",
       "ja": "Japonês",
       "zh": "Chinês",
+      "ru": "Russo",
       "hi": "Hindi",
       "ar": "Árabe"
     },
@@ -56,23 +56,30 @@
     "headerHint": "Configure o cabeçalho da ata com o nome da entidade e, se quiser, um logotipo.",
     "headerNameLabel": "Nome da empresa / entidade",
     "headerNamePh": "Ex.: Globalogistics, Comitê COCOLAB, Diretoria Geral…",
-    "includeLogo": "Incluir logotipo",
-    "logoLabel": "Logotipo",
+    "includeLogo": "Incluir logo",
+    "logoLabel": "Logo",
     "logoPick": "Escolher",
     "logoReset": "Remover",
-    "logoStatusApp": "Logotipo: usando o do app",
-    "logoStatusCustom": "Logotipo: personalizado",
-    "logoStatusSet": "Logotipo do cabeçalho configurado",
-    "logoStatusNone": "Sem logotipo no cabeçalho",
+    "logoStatusApp": "Logo: usando o da app",
+    "logoStatusCustom": "Logo: personalizado",
+    "logoStatusSet": "Logo do cabeçalho configurado",
+    "logoStatusNone": "Sem logo no cabeçalho",
     "logoAlt": "Logotipo do cabeçalho",
     "footerLabel": "Rodapé",
     "footerPh": "Texto opcional para o rodapé…",
-    "footerHint": "Dica: este texto é adicionado ao final da ata (útil para entidade, área, confidencialidade etc.)."
+    "footerHint": "Dica: este texto é adicionado ao final da ata (útil para entidade, área, confidencialidade etc.).",
+    "colorsTitle": "Cores do documento",
+    "colorsHint": "Estas cores são aplicadas ao PDF exportado e à cópia para o Gmail.",
+    "marginColorLabel": "Cor das margens",
+    "contourColorLabel": "Cor dos contornos",
+    "tableColorLabel": "Cor das tabelas e cabeçalhos",
+    "textColorLabel": "Cor dos textos",
+    "colorsReset": "Restaurar cores"
   },
   "setup": {
     "title": "Configuração",
-    "lead": "Defina os dados base e gere a estrutura da ata.",
-    "meetingTitle": "Título / Nome da reunião",
+    "lead": "Defina os dados básicos e gere a estrutura da ata.",
+    "meetingTitle": "Título / nome da reunião",
     "meetingTitlePh": "Sprint Review, Comitê etc.",
     "date": "Data",
     "type": "Tipo",
@@ -103,7 +110,7 @@
   },
   "contrib": {
     "title": "Contribuições da reunião",
-    "lead": "Cada contribuição fica identificada por participante e aceita respostas aninhadas (estilo thread).",
+    "lead": "Cada contribuição fica identificada pelo participante e aceita respostas aninhadas (estilo thread).",
     "author": "Autor",
     "text": "Texto da contribuição",
     "textPh": "Escreva ou dite sua contribuição…",
@@ -113,23 +120,60 @@
     "emptyThreads": "Ainda não há contribuições. Adicione a primeira acima ou dite uma com 🎙️."
   },
   "dictation": {
-    "listening": "🎙️ Ouvindo… fale naturalmente."
+    "listening": "🎙️ Ouvindo… fale naturalmente.",
+    "whisperHelp": "Toque uma vez para gravar. Toque novamente para transcrever o que foi gravado.",
+    "browserHelp": "Toque uma vez para começar a ditar. Toque novamente para parar o ditado."
+  },
+  "transcription": {
+    "modeLabel": "Motor de transcrição",
+    "modeWhisper": "Whisper offline · Privacidade",
+    "modeBrowser": "Navegador · Mais rápido",
+    "modeHintWhisper": "Privacidade máxima: áudio e texto são processados localmente após baixar o modelo.",
+    "modeHintBrowser": "Inicialização mais rápida: usa o motor de voz do navegador e pode depender de serviços da plataforma ou do próprio navegador.",
+    "title": "Transcritor offline · Whisper Small",
+    "lead": "Baixe o modelo uma vez e depois dite sem conexão.",
+    "download": "Baixar modelo",
+    "delete": "Excluir modelo",
+    "statusMissing": "Modelo não baixado.",
+    "statusReady": "Modelo pronto para ditado offline.",
+    "statusChecking": "Verificando modelo local…",
+    "statusPreparingRuntime": "Preparando runtime local…",
+    "statusDownloading": "Baixando modelo…",
+    "statusLoading": "Carregando modelo local…",
+    "statusRecording": "Gravando áudio… toque novamente para terminar.",
+    "statusProcessing": "Transcrevendo localmente…",
+    "statusDeleted": "Modelo excluído.",
+    "browserStatusListening": "Ditado do navegador ativo… fale agora.",
+    "toastReady": "Modelo Whisper Small pronto.",
+    "toastDeleted": "Modelo excluído.",
+    "errModelMissing": "Baixe primeiro o Whisper Small em Configurações.",
+    "errMicDenied": "Permissão do microfone negada.",
+    "errMicUnavailable": "Microfone indisponível.",
+    "errProcessing": "Não foi possível transcrever localmente.",
+    "errTooShort": "Não detectei voz suficiente.",
+    "errDownload": "Não foi possível baixar o modelo.",
+    "errUnsupported": "Este navegador não oferece suporte à transcrição local offline.",
+    "errLibrary": "Não foi possível carregar o motor de transcrição local.",
+    "commandSelectAria": "Motor de transcrição",
+    "commandDownload": "Baixar Whisper",
+    "commandReady": "Whisper pronto",
+    "commandMissing": "Whisper não baixado"
   },
   "keypoints": {
     "title": "Pontos-chave",
-    "lead": "Extraia pontos a partir das contribuições (incluindo respostas) com remoção de duplicatas.",
+    "lead": "Extraia pontos a partir das contribuições (inclui respostas) com deduplicação.",
     "howmany": "Quantos pontos?",
     "extract": "Extrair",
     "empty": "Ainda não há pontos-chave. Clique em “Extrair”.",
     "remove": "Remover ponto-chave"
   },
   "tasks": {
-    "title": "Tarefas e prazos",
+    "title": "Tarefas e cronogramas",
     "lead": "Atribua tarefas por participante com data-alvo.",
     "task": "Tarefa",
     "taskPh": "Descrição da tarefa…",
     "assignee": "Responsável",
-    "due": "Data limite",
+    "due": "Prazo",
     "status": "Status",
     "pending": "Pendente",
     "done": "Concluída",
@@ -139,9 +183,9 @@
   },
   "observations": {
     "title": "Observações",
-    "lead": "Registre contratempos, clima da reunião, riscos, incidentes ou qualquer anotação relevante.",
+    "lead": "Registre contratempos, ambiente da reunião, riscos, incidentes ou qualquer anotação relevante.",
     "field": "Observações finais",
-    "ph": "Anote aqui incidentes, bloqueios, clima geral, dependências, acordos tácitos ou qualquer aspecto relevante…",
+    "ph": "Anote aqui incidentes, bloqueios, ambiente geral, dependências, acordos implícitos ou qualquer aspecto relevante…",
     "hint": "Estas notas aparecerão no final da ata exportada."
   },
   "timeline": {
@@ -152,7 +196,7 @@
     "untitled": "Reunião sem título",
     "none": "—",
     "doc": {
-      "title": "ATA DA REUNIÃO"
+      "title": "ATA DE REUNIÃO"
     },
     "header": {
       "reference": "Referência",
@@ -180,11 +224,11 @@
     },
     "summary": {
       "bullets": {
-        "contrib": "Contribuições registradas: {{total}} ({{threads}} tópicos principais)",
+        "contrib": "Contribuições registradas: {{total}} ({{threads}} threads principais)",
         "keypoints": "Pontos-chave identificados: {{n}}",
         "tasks": "Tarefas: {{total}} ({{done}} concluídas, {{pending}} pendentes)"
       },
-      "highlights": "Destaques"
+      "highlights": "Aspectos de destaque"
     },
     "contrib": {
       "kind": {
@@ -198,7 +242,7 @@
       "id": "ID",
       "task": "Tarefa / conclusão",
       "assignee": "Responsável",
-      "due": "Data limite",
+      "due": "Prazo",
       "status": "Status"
     },
     "observations": {
@@ -218,22 +262,22 @@
     "needAuthor": "Selecione um autor.",
     "needText": "Escreva algo primeiro.",
     "needTextField": "Selecione um campo de texto para ditar.",
-    "voiceNotAvail": "O ditado não está disponível neste navegador.",
+    "voiceNotAvail": "Ditado indisponível neste navegador.",
     "voicePermissionDenied": "A permissão do microfone não foi concedida.",
     "voiceMicUnavailable": "Nenhum microfone disponível foi detectado.",
-    "voiceNoSpeech": "Nenhuma fala foi detectada. Tente novamente.",
+    "voiceNoSpeech": "Nenhuma voz foi detectada. Tente novamente.",
     "voiceNetwork": "O ditado do navegador precisa de conexão neste dispositivo.",
     "voiceGenericError": "Não foi possível concluir o ditado. Tente novamente.",
-    "noThreadsForKeypoints": "Primeiro adicione contribuições para poder extrair pontos-chave.",
+    "noThreadsForKeypoints": "Primeiro adicione contribuições para extrair pontos-chave.",
     "needTaskText": "Escreva uma tarefa.",
     "needGenerateFirst": "Primeiro gere a estrutura (Configuração → Gerar estrutura).",
-    "clearConfirm": "Tem certeza de que deseja limpar todos os dados? Isto não pode ser desfeito.",
-    "deleteContribConfirm": "Excluir esta contribuição e todas as suas respostas?",
+    "clearConfirm": "Tem certeza de que deseja limpar todos os dados? Isso não pode ser desfeito.",
+    "deleteContribConfirm": "Excluir esta contribuição e todas as respostas?",
     "deleteTaskConfirm": "Excluir esta tarefa?",
     "printAreaMissing": "A área de impressão (printArea) não foi encontrada.",
-    "copyNotSupported": "Não foi possível copiar automaticamente neste navegador. Tente outro (Chrome/Edge) ou copie o texto sem formatação.",
-    "logoTooBig": "O logotipo é grande demais. Use uma imagem mais leve (ideal < 900KB).",
-    "logoReadFail": "Não foi possível ler o logotipo. Tente outro arquivo."
+    "copyNotSupported": "Não foi possível copiar automaticamente neste navegador. Tente outro (Chrome/Edge) ou copie o texto simples.",
+    "logoTooBig": "O logo é grande demais. Use uma imagem mais leve (ideal < 900KB).",
+    "logoReadFail": "Não foi possível ler o logo. Tente outro arquivo."
   },
   "toasts": {
     "structureReady": "Estrutura pronta ✅",
@@ -252,8 +296,9 @@
     "copyPreparing": "Copiando ata…",
     "exportCopied": "Ata copiada ✅ (cole no Gmail)",
     "exportSettingsSaved": "Exportação atualizada ✅",
-    "logoUpdated": "Logotipo atualizado ✅",
-    "logoReset": "Logotipo removido ✅"
+    "logoUpdated": "Logo atualizado ✅",
+    "logoReset": "Logo removido ✅",
+    "exportColorsRestored": "Cores do PDF restauradas ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",
@@ -261,18 +306,18 @@
     "year": "2025",
     "author": "Andrés Calvo Espinosa",
     "coherenceButtonAria": "Coerência Universal",
-    "licenseButtonAria": "Licença MIT",
-    "licenseButton": "Licença MIT",
+    "licenseButtonAria": "Licenças",
+    "licenseButton": "Licenças",
     "privacyButton": "Privacidade",
     "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
   "licenseOverlay": {
-    "title": "Licença MIT",
-    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    "title": "Licenças",
+    "body": "<p><b>Código próprio do app.</b> O código desenvolvido especificamente para este aplicativo é distribuído sob a licença MIT.</p>\n<pre class=\"license-text\">MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre>\n<h3>Código e componentes de terceiros</h3>\n<ul>\n  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>\n  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>\n  <li><b>ONNX Runtime</b>: MIT</li>\n  <li><b>OpenAI Whisper (projeto original)</b>: MIT</li>\n</ul>\n<p>Essas licenças de terceiros não mudam a licença MIT do código próprio do app, mas você deve preservar os avisos e textos de licença aplicáveis ao redistribuir o aplicativo ou seus componentes.</p>\n<p>Na prática: você pode publicar seu código sob MIT, mas a distribuição final do app também deve incluir uma seção de licenças de terceiros ou os arquivos de licença e NOTICE exigidos pelos componentes incluídos.</p>"
   },
   "privacy": {
-    "title": "Política de privacidade",
-    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> funciona 100% no seu navegador. Não enviamos seus dados a nenhum servidor.</p>"
+    "title": "Privacidade real do app",
+    "body": "<p><b>Resumo.</b> Este aplicativo foi projetado para executar o trabalho principal no seu navegador. De acordo com o código revisado, o conteúdo da ata não é enviado para um backend próprio da aplicação.</p>\n<h3>O que é salvo localmente no seu navegador</h3>\n<ul>\n  <li>O título, a data, o tipo de reunião, os participantes, as contribuições, as tarefas, os pontos-chave e as observações.</li>\n  <li>Preferências como idioma, tema, motor de transcrição e ajustes de exportação.</li>\n  <li>Se você enviar um logotipo para o PDF, esse arquivo também pode ficar salvo localmente como parte das configurações de exportação.</li>\n</ul>\n<h3>O que não é compartilhado por padrão</h3>\n<p>O código revisado não mostra uma API própria nem um envio do conteúdo da ata para servidores da aplicação. Também não há indícios de analytics próprios para o conteúdo que você escreve ou dita.</p>\n<h3>Transcrição de acordo com o modo escolhido</h3>\n<p><b>Whisper offline.</b> O áudio é capturado no navegador e processado localmente no dispositivo com o modelo baixado. Depois que o runtime e o modelo são baixados, a transcrição passa a funcionar localmente e não há envio do áudio a um serviço de transcrição no código revisado.</p>\n<p><b>Navegador.</b> O app usa o motor de reconhecimento do próprio navegador. Nesse modo, o app não implementa um envio próprio de áudio, mas o tratamento real pode ser local ou remoto dependendo do navegador, do sistema operacional e da plataforma. Por isso, não se deve presumir que esse modo seja sempre 100% local em todos os dispositivos.</p>\n<h3>Quando pode haver conexões externas</h3>\n<ul>\n  <li>Quando o runtime ou o modelo necessários para a transcrição offline são baixados pela primeira vez.</li>\n  <li>Quando você usa o modo de transcrição do navegador em dispositivos ou navegadores que dependem de serviços de voz da plataforma.</li>\n  <li>Quando você abre links externos da interface.</li>\n  <li>Quando você copia a ata e decide colá-la no Gmail ou em outro serviço externo.</li>\n</ul>\n<h3>Exportação e uso offline</h3>\n<p>A exportação em PDF é gerada localmente no navegador e enviada para a caixa de diálogo de impressão do próprio navegador. O app pode funcionar sem conexão graças ao armazenamento local e ao service worker, mas isso não equivale a criptografia local nem a exclusão automática.</p>\n<h3>Importante</h3>\n<p>Como as informações ficam salvas localmente no navegador ou no perfil do dispositivo, qualquer pessoa com acesso a esse navegador ou a esse perfil poderá vê-las. Se você compartilha o dispositivo, é recomendável limpar os dados do app ao terminar.</p>"
   },
   "coherence": {
     "title": "Coerência Universal",

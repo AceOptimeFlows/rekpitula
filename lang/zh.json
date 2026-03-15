@@ -1,10 +1,10 @@
 {
   "a11y": {
-    "skip": "跳转到内容"
+    "skip": "跳到内容"
   },
   "app": {
-    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
-    "logoAlt": "OptimeFlow(s) 徽标",
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — 离线 PWA",
+    "logoAlt": "OptimeFlow(s) 标志",
     "brandName": "OptimeFlow(s)",
     "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
@@ -12,7 +12,7 @@
     "openButton": "设置",
     "themeLabel": "主题",
     "themes": {
-      "system": "系统",
+      "system": "跟随系统",
       "dark": "暗色核心",
       "midnight": "午夜蓝",
       "nebula": "霓虹星云",
@@ -20,7 +20,7 @@
       "forest": "翡翠森林",
       "amber": "暖琥珀",
       "violet": "皇家紫",
-      "mono": "黑白极简"
+      "mono": "Mono noir"
     },
     "languageLabel": "语言",
     "languages": {
@@ -30,10 +30,10 @@
       "de": "德语",
       "it": "意大利语",
       "fr": "法语",
-      "ru": "俄语",
       "ko": "韩语",
       "ja": "日语",
       "zh": "中文",
+      "ru": "俄语",
       "hi": "印地语",
       "ar": "阿拉伯语"
     },
@@ -45,33 +45,40 @@
     "copy": "复制到 Gmail",
     "jumpAria": "跳转到版块",
     "jump": {
-      "contrib": "发言内容",
+      "contrib": "发言",
       "keypoints": "要点",
       "tasks": "任务",
-      "observations": "观察事项"
+      "observations": "备注"
     }
   },
   "export": {
     "settingsTitle": "会议纪要导出",
-    "headerHint": "使用机构名称以及可选的徽标来配置会议纪要页眉。",
+    "headerHint": "设置文档页眉，可填写机构名称，如需也可加入标志。",
     "headerNameLabel": "公司 / 机构名称",
-    "headerNamePh": "例如：Globalogistics、COCOLAB 委员会、总管理处…",
-    "includeLogo": "包含徽标",
-    "logoLabel": "徽标",
+    "headerNamePh": "例如：Globalogistics、COCOLAB 委员会、总管理部…",
+    "includeLogo": "包含标志",
+    "logoLabel": "标志",
     "logoPick": "选择",
     "logoReset": "移除",
-    "logoStatusApp": "徽标：使用应用徽标",
-    "logoStatusCustom": "徽标：自定义",
-    "logoStatusSet": "页眉徽标已设置",
-    "logoStatusNone": "无页眉徽标",
-    "logoAlt": "页眉徽标",
+    "logoStatusApp": "标志：使用应用标志",
+    "logoStatusCustom": "标志：自定义",
+    "logoStatusSet": "页眉标志已设置",
+    "logoStatusNone": "无页眉标志",
+    "logoAlt": "页眉标志",
     "footerLabel": "页脚",
-    "footerPh": "页脚可选文本…",
-    "footerHint": "提示：这段文字会添加到会议纪要末尾（适用于机构、部门、保密说明等）。"
+    "footerPh": "可选页脚文本…",
+    "footerHint": "提示：此文本会添加到纪要末尾（适合机构、部门、保密说明等）。",
+    "colorsTitle": "文档颜色",
+    "colorsHint": "这些颜色会应用到导出的 PDF 和复制到 Gmail 的内容。",
+    "marginColorLabel": "页边距颜色",
+    "contourColorLabel": "轮廓颜色",
+    "tableColorLabel": "表格和表头颜色",
+    "textColorLabel": "文字颜色",
+    "colorsReset": "恢复颜色"
   },
   "setup": {
     "title": "配置",
-    "lead": "定义基础信息并生成会议纪要结构。",
+    "lead": "定义基础信息并生成纪要结构。",
     "meetingTitle": "会议标题 / 名称",
     "meetingTitlePh": "Sprint Review、委员会等",
     "date": "日期",
@@ -81,43 +88,80 @@
       "catchup": "跟进",
       "workshop": "工作坊",
       "oneonone": "1:1",
-      "retro": "回顾"
+      "retro": "复盘"
     },
-    "participants": "参与者",
-    "participantsPh": "添加参与者…",
+    "participants": "参会人",
+    "participantsPh": "添加参会人…",
     "add": "添加",
     "generate": "生成结构",
-    "autosave": "自动保存已开启 · 本地",
+    "autosave": "自动保存 ON · 本地",
     "autosaveSavedAt": "已保存 · {{time}}",
-    "removeParticipant": "移除参与者",
-    "noParticipantsOption": "请先添加参与者…"
+    "removeParticipant": "移除参会人",
+    "noParticipantsOption": "请先添加参会人…"
   },
   "empty": {
     "title": "先创建会议",
-    "body": "添加参与者并点击“生成结构”。随后你就可以口述发言、提取要点、分配任务并导出。"
+    "body": "添加参会人并点击“生成结构”。之后你就可以进行语音输入、提取要点、分配任务并导出。"
   },
   "progress": {
     "title": "进度",
-    "caption": "已完成版块",
+    "caption": "个版块已完成",
     "pill": "{{done}}/{{total}}"
   },
   "contrib": {
     "title": "会议发言",
-    "lead": "每条发言都会按参与者标记，并支持嵌套回复（线程样式）。",
+    "lead": "每条发言都会标注参会人，并支持嵌套回复（线程样式）。",
     "author": "作者",
     "text": "发言内容",
-    "textPh": "输入或口述你的发言…",
-    "dictate": "🎙️ 口述",
+    "textPh": "输入或语音输入你的发言…",
+    "dictate": "🎙️ 语音输入",
     "add": "添加发言",
     "reply": "回复",
-    "emptyThreads": "还没有发言。请先在上方添加第一条，或使用 🎙️ 口述。"
+    "emptyThreads": "还没有发言。先在上方添加第一条，或使用 🎙️ 进行语音输入。"
   },
   "dictation": {
-    "listening": "🎙️ 正在聆听…请自然说话。"
+    "listening": "🎙️ 正在聆听…请自然说话。",
+    "whisperHelp": "按一次开始录音，再按一次将录音转写。",
+    "browserHelp": "按一次开始语音输入，再按一次停止。"
+  },
+  "transcription": {
+    "modeLabel": "转写引擎",
+    "modeWhisper": "Whisper 离线 · 隐私",
+    "modeBrowser": "浏览器 · 更快",
+    "modeHintWhisper": "最高级别隐私：下载模型后，音频和文本都在本地处理。",
+    "modeHintBrowser": "启动更快：使用浏览器的语音引擎，可能依赖平台或浏览器服务。",
+    "title": "离线转写器 · Whisper Small",
+    "lead": "模型下载一次，之后即可离线语音输入。",
+    "download": "下载模型",
+    "delete": "删除模型",
+    "statusMissing": "模型未下载。",
+    "statusReady": "模型已可用于离线语音输入。",
+    "statusChecking": "正在检查本地模型…",
+    "statusPreparingRuntime": "正在准备本地运行时…",
+    "statusDownloading": "正在下载模型…",
+    "statusLoading": "正在加载本地模型…",
+    "statusRecording": "正在录音…再次点击可结束。",
+    "statusProcessing": "正在本地转写…",
+    "statusDeleted": "模型已删除。",
+    "browserStatusListening": "浏览器语音输入已启用…现在请说话。",
+    "toastReady": "Whisper Small 模型已就绪。",
+    "toastDeleted": "模型已删除。",
+    "errModelMissing": "请先在设置中下载 Whisper Small。",
+    "errMicDenied": "麦克风权限被拒绝。",
+    "errMicUnavailable": "麦克风不可用。",
+    "errProcessing": "无法完成本地转写。",
+    "errTooShort": "未检测到足够的语音。",
+    "errDownload": "无法下载模型。",
+    "errUnsupported": "此浏览器不支持离线本地转写。",
+    "errLibrary": "无法加载本地转写引擎。",
+    "commandSelectAria": "转写引擎",
+    "commandDownload": "下载 Whisper",
+    "commandReady": "Whisper 已就绪",
+    "commandMissing": "Whisper 未下载"
   },
   "keypoints": {
     "title": "要点",
-    "lead": "从发言（包括回复）中提取要点，并进行去重。",
+    "lead": "从发言（包括回复）中提取要点并去重。",
     "howmany": "提取多少个要点？",
     "extract": "提取",
     "empty": "还没有要点。点击“提取”。",
@@ -125,27 +169,27 @@
   },
   "tasks": {
     "title": "任务与时间线",
-    "lead": "按参与者分配任务并设置目标日期。",
+    "lead": "按参会人分配任务并设置目标日期。",
     "task": "任务",
     "taskPh": "任务描述…",
     "assignee": "负责人",
     "due": "截止日期",
     "status": "状态",
-    "pending": "待办",
+    "pending": "待处理",
     "done": "已完成",
     "add": "添加",
     "hint": "提示：用 ✓ 切换状态，用 ↩︎ 切回。",
-    "empty": "还没有任务。请在上方添加一个。"
+    "empty": "还没有任务。请先在上方添加。"
   },
   "observations": {
-    "title": "观察事项",
-    "lead": "记录问题、会议氛围、风险、事件或任何相关备注。",
-    "field": "最终观察",
-    "ph": "在这里记录事件、阻塞、整体氛围、依赖关系、默认约定或任何相关事项…",
-    "hint": "这些备注会显示在导出的会议纪要末尾。"
+    "title": "备注",
+    "lead": "记录问题、会议氛围、风险、事件或任何相关说明。",
+    "field": "最终备注",
+    "ph": "在这里记录事件、阻塞项、整体氛围、依赖关系、默认达成的共识或任何相关内容…",
+    "hint": "这些备注会显示在导出纪要的最后。"
   },
   "timeline": {
-    "title": "按参与者查看时间线",
+    "title": "按参会人查看时间线",
     "empty": "添加任务后，这里会显示每个人的时间线。"
   },
   "print": {
@@ -162,12 +206,12 @@
     "details": {
       "meeting": "委员会 / 会议",
       "entity": "机构 / 团队",
-      "participantsCount": "参与者人数"
+      "participantsCount": "参会人数"
     },
     "meta": {
       "date": "日期",
       "type": "类型",
-      "participants": "参与者",
+      "participants": "参会人",
       "createdAt": "生成时间"
     },
     "sections": {
@@ -175,14 +219,14 @@
       "contrib": "会议过程",
       "keypoints": "要点与共识",
       "tasks": "任务 / 结论",
-      "observations": "观察事项",
-      "participants": "参与者"
+      "observations": "备注",
+      "participants": "参会人"
     },
     "summary": {
       "bullets": {
-        "contrib": "已记录发言：{{total}} 条（{{threads}} 个主线程）",
-        "keypoints": "已识别要点：{{n}} 个",
-        "tasks": "任务：{{total}} 个（已完成 {{done}} 个，待办 {{pending}} 个）"
+        "contrib": "已记录发言：{{total}}（{{threads}} 个主线程）",
+        "keypoints": "已识别要点：{{n}}",
+        "tasks": "任务：{{total}}（已完成 {{done}}，待处理 {{pending}}）"
       },
       "highlights": "亮点"
     },
@@ -202,81 +246,82 @@
       "status": "状态"
     },
     "observations": {
-      "empty": "暂无观察记录。"
+      "empty": "暂无备注。"
     },
     "participantsTable": {
       "number": "#",
       "name": "姓名",
-      "role": "职务 / 岗位",
+      "role": "职位 / 岗位",
       "company": "公司 / 团队",
       "signature": "签名"
     },
-    "footer": "由 OptimeFlow(s) 生成 · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
+    "footer": "由 OptimeFlow(s) · Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ 生成"
   },
   "alerts": {
-    "needParticipants": "请至少添加 1 位参与者后再继续。",
+    "needParticipants": "请至少添加 1 位参会人后再继续。",
     "needAuthor": "请选择作者。",
     "needText": "请先输入内容。",
-    "needTextField": "请选择一个用于口述的文本字段。",
-    "voiceNotAvail": "此浏览器不支持口述功能。",
+    "needTextField": "请选择一个用于语音输入的文本字段。",
+    "voiceNotAvail": "此浏览器不支持语音输入。",
     "voicePermissionDenied": "未授予麦克风权限。",
     "voiceMicUnavailable": "未检测到可用麦克风。",
-    "voiceNoSpeech": "未检测到语音。请重试。",
-    "voiceNetwork": "此设备上的浏览器口述功能需要联网。",
-    "voiceGenericError": "无法完成口述。请重试。",
-    "noThreadsForKeypoints": "请先添加发言，才能提取要点。",
+    "voiceNoSpeech": "未检测到语音。请再试一次。",
+    "voiceNetwork": "在此设备上，浏览器语音输入需要联网。",
+    "voiceGenericError": "无法完成语音输入。请再试一次。",
+    "noThreadsForKeypoints": "请先添加发言，再提取要点。",
     "needTaskText": "请输入任务内容。",
-    "needGenerateFirst": "请先生成结构（配置 → 生成结构）。",
+    "needGenerateFirst": "请先生成结构（设置 → 生成结构）。",
     "clearConfirm": "确定要清空所有数据吗？此操作无法撤销。",
     "deleteContribConfirm": "删除这条发言及其所有回复？",
-    "deleteTaskConfirm": "删除这个任务？",
+    "deleteTaskConfirm": "删除这项任务？",
     "printAreaMissing": "未找到打印区域（printArea）。",
-    "copyNotSupported": "此浏览器无法自动复制。请尝试其他浏览器（Chrome/Edge）或复制纯文本。",
-    "logoTooBig": "徽标文件太大。请使用更轻的图片（建议 < 900KB）。",
-    "logoReadFail": "无法读取徽标。请尝试其他文件。"
+    "copyNotSupported": "此浏览器无法自动复制。请换用其他浏览器（Chrome/Edge），或手动复制纯文本。",
+    "logoTooBig": "标志文件过大。请使用更轻的图片（建议 < 900KB）。",
+    "logoReadFail": "无法读取标志。请尝试其他文件。"
   },
   "toasts": {
     "structureReady": "结构已就绪 ✅",
-    "participantAdded": "已添加参与者：{{name}}",
-    "participantRemoved": "已移除参与者：{{name}}",
-    "contribAdded": "已添加发言 ✅",
-    "replyAdded": "已添加回复 ✅",
+    "participantAdded": "已添加参会人：{{name}}",
+    "participantRemoved": "已移除参会人：{{name}}",
+    "contribAdded": "发言已添加 ✅",
+    "replyAdded": "回复已添加 ✅",
     "deleted": "已删除 ✅",
     "keypointsExtracted": "已提取要点：{{n}}",
-    "keypointRemoved": "已删除要点",
-    "taskAdded": "已添加任务 ✅",
+    "keypointRemoved": "要点已删除",
+    "taskAdded": "任务已添加 ✅",
     "taskToggled": "状态已更新 ✅",
-    "taskRemoved": "已删除任务 ✅",
+    "taskRemoved": "任务已删除 ✅",
     "cleared": "数据已清空 ✅",
     "exportPreparing": "正在准备 PDF…",
-    "copyPreparing": "正在复制会议纪要…",
-    "exportCopied": "会议纪要已复制 ✅（请粘贴到 Gmail）",
+    "copyPreparing": "正在复制纪要…",
+    "exportCopied": "纪要已复制 ✅（请粘贴到 Gmail）",
     "exportSettingsSaved": "导出设置已更新 ✅",
-    "logoUpdated": "徽标已更新 ✅",
-    "logoReset": "徽标已移除 ✅"
+    "logoUpdated": "标志已更新 ✅",
+    "logoReset": "标志已删除 ✅",
+    "exportColorsRestored": "PDF 颜色已恢复 ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",
-    "appName": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️",
+    "appName": "ReKπTúL@",
     "year": "2025",
     "author": "Andrés Calvo Espinosa",
     "coherenceButtonAria": "普遍一致性",
-    "licenseButtonAria": "MIT 许可证",
-    "licenseButton": "MIT 许可证",
+    "licenseButtonAria": "许可证",
+    "licenseButton": "许可证",
     "privacyButton": "隐私",
     "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
   "licenseOverlay": {
-    "title": "MIT 许可证",
-    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    "title": "许可证",
+    "body": "<p><b>应用自有代码。</b> 专门为本应用开发的代码以 MIT 许可证发布。</p>\n<pre class=\"license-text\">MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre>\n<h3>第三方代码与组件</h3>\n<ul>\n  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>\n  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>\n  <li><b>ONNX Runtime</b>: MIT</li>\n  <li><b>OpenAI Whisper（原始项目）</b>: MIT</li>\n</ul>\n<p>这些第三方许可证不会改变应用自有代码的 MIT 许可证，但在重新分发应用或其组件时，你仍需保留相应的许可文本和声明。</p>\n<p>实际操作上，你可以将自己的代码以 MIT 发布，但最终发布的应用还应包含第三方许可证说明，或包含与所用组件对应的 LICENSE 与 NOTICE 文件。</p>"
   },
   "privacy": {
-    "title": "隐私政策",
-    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> 100% 在你的浏览器中运行。我们不会将你的数据发送到任何服务器。</p>"
+    "title": "应用的真实隐私情况",
+    "body": "<p><b>摘要。</b> 本应用的设计目标是让主要工作在你的浏览器中完成。根据已审阅的代码，会议纪要内容不会发送到应用自有后端。</p>\n<h3>会在浏览器中本地保存的内容</h3>\n<ul>\n  <li>标题、日期、会议类型、参会人、发言、任务、要点和备注。</li>\n  <li>语言、主题、转写引擎和导出设置等偏好项。</li>\n  <li>如果你为 PDF 上传了标志，该文件也可能作为导出设置的一部分保存在本地。</li>\n</ul>\n<h3>默认不会共享的内容</h3>\n<p>在已审阅的代码中，没有看到将纪要内容上传到应用服务器的自有 API，也没有看到针对你输入或语音输入内容的自有分析功能。</p>\n<h3>按所选模式区分的转写方式</h3>\n<p><b>Whisper 离线。</b> 音频在浏览器中采集，并使用已下载模型在设备本地处理。下载运行时和模型之后，转写会在本地进行；在已审阅的代码中，没有看到把音频上传到转写服务的逻辑。</p>\n<p><b>浏览器。</b> 应用使用浏览器自身的语音识别引擎。在此模式下，应用并未实现自有的音频上传，但实际处理可能因浏览器、操作系统和平台而在本地或远程完成。因此，不能假设该模式在所有设备上都始终是 100% 本地。</p>\n<h3>哪些情况下仍可能出现外部连接</h3>\n<ul>\n  <li>首次下载离线转写所需的运行时或模型时。</li>\n  <li>在依赖平台语音服务的设备或浏览器上使用浏览器转写模式时。</li>\n  <li>打开界面中的外部链接时。</li>\n  <li>复制纪要后，决定粘贴到 Gmail 或其他外部服务时。</li>\n</ul>\n<h3>导出与离线使用</h3>\n<p>PDF 导出在浏览器中本地生成，并发送到浏览器自己的打印对话框。应用可借助本地存储和 Service Worker 离线运行，但这并不等同于本地加密或自动删除。</p>\n<h3>重要</h3>\n<p>由于信息会保存在浏览器或设备配置文件中，任何能够访问该浏览器或该配置文件的人都可能看到这些内容。如果设备是多人共用的，建议在使用结束后删除应用数据。</p>"
   },
   "coherence": {
     "title": "普遍一致性",
-    "body": "愿这部作品既是感谢，也是承诺：让思考、感受与行动朝着同一个方向前行。"
+    "body": "愿这件作品既表达感谢，也体现承诺：让思考、感受与行动保持同一方向。"
   },
   "confirm": {
     "title": "确认"

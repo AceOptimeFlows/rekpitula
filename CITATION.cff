@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "Re⏪ K🧠 π🌀 Tú🫵 L@🗣️"
+type: software
+authors:
+  - given-names: "Andrés"
+    family-names: "Calvo Espinosa"
+    affiliation: "OptimeFlow(s)"
+    orcid: "https://orcid.org/0009-0005-4079-7418"
+abstract: "Privacy-first, offline-first Progressive Web App for structured meeting minutes with local dictation, threaded contributions, key-point extraction, task tracking, observations, and branded A4 PDF export."
+license: "MIT"
+Zenodo DOI: 10.5281/zenodo.19039827
+keywords:
+  - "progressive web app"
+  - "offline-first"
+  - "meeting minutes"
+  - "local transcription"
+  - "Whisper"
+  - "task tracking"
+  - "PDF export"
+  - "productivity"

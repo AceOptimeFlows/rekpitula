@@ -1,0 +1,26 @@
+{
+  "title": "Re⏪ K🧠 π🌀 Tú🫵 L@🗣️: Privacy-first offline meeting minutes PWA",
+  "description": "<p>Re⏪ K🧠 π🌀 Tú🫵 L@🗣️ is an installable, offline-first Progressive Web App for structured meeting minutes. It combines local dictation, threaded contributions, key-point extraction, task tracking, observations, and branded A4 PDF export in a browser-only workflow.</p><p>The project is designed for desktop and mobile use, with no mandatory backend and a privacy-first offline mode powered by Whisper.</p>",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Calvo Espinosa, Andrés",
+      "affiliation": "OptimeFlow(s)",
+      "orcid": "0009-0005-4079-7418"
+    }
+  ],
+  "keywords": [
+    "PWA",
+    "offline-first",
+    "meeting minutes",
+    "local transcription",
+    "Whisper",
+    "task tracking",
+    "PDF export",
+    "productivity"
+  ],
+  "language": "eng",
+  "notes": "Includes configurable export branding and colors, local autosave, and browser/mobile support."
+}

@@ -1,10 +1,10 @@
 {
   "a11y": {
-    "skip": "Passer au contenu"
+    "skip": "Aller au contenu"
   },
   "app": {
-    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
-    "logoAlt": "Logo d'OptimeFlow(s)",
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA hors ligne",
+    "logoAlt": "Logo d’OptimeFlow(s)",
     "brandName": "OptimeFlow(s)",
     "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
@@ -18,7 +18,7 @@
       "nebula": "Nébuleuse néon",
       "ocean": "Océan profond",
       "forest": "Forêt émeraude",
-      "amber": "Ambre chaud",
+      "amber": "Ambre chaleureux",
       "violet": "Violet royal",
       "mono": "Mono noir"
     },
@@ -30,14 +30,14 @@
       "de": "Allemand",
       "it": "Italien",
       "fr": "Français",
-      "ru": "Russe",
       "ko": "Coréen",
       "ja": "Japonais",
       "zh": "Chinois",
+      "ru": "Russe",
       "hi": "Hindi",
       "ar": "Arabe"
     },
-    "installButton": "Installer l'application"
+    "installButton": "Installer l’app"
   },
   "actions": {
     "clear": "Effacer",
@@ -52,27 +52,34 @@
     }
   },
   "export": {
-    "settingsTitle": "Export du procès-verbal",
-    "headerHint": "Configurez l'en-tête du procès-verbal avec le nom de l'entité et, si vous le souhaitez, un logo.",
-    "headerNameLabel": "Nom de l'entreprise / entité",
+    "settingsTitle": "Export du compte rendu",
+    "headerHint": "Configurez l’en-tête du compte rendu avec le nom de l’entité et, si vous le souhaitez, un logo.",
+    "headerNameLabel": "Nom de l’entreprise / entité",
     "headerNamePh": "Ex. : Globalogistics, Comité COCOLAB, Direction générale…",
     "includeLogo": "Inclure le logo",
     "logoLabel": "Logo",
     "logoPick": "Choisir",
     "logoReset": "Retirer",
-    "logoStatusApp": "Logo : utilisation de celui de l'application",
+    "logoStatusApp": "Logo : utilisation de celui de l’app",
     "logoStatusCustom": "Logo : personnalisé",
-    "logoStatusSet": "Logo d'en-tête configuré",
-    "logoStatusNone": "Aucun logo d'en-tête",
-    "logoAlt": "Logo d'en-tête",
+    "logoStatusSet": "Logo d’en-tête configuré",
+    "logoStatusNone": "Aucun logo d’en-tête",
+    "logoAlt": "Logo d’en-tête",
     "footerLabel": "Pied de page",
-    "footerPh": "Texte optionnel pour le pied de page…",
-    "footerHint": "Astuce : ce texte est ajouté à la fin du procès-verbal (utile pour l'entité, le service, la confidentialité, etc.)."
+    "footerPh": "Texte facultatif pour le pied de page…",
+    "footerHint": "Astuce : ce texte est ajouté à la fin du compte rendu (utile pour l’entité, le service, la confidentialité, etc.).",
+    "colorsTitle": "Couleurs du document",
+    "colorsHint": "Ces couleurs s’appliquent au PDF exporté et à la copie pour Gmail.",
+    "marginColorLabel": "Couleur des marges",
+    "contourColorLabel": "Couleur des contours",
+    "tableColorLabel": "Couleur des tableaux et en-têtes",
+    "textColorLabel": "Couleur des textes",
+    "colorsReset": "Restaurer les couleurs"
   },
   "setup": {
     "title": "Configuration",
-    "lead": "Définissez les données de base et générez la structure du procès-verbal.",
-    "meetingTitle": "Titre / Nom de la réunion",
+    "lead": "Définissez les informations de base et générez la structure du compte rendu.",
+    "meetingTitle": "Titre / nom de la réunion",
     "meetingTitlePh": "Sprint Review, Comité, etc.",
     "date": "Date",
     "type": "Type",
@@ -87,14 +94,14 @@
     "participantsPh": "Ajouter un participant…",
     "add": "Ajouter",
     "generate": "Générer la structure",
-    "autosave": "Sauvegarde auto ON · Local",
+    "autosave": "Sauvegarde auto ON · Locale",
     "autosaveSavedAt": "Enregistré · {{time}}",
     "removeParticipant": "Supprimer le participant",
-    "noParticipantsOption": "Ajoutez d'abord des participants…"
+    "noParticipantsOption": "Ajoutez d’abord des participants…"
   },
   "empty": {
     "title": "Commencez par créer la réunion",
-    "body": "Ajoutez des participants puis cliquez sur « Générer la structure ». Vous pourrez ensuite dicter des contributions, extraire des points clés, attribuer des tâches et exporter."
+    "body": "Ajoutez des participants puis cliquez sur “Générer la structure”. Vous pourrez ensuite dicter des contributions, extraire des points clés, attribuer des tâches et exporter."
   },
   "progress": {
     "title": "Progression",
@@ -108,23 +115,60 @@
     "text": "Texte de la contribution",
     "textPh": "Écrivez ou dictez votre contribution…",
     "dictate": "🎙️ Dicter",
-    "add": "Ajouter une contribution",
+    "add": "Ajouter la contribution",
     "reply": "Répondre",
-    "emptyThreads": "Il n'y a pas encore de contributions. Ajoutez la première ci-dessus ou dictez-en une avec 🎙️."
+    "emptyThreads": "Il n’y a pas encore de contributions. Ajoutez la première ci-dessus ou dictez-en une avec 🎙️."
   },
   "dictation": {
-    "listening": "🎙️ Écoute… parlez naturellement."
+    "listening": "🎙️ À l’écoute… parlez naturellement.",
+    "whisperHelp": "Appuyez une fois pour enregistrer. Appuyez de nouveau pour transcrire l’enregistrement.",
+    "browserHelp": "Appuyez une fois pour commencer la dictée. Appuyez une seconde fois pour l’arrêter."
+  },
+  "transcription": {
+    "modeLabel": "Moteur de transcription",
+    "modeWhisper": "Whisper hors ligne · Confidentialité",
+    "modeBrowser": "Navigateur · Plus rapide",
+    "modeHintWhisper": "Confidentialité maximale : l’audio et le texte sont traités localement après le téléchargement du modèle.",
+    "modeHintBrowser": "Démarrage plus rapide : utilise le moteur vocal du navigateur et peut dépendre de services de la plateforme ou du navigateur.",
+    "title": "Transcripteur hors ligne · Whisper Small",
+    "lead": "Téléchargez le modèle une fois puis dictez sans connexion.",
+    "download": "Télécharger le modèle",
+    "delete": "Supprimer le modèle",
+    "statusMissing": "Modèle non téléchargé.",
+    "statusReady": "Modèle prêt pour la dictée hors ligne.",
+    "statusChecking": "Vérification du modèle local…",
+    "statusPreparingRuntime": "Préparation du runtime local…",
+    "statusDownloading": "Téléchargement du modèle…",
+    "statusLoading": "Chargement du modèle local…",
+    "statusRecording": "Enregistrement audio… appuyez de nouveau pour terminer.",
+    "statusProcessing": "Transcription locale en cours…",
+    "statusDeleted": "Modèle supprimé.",
+    "browserStatusListening": "Dictée du navigateur active… parlez maintenant.",
+    "toastReady": "Modèle Whisper Small prêt.",
+    "toastDeleted": "Modèle supprimé.",
+    "errModelMissing": "Téléchargez d’abord Whisper Small dans Paramètres.",
+    "errMicDenied": "Autorisation du microphone refusée.",
+    "errMicUnavailable": "Microphone indisponible.",
+    "errProcessing": "Impossible de transcrire localement.",
+    "errTooShort": "Je n’ai pas détecté assez de voix.",
+    "errDownload": "Impossible de télécharger le modèle.",
+    "errUnsupported": "Ce navigateur ne prend pas en charge la transcription locale hors ligne.",
+    "errLibrary": "Impossible de charger le moteur de transcription local.",
+    "commandSelectAria": "Moteur de transcription",
+    "commandDownload": "Télécharger Whisper",
+    "commandReady": "Whisper prêt",
+    "commandMissing": "Whisper non téléchargé"
   },
   "keypoints": {
     "title": "Points clés",
     "lead": "Extrayez des points à partir des contributions (y compris les réponses) avec déduplication.",
     "howmany": "Combien de points ?",
     "extract": "Extraire",
-    "empty": "Il n'y a pas encore de points clés. Cliquez sur « Extraire ».",
+    "empty": "Il n’y a pas encore de points clés. Cliquez sur “Extraire”.",
     "remove": "Supprimer le point clé"
   },
   "tasks": {
-    "title": "Tâches et échéances",
+    "title": "Tâches et timelines",
     "lead": "Attribuez des tâches par participant avec une date cible.",
     "task": "Tâche",
     "taskPh": "Description de la tâche…",
@@ -132,37 +176,37 @@
     "due": "Date limite",
     "status": "Statut",
     "pending": "En attente",
-    "done": "Terminé",
+    "done": "Terminée",
     "add": "Ajouter",
-    "hint": "Astuce : changez le statut avec ✓ et revenez avec ↩︎.",
-    "empty": "Il n'y a pas encore de tâches. Ajoutez-en une ci-dessus."
+    "hint": "Astuce : alternez le statut avec ✓ et revenez avec ↩︎.",
+    "empty": "Il n’y a pas encore de tâches. Ajoutez-en une ci-dessus."
   },
   "observations": {
     "title": "Observations",
-    "lead": "Consignez les contretemps, l'ambiance de la réunion, les risques, les incidents ou toute note pertinente.",
+    "lead": "Consignez les contretemps, l’ambiance de la réunion, les risques, les incidents ou toute note pertinente.",
     "field": "Observations finales",
-    "ph": "Notez ici les incidents, blocages, ambiance générale, dépendances, accords tacites ou tout aspect pertinent…",
-    "hint": "Ces notes apparaîtront à la fin du procès-verbal exporté."
+    "ph": "Notez ici les incidents, blocages, ambiance générale, dépendances, accords implicites ou tout aspect pertinent…",
+    "hint": "Ces notes apparaîtront à la fin du compte rendu exporté."
   },
   "timeline": {
-    "title": "Chronologie par participant",
-    "empty": "Lorsque vous ajouterez des tâches, vous verrez ici la chronologie par personne."
+    "title": "Timeline par participant",
+    "empty": "Quand vous ajouterez des tâches, la timeline par personne apparaîtra ici."
   },
   "print": {
     "untitled": "Réunion sans titre",
     "none": "—",
     "doc": {
-      "title": "PROCÈS-VERBAL DE RÉUNION"
+      "title": "COMPTE RENDU DE RÉUNION"
     },
     "header": {
       "reference": "Référence",
       "version": "Version",
-      "issueDate": "Date d'émission"
+      "issueDate": "Date d’émission"
     },
     "details": {
       "meeting": "Comité / Réunion",
       "entity": "Entité / Équipe",
-      "participantsCount": "Nb. de participants"
+      "participantsCount": "Nb de participants"
     },
     "meta": {
       "date": "Date",
@@ -207,7 +251,7 @@
     "participantsTable": {
       "number": "#",
       "name": "Nom",
-      "role": "Fonction / Poste",
+      "role": "Rôle / Fonction",
       "company": "Entreprise / Équipe",
       "signature": "Signature"
     },
@@ -216,24 +260,24 @@
   "alerts": {
     "needParticipants": "Ajoutez au moins 1 participant pour continuer.",
     "needAuthor": "Sélectionnez un auteur.",
-    "needText": "Écrivez d'abord quelque chose.",
-    "needTextField": "Sélectionnez un champ de texte à dicter.",
-    "voiceNotAvail": "La dictée n'est pas disponible dans ce navigateur.",
-    "voicePermissionDenied": "L'autorisation du microphone n'a pas été accordée.",
-    "voiceMicUnavailable": "Aucun microphone disponible n'a été détecté.",
-    "voiceNoSpeech": "Aucune voix n'a été détectée. Réessayez.",
+    "needText": "Écrivez d’abord quelque chose.",
+    "needTextField": "Sélectionnez un champ de texte pour la dictée.",
+    "voiceNotAvail": "La dictée n’est pas disponible dans ce navigateur.",
+    "voicePermissionDenied": "L’autorisation du microphone n’a pas été accordée.",
+    "voiceMicUnavailable": "Aucun microphone disponible n’a été détecté.",
+    "voiceNoSpeech": "Aucune voix détectée. Réessayez.",
     "voiceNetwork": "La dictée du navigateur nécessite une connexion sur cet appareil.",
-    "voiceGenericError": "La dictée n'a pas pu être effectuée. Réessayez.",
-    "noThreadsForKeypoints": "Ajoutez d'abord des contributions pour pouvoir extraire des points clés.",
+    "voiceGenericError": "La dictée n’a pas pu être terminée. Réessayez.",
+    "noThreadsForKeypoints": "Ajoutez d’abord des contributions pour pouvoir extraire des points clés.",
     "needTaskText": "Saisissez une tâche.",
-    "needGenerateFirst": "Générez d'abord la structure (Configuration → Générer la structure).",
-    "clearConfirm": "Voulez-vous vraiment effacer toutes les données ? Cette action est irréversible.",
+    "needGenerateFirst": "Générez d’abord la structure (Configuration → Générer la structure).",
+    "clearConfirm": "Êtes-vous sûr de vouloir effacer toutes les données ? Cette action est irréversible.",
     "deleteContribConfirm": "Supprimer cette contribution et toutes ses réponses ?",
     "deleteTaskConfirm": "Supprimer cette tâche ?",
-    "printAreaMissing": "La zone d'impression (printArea) est introuvable.",
-    "copyNotSupported": "La copie automatique n'a pas pu être effectuée dans ce navigateur. Essayez-en un autre (Chrome/Edge) ou copiez le texte brut.",
-    "logoTooBig": "Le logo est trop volumineux. Utilisez une image plus légère (idéalement < 900 Ko).",
-    "logoReadFail": "Le logo n'a pas pu être lu. Essayez un autre fichier."
+    "printAreaMissing": "Zone d’impression (printArea) introuvable.",
+    "copyNotSupported": "Impossible de copier automatiquement dans ce navigateur. Essayez-en un autre (Chrome/Edge) ou copiez le texte brut.",
+    "logoTooBig": "Le logo est trop volumineux. Utilisez une image plus légère (idéalement < 900KB).",
+    "logoReadFail": "Impossible de lire le logo. Essayez un autre fichier."
   },
   "toasts": {
     "structureReady": "Structure prête ✅",
@@ -249,11 +293,12 @@
     "taskRemoved": "Tâche supprimée ✅",
     "cleared": "Données effacées ✅",
     "exportPreparing": "Préparation du PDF…",
-    "copyPreparing": "Copie du procès-verbal…",
-    "exportCopied": "Procès-verbal copié ✅ (collez-le dans Gmail)",
+    "copyPreparing": "Copie du compte rendu…",
+    "exportCopied": "Compte rendu copié ✅ (collez-le dans Gmail)",
     "exportSettingsSaved": "Export mis à jour ✅",
     "logoUpdated": "Logo mis à jour ✅",
-    "logoReset": "Logo supprimé ✅"
+    "logoReset": "Logo supprimé ✅",
+    "exportColorsRestored": "Couleurs du PDF restaurées ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",
@@ -261,22 +306,22 @@
     "year": "2025",
     "author": "Andrés Calvo Espinosa",
     "coherenceButtonAria": "Cohérence universelle",
-    "licenseButtonAria": "Licence MIT",
-    "licenseButton": "Licence MIT",
+    "licenseButtonAria": "Licences",
+    "licenseButton": "Licences",
     "privacyButton": "Confidentialité",
     "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
   "licenseOverlay": {
-    "title": "Licence MIT",
-    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    "title": "Licences",
+    "body": "<p><b>Code propre de l’app.</b> Le code développé spécifiquement pour cette application est distribué sous licence MIT.</p>\n<pre class=\"license-text\">MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre>\n<h3>Code et composants tiers</h3>\n<ul>\n  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>\n  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>\n  <li><b>ONNX Runtime</b>: MIT</li>\n  <li><b>OpenAI Whisper (projet original)</b>: MIT</li>\n</ul>\n<p>Ces licences tierces ne changent pas la licence MIT du code propre de l’app, mais vous devez conserver les avis et textes de licence applicables lorsque vous redistribuez l’application ou ses composants.</p>\n<p>En pratique : vous pouvez publier votre code sous MIT, mais la distribution finale de l’app doit aussi inclure une section sur les licences tierces ou les fichiers de licence et NOTICE requis pour les composants inclus.</p>"
   },
   "privacy": {
-    "title": "Politique de confidentialité",
-    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> fonctionne à 100 % dans votre navigateur. Nous n'envoyons aucune de vos données à un serveur.</p>"
+    "title": "Confidentialité réelle de l’app",
+    "body": "<p><b>Résumé.</b> Cette application est conçue pour exécuter le travail principal dans votre navigateur. D’après le code examiné, le contenu du compte rendu n’est pas envoyé à un backend propre à l’application.</p>\n<h3>Ce qui est stocké localement dans votre navigateur</h3>\n<ul>\n  <li>Le titre, la date, le type de réunion, les participants, les contributions, les tâches, les points clés et les observations.</li>\n  <li>Des préférences comme la langue, le thème, le moteur de transcription et les paramètres d’export.</li>\n  <li>Si vous téléversez un logo pour le PDF, ce fichier peut aussi être enregistré localement dans les paramètres d’export.</li>\n</ul>\n<h3>Ce qui n’est pas partagé par défaut</h3>\n<p>Le code examiné ne montre ni API propre ni envoi du contenu du compte rendu vers les serveurs de l’application. On n’y voit pas non plus d’analytics propriétaires pour le contenu que vous écrivez ou dictez.</p>\n<h3>Transcription selon le mode choisi</h3>\n<p><b>Whisper hors ligne.</b> L’audio est capturé dans le navigateur et traité localement sur l’appareil avec le modèle téléchargé. Une fois le runtime et le modèle téléchargés, la transcription fonctionne localement et aucun envoi de l’audio vers un service de transcription n’apparaît dans le code examiné.</p>\n<p><b>Navigateur.</b> L’app utilise le moteur de reconnaissance du navigateur lui-même. Dans ce mode, l’app n’implémente pas d’envoi audio propre, mais le traitement réel peut être local ou distant selon le navigateur, le système d’exploitation et la plateforme. C’est pourquoi il ne faut pas supposer que ce mode soit toujours 100% local sur tous les appareils.</p>\n<h3>Quand des connexions externes peuvent avoir lieu</h3>\n<ul>\n  <li>Lorsque le runtime ou le modèle nécessaires à la transcription hors ligne sont téléchargés pour la première fois.</li>\n  <li>Lorsque vous utilisez le mode de transcription du navigateur sur des appareils ou navigateurs qui dépendent des services vocaux de la plateforme.</li>\n  <li>Lorsque vous ouvrez des liens externes depuis l’interface.</li>\n  <li>Lorsque vous copiez le compte rendu et décidez de le coller dans Gmail ou un autre service externe.</li>\n</ul>\n<h3>Export et usage hors ligne</h3>\n<p>L’export PDF est généré localement dans le navigateur puis envoyé à la boîte de dialogue d’impression du navigateur lui-même. L’app peut fonctionner hors ligne grâce au stockage local et au service worker, mais cela n’équivaut ni à un chiffrement local ni à une suppression automatique.</p>\n<h3>Important</h3>\n<p>Comme les informations restent enregistrées localement dans le navigateur ou dans le profil de l’appareil, toute personne ayant accès à ce navigateur ou à ce profil pourrait les voir. Si vous partagez l’appareil, il est recommandé d’effacer les données de l’app à la fin.</p>"
   },
   "coherence": {
     "title": "Cohérence universelle",
-    "body": "Que cette œuvre serve de remerciement et d'engagement : penser, ressentir et agir dans la même direction."
+    "body": "Que cette œuvre serve de gratitude et d’engagement : penser, ressentir et agir dans la même direction."
   },
   "confirm": {
     "title": "Confirmation"

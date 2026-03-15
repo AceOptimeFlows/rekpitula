@@ -3,7 +3,7 @@
     "skip": "Zum Inhalt springen"
   },
   "app": {
-    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — Offline-PWA",
     "logoAlt": "OptimeFlow(s)-Logo",
     "brandName": "OptimeFlow(s)",
     "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
@@ -18,8 +18,8 @@
       "nebula": "Neon-Nebel",
       "ocean": "Tiefer Ozean",
       "forest": "Smaragdwald",
-      "amber": "Warmer Bernstein",
-      "violet": "Königliches Violett",
+      "amber": "Warmes Bernstein",
+      "violet": "Königsviolett",
       "mono": "Mono noir"
     },
     "languageLabel": "Sprache",
@@ -30,10 +30,10 @@
       "de": "Deutsch",
       "it": "Italienisch",
       "fr": "Französisch",
-      "ru": "Russisch",
       "ko": "Koreanisch",
       "ja": "Japanisch",
       "zh": "Chinesisch",
+      "ru": "Russisch",
       "hi": "Hindi",
       "ar": "Arabisch"
     },
@@ -53,31 +53,38 @@
   },
   "export": {
     "settingsTitle": "Protokollexport",
-    "headerHint": "Konfiguriere die Kopfzeile des Protokolls mit dem Namen der Organisation und, wenn du möchtest, einem Logo.",
-    "headerNameLabel": "Name des Unternehmens / der Organisation",
-    "headerNamePh": "Z. B.: Globalogistics, COCOLAB-Komitee, Geschäftsleitung…",
+    "headerHint": "Konfiguriere den Dokumentkopf mit dem Namen der Organisation und, wenn du möchtest, mit einem Logo.",
+    "headerNameLabel": "Unternehmens- / Organisationsname",
+    "headerNamePh": "Z. B.: Globalogistics, COCOLAB-Komitee, Geschäftsführung…",
     "includeLogo": "Logo einfügen",
     "logoLabel": "Logo",
     "logoPick": "Auswählen",
     "logoReset": "Entfernen",
     "logoStatusApp": "Logo: App-Logo wird verwendet",
     "logoStatusCustom": "Logo: benutzerdefiniert",
-    "logoStatusSet": "Kopfzeilenlogo konfiguriert",
-    "logoStatusNone": "Kein Kopfzeilenlogo",
-    "logoAlt": "Kopfzeilenlogo",
+    "logoStatusSet": "Kopf-Logo konfiguriert",
+    "logoStatusNone": "Kein Kopf-Logo",
+    "logoAlt": "Kopf-Logo",
     "footerLabel": "Fußzeile",
-    "footerPh": "Optionaler Text für die Fußzeile…",
-    "footerHint": "Tipp: Dieser Text wird am Ende des Protokolls hinzugefügt (nützlich für Organisation, Bereich, Vertraulichkeit usw.)."
+    "footerPh": "Optionaler Fußzeilentext…",
+    "footerHint": "Tipp: Dieser Text wird am Ende des Protokolls hinzugefügt (nützlich für Organisation, Bereich, Vertraulichkeit usw.).",
+    "colorsTitle": "Dokumentfarben",
+    "colorsHint": "Diese Farben werden auf das exportierte PDF und die Kopie für Gmail angewendet.",
+    "marginColorLabel": "Randfarbe",
+    "contourColorLabel": "Konturfarbe",
+    "tableColorLabel": "Farbe von Tabellen und Überschriften",
+    "textColorLabel": "Textfarbe",
+    "colorsReset": "Farben zurücksetzen"
   },
   "setup": {
     "title": "Konfiguration",
-    "lead": "Lege die Basisdaten fest und generiere die Protokollstruktur.",
-    "meetingTitle": "Titel / Name des Meetings",
+    "lead": "Lege die Grunddaten fest und erstelle die Struktur des Protokolls.",
+    "meetingTitle": "Titel / Name der Besprechung",
     "meetingTitlePh": "Sprint Review, Komitee usw.",
     "date": "Datum",
     "type": "Typ",
     "types": {
-      "meeting": "Meeting",
+      "meeting": "Besprechung",
       "catchup": "Follow-up",
       "workshop": "Workshop",
       "oneonone": "1:1",
@@ -86,34 +93,71 @@
     "participants": "Teilnehmende",
     "participantsPh": "Teilnehmende hinzufügen…",
     "add": "Hinzufügen",
-    "generate": "Struktur generieren",
-    "autosave": "Automatisches Speichern EIN · Lokal",
+    "generate": "Struktur erstellen",
+    "autosave": "Autosave EIN · Lokal",
     "autosaveSavedAt": "Gespeichert · {{time}}",
     "removeParticipant": "Teilnehmende entfernen",
-    "noParticipantsOption": "Zuerst Teilnehmende hinzufügen…"
+    "noParticipantsOption": "Füge zuerst Teilnehmende hinzu…"
   },
   "empty": {
-    "title": "Beginne mit dem Anlegen des Meetings",
-    "body": "Füge Teilnehmende hinzu und klicke auf „Struktur generieren“. Danach kannst du Beiträge diktieren, Kernpunkte extrahieren, Aufgaben zuweisen und exportieren."
+    "title": "Erstelle zuerst die Besprechung",
+    "body": "Füge Teilnehmende hinzu und klicke auf „Struktur erstellen“. Danach kannst du Beiträge diktieren, Kernpunkte extrahieren, Aufgaben zuweisen und exportieren."
   },
   "progress": {
     "title": "Fortschritt",
-    "caption": "fertige Abschnitte",
+    "caption": "Abschnitte fertig",
     "pill": "{{done}}/{{total}}"
   },
   "contrib": {
-    "title": "Beiträge zum Meeting",
+    "title": "Beiträge der Besprechung",
     "lead": "Jeder Beitrag wird einer Person zugeordnet und unterstützt verschachtelte Antworten (Thread-Stil).",
-    "author": "Autor/in",
+    "author": "Autor",
     "text": "Beitragstext",
-    "textPh": "Beitrag schreiben oder diktieren…",
+    "textPh": "Schreibe oder diktiere deinen Beitrag…",
     "dictate": "🎙️ Diktieren",
     "add": "Beitrag hinzufügen",
     "reply": "Antworten",
     "emptyThreads": "Es gibt noch keine Beiträge. Füge oben den ersten hinzu oder diktiere einen mit 🎙️."
   },
   "dictation": {
-    "listening": "🎙️ Zuhören… sprich ganz natürlich."
+    "listening": "🎙️ Ich höre zu… sprich ganz natürlich.",
+    "whisperHelp": "Einmal drücken, um aufzunehmen. Noch einmal drücken, um die Aufnahme zu transkribieren.",
+    "browserHelp": "Einmal drücken, um das Diktat zu starten. Noch einmal drücken, um das Diktat zu stoppen."
+  },
+  "transcription": {
+    "modeLabel": "Transkriptions-Engine",
+    "modeWhisper": "Whisper offline · Datenschutz",
+    "modeBrowser": "Browser · Schneller",
+    "modeHintWhisper": "Maximaler Datenschutz: Audio und Text werden nach dem Herunterladen des Modells lokal verarbeitet.",
+    "modeHintBrowser": "Schnellerer Start: verwendet die Sprach-Engine des Browsers und kann von Diensten der Plattform oder des Browsers abhängen.",
+    "title": "Offline-Transkriptor · Whisper Small",
+    "lead": "Lade das Modell einmal herunter und diktiere danach offline.",
+    "download": "Modell herunterladen",
+    "delete": "Modell löschen",
+    "statusMissing": "Modell nicht heruntergeladen.",
+    "statusReady": "Modell für Offline-Diktat bereit.",
+    "statusChecking": "Lokales Modell wird geprüft…",
+    "statusPreparingRuntime": "Lokale Laufzeit wird vorbereitet…",
+    "statusDownloading": "Modell wird heruntergeladen…",
+    "statusLoading": "Lokales Modell wird geladen…",
+    "statusRecording": "Audio wird aufgenommen… zum Beenden erneut drücken.",
+    "statusProcessing": "Lokal wird transkribiert…",
+    "statusDeleted": "Modell gelöscht.",
+    "browserStatusListening": "Browser-Diktat aktiv… jetzt sprechen.",
+    "toastReady": "Whisper Small-Modell bereit.",
+    "toastDeleted": "Modell gelöscht.",
+    "errModelMissing": "Lade zuerst Whisper Small in den Einstellungen herunter.",
+    "errMicDenied": "Mikrofonberechtigung verweigert.",
+    "errMicUnavailable": "Mikrofon nicht verfügbar.",
+    "errProcessing": "Lokale Transkription konnte nicht durchgeführt werden.",
+    "errTooShort": "Es wurde nicht genug Sprache erkannt.",
+    "errDownload": "Das Modell konnte nicht heruntergeladen werden.",
+    "errUnsupported": "Dieser Browser unterstützt keine lokale Offline-Transkription.",
+    "errLibrary": "Die lokale Transkriptions-Engine konnte nicht geladen werden.",
+    "commandSelectAria": "Transkriptions-Engine",
+    "commandDownload": "Whisper herunterladen",
+    "commandReady": "Whisper bereit",
+    "commandMissing": "Whisper nicht heruntergeladen"
   },
   "keypoints": {
     "title": "Kernpunkte",
@@ -127,32 +171,32 @@
     "title": "Aufgaben und Zeitpläne",
     "lead": "Weise Aufgaben pro Person mit Zieldatum zu.",
     "task": "Aufgabe",
-    "taskPh": "Beschreibung der Aufgabe…",
+    "taskPh": "Aufgabenbeschreibung…",
     "assignee": "Verantwortlich",
     "due": "Fälligkeitsdatum",
     "status": "Status",
     "pending": "Ausstehend",
     "done": "Erledigt",
     "add": "Hinzufügen",
-    "hint": "Tipp: Status mit ✓ umschalten und mit ↩︎ zurück.",
+    "hint": "Tipp: Status mit ✓ umschalten und mit ↩︎ zurücksetzen.",
     "empty": "Es gibt noch keine Aufgaben. Füge oben eine hinzu."
   },
   "observations": {
     "title": "Beobachtungen",
-    "lead": "Halte Probleme, Meeting-Atmosphäre, Risiken, Vorfälle oder sonstige relevante Hinweise fest.",
+    "lead": "Halte Zwischenfälle, Besprechungsatmosphäre, Risiken, Vorkommnisse oder jede relevante Notiz fest.",
     "field": "Abschließende Beobachtungen",
-    "ph": "Notiere hier Vorfälle, Blockaden, allgemeine Stimmung, Abhängigkeiten, stillschweigende Vereinbarungen oder jeden anderen relevanten Aspekt…",
+    "ph": "Notiere hier Zwischenfälle, Blocker, allgemeine Stimmung, Abhängigkeiten, stillschweigende Vereinbarungen oder jeden anderen relevanten Aspekt…",
     "hint": "Diese Notizen erscheinen am Ende des exportierten Protokolls."
   },
   "timeline": {
     "title": "Zeitplan nach Person",
-    "empty": "Sobald du Aufgaben hinzufügst, siehst du hier den Zeitplan pro Person."
+    "empty": "Wenn du Aufgaben hinzufügst, erscheint hier der Zeitplan pro Person."
   },
   "print": {
-    "untitled": "Meeting ohne Titel",
+    "untitled": "Besprechung ohne Titel",
     "none": "—",
     "doc": {
-      "title": "SITZUNGSPROTOKOLL"
+      "title": "BESPRECHUNGSPROTOKOLL"
     },
     "header": {
       "reference": "Referenz",
@@ -160,7 +204,7 @@
       "issueDate": "Ausgabedatum"
     },
     "details": {
-      "meeting": "Komitee / Meeting",
+      "meeting": "Komitee / Besprechung",
       "entity": "Organisation / Team",
       "participantsCount": "Anzahl der Teilnehmenden"
     },
@@ -172,7 +216,7 @@
     },
     "sections": {
       "summary": "Kurzfassung",
-      "contrib": "Verlauf des Meetings",
+      "contrib": "Besprechungsverlauf",
       "keypoints": "Kernpunkte und Vereinbarungen",
       "tasks": "Aufgaben / Schlussfolgerungen",
       "observations": "Beobachtungen",
@@ -184,15 +228,15 @@
         "keypoints": "Identifizierte Kernpunkte: {{n}}",
         "tasks": "Aufgaben: {{total}} ({{done}} erledigt, {{pending}} ausstehend)"
       },
-      "highlights": "Highlights"
+      "highlights": "Hervorgehobene Aspekte"
     },
     "contrib": {
       "kind": {
         "root": "Beitrag",
         "reply": "Antwort"
       },
-      "replyTo": "bezogen auf Punkt #{{n}}",
-      "repliesLabel": "Zugehörige Beiträge"
+      "replyTo": "zu Punkt #{{n}} zugeordnet",
+      "repliesLabel": "Zugeordnete Beiträge"
     },
     "tasksTable": {
       "id": "ID",
@@ -215,30 +259,30 @@
   },
   "alerts": {
     "needParticipants": "Füge mindestens 1 teilnehmende Person hinzu, um fortzufahren.",
-    "needAuthor": "Wähle eine Autorin oder einen Autor aus.",
+    "needAuthor": "Wähle einen Autor aus.",
     "needText": "Schreibe zuerst etwas.",
     "needTextField": "Wähle ein Textfeld zum Diktieren aus.",
-    "voiceNotAvail": "Diktieren ist in diesem Browser nicht verfügbar.",
-    "voicePermissionDenied": "Die Mikrofonberechtigung wurde nicht erteilt.",
-    "voiceMicUnavailable": "Es wurde kein verfügbares Mikrofon erkannt.",
-    "voiceNoSpeech": "Es wurde keine Sprache erkannt. Versuche es erneut.",
-    "voiceNetwork": "Die Browser-Diktierfunktion benötigt auf diesem Gerät eine Internetverbindung.",
-    "voiceGenericError": "Das Diktat konnte nicht abgeschlossen werden. Versuche es erneut.",
-    "noThreadsForKeypoints": "Füge zuerst Beiträge hinzu, damit Kernpunkte extrahiert werden können.",
+    "voiceNotAvail": "Diktat ist in diesem Browser nicht verfügbar.",
+    "voicePermissionDenied": "Es wurde keine Mikrofonberechtigung erteilt.",
+    "voiceMicUnavailable": "Kein verfügbares Mikrofon erkannt.",
+    "voiceNoSpeech": "Keine Sprache erkannt. Bitte versuche es erneut.",
+    "voiceNetwork": "Das Browser-Diktat benötigt auf diesem Gerät eine Internetverbindung.",
+    "voiceGenericError": "Das Diktat konnte nicht abgeschlossen werden. Bitte versuche es erneut.",
+    "noThreadsForKeypoints": "Füge zuerst Beiträge hinzu, um Kernpunkte extrahieren zu können.",
     "needTaskText": "Schreibe eine Aufgabe.",
-    "needGenerateFirst": "Erzeuge zuerst die Struktur (Konfiguration → Struktur generieren).",
-    "clearConfirm": "Möchtest du wirklich alle Daten löschen? Das kann nicht rückgängig gemacht werden.",
+    "needGenerateFirst": "Erstelle zuerst die Struktur (Konfiguration → Struktur erstellen).",
+    "clearConfirm": "Möchtest du wirklich alle Daten löschen? Dies kann nicht rückgängig gemacht werden.",
     "deleteContribConfirm": "Diesen Beitrag und alle Antworten löschen?",
     "deleteTaskConfirm": "Diese Aufgabe löschen?",
     "printAreaMissing": "Der Druckbereich (printArea) wurde nicht gefunden.",
-    "copyNotSupported": "Das automatische Kopieren konnte in diesem Browser nicht durchgeführt werden. Versuche es mit einem anderen (Chrome/Edge) oder kopiere den Nur-Text.",
-    "logoTooBig": "Das Logo ist zu groß. Verwende ein kleineres Bild (ideal < 900 KB).",
+    "copyNotSupported": "Automatisches Kopieren wird in diesem Browser nicht unterstützt. Versuche es mit einem anderen (Chrome/Edge) oder kopiere den Nur-Text.",
+    "logoTooBig": "Das Logo ist zu groß. Verwende ein leichteres Bild (ideal < 900 KB).",
     "logoReadFail": "Das Logo konnte nicht gelesen werden. Probiere eine andere Datei."
   },
   "toasts": {
     "structureReady": "Struktur bereit ✅",
-    "participantAdded": "Teilnehmende Person hinzugefügt: {{name}}",
-    "participantRemoved": "Teilnehmende Person entfernt: {{name}}",
+    "participantAdded": "Teilnehmende hinzugefügt: {{name}}",
+    "participantRemoved": "Teilnehmende entfernt: {{name}}",
     "contribAdded": "Beitrag hinzugefügt ✅",
     "replyAdded": "Antwort hinzugefügt ✅",
     "deleted": "Gelöscht ✅",
@@ -253,30 +297,31 @@
     "exportCopied": "Protokoll kopiert ✅ (in Gmail einfügen)",
     "exportSettingsSaved": "Export aktualisiert ✅",
     "logoUpdated": "Logo aktualisiert ✅",
-    "logoReset": "Logo entfernt ✅"
+    "logoReset": "Logo entfernt ✅",
+    "exportColorsRestored": "PDF-Farben wiederhergestellt ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",
-    "appName": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️",
+    "appName": "ReKπTúL@",
     "year": "2025",
     "author": "Andrés Calvo Espinosa",
     "coherenceButtonAria": "Universelle Kohärenz",
-    "licenseButtonAria": "MIT-Lizenz",
-    "licenseButton": "MIT-Lizenz",
+    "licenseButtonAria": "Lizenzen",
+    "licenseButton": "Lizenzen",
     "privacyButton": "Datenschutz",
     "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
   "licenseOverlay": {
-    "title": "MIT-Lizenz",
-    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    "title": "Lizenzen",
+    "body": "<p><b>Eigener App-Code.</b> Der speziell für diese Anwendung entwickelte Code wird unter der MIT-Lizenz verteilt.</p>\n<pre class=\"license-text\">MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre>\n<h3>Code und Komponenten Dritter</h3>\n<ul>\n  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>\n  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>\n  <li><b>ONNX Runtime</b>: MIT</li>\n  <li><b>OpenAI Whisper (ursprüngliches Projekt)</b>: MIT</li>\n</ul>\n<p>Diese Drittanbieter-Lizenzen ändern die MIT-Lizenz des eigenen App-Codes nicht, aber du musst die anwendbaren Hinweise und Lizenztexte beibehalten, wenn du die Anwendung oder ihre Komponenten weiterverbreitest.</p>\n<p>In der Praxis bedeutet das: Du kannst deinen Code unter MIT veröffentlichen, aber die endgültige Distribution der App muss außerdem einen Abschnitt zu Drittanbieter-Lizenzen oder die Dateien LICENSE und NOTICE enthalten, die zu den enthaltenen Komponenten gehören.</p>"
   },
   "privacy": {
-    "title": "Datenschutzerklärung",
-    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> läuft zu 100 % in deinem Browser. Wir senden deine Daten an keinen Server.</p>"
+    "title": "Tatsächlicher Datenschutz der App",
+    "body": "<p><b>Zusammenfassung.</b> Diese Anwendung ist darauf ausgelegt, die Hauptarbeit in deinem Browser auszuführen. Der Inhalt des Protokolls wird laut geprüftem Code nicht an ein eigenes Backend der Anwendung gesendet.</p>\n<h3>Was lokal in deinem Browser gespeichert wird</h3>\n<ul>\n  <li>Titel, Datum, Besprechungstyp, Teilnehmende, Beiträge, Aufgaben, Kernpunkte und Beobachtungen.</li>\n  <li>Einstellungen wie Sprache, Thema, Transkriptionsmodus und Exportoptionen.</li>\n  <li>Wenn du ein Logo für das PDF hochlädst, kann auch diese Datei lokal als Teil der Exporteinstellungen gespeichert werden.</li>\n</ul>\n<h3>Was standardmäßig nicht geteilt wird</h3>\n<p>Im geprüften Code ist keine eigene API und kein Upload des Protokollinhalts an Server der Anwendung zu sehen. Auch keine eigene Analytik für die Inhalte, die du schreibst oder diktierst, ist erkennbar.</p>\n<h3>Transkription je nach gewähltem Modus</h3>\n<p><b>Whisper offline.</b> Das Audio wird im Browser erfasst und lokal auf dem Gerät mit dem heruntergeladenen Modell verarbeitet. Sobald Laufzeit und Modell heruntergeladen wurden, funktioniert die Transkription lokal, und im geprüften Code gibt es keinen Upload des Audios an einen Transkriptionsdienst.</p>\n<p><b>Browser.</b> Die App verwendet die Erkennungs-Engine des Browsers selbst. In diesem Modus implementiert die App keinen eigenen Audio-Upload, aber die tatsächliche Verarbeitung kann je nach Browser, Betriebssystem und Plattform lokal oder entfernt erfolgen. Deshalb sollte nicht angenommen werden, dass dieser Modus auf allen Geräten immer zu 100 % lokal ist.</p>\n<h3>Wann es dennoch externe Verbindungen geben kann</h3>\n<ul>\n  <li>Wenn die für die Offline-Transkription benötigte Laufzeit oder das Modell erstmals heruntergeladen werden.</li>\n  <li>Wenn du den Transkriptionsmodus des Browsers auf Geräten oder in Browsern verwendest, die von Sprachdiensten der Plattform abhängen.</li>\n  <li>Wenn du externe Links in der Oberfläche öffnest.</li>\n  <li>Wenn du das Protokoll kopierst und dich entscheidest, es in Gmail oder einen anderen externen Dienst einzufügen.</li>\n</ul>\n<h3>Export und Offline-Nutzung</h3>\n<p>Der PDF-Export wird lokal im Browser erzeugt und an den Druckdialog des Browsers gesendet. Die App kann dank lokaler Speicherung und Service Worker ohne Verbindung funktionieren, aber das bedeutet weder lokale Verschlüsselung noch automatisches Löschen.</p>\n<h3>Wichtig</h3>\n<p>Da die Informationen lokal im Browser oder im Geräteprofil gespeichert bleiben, kann jede Person mit Zugriff auf diesen Browser oder dieses Profil sie sehen. Wenn du ein Gerät teilst, solltest du die App-Daten nach Abschluss löschen.</p>"
   },
   "coherence": {
     "title": "Universelle Kohärenz",
-    "body": "Möge dieses Werk als Dank und als Verpflichtung dienen: zu denken, zu fühlen und zu handeln in dieselbe Richtung."
+    "body": "Möge dieses Werk als Dank und als Verpflichtung dienen: denken, fühlen und handeln in dieselbe Richtung."
   },
   "confirm": {
     "title": "Bestätigung"

@@ -3,7 +3,7 @@
     "skip": "Skip to content"
   },
   "app": {
-    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — PWA offline",
+    "title": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️ — Offline PWA",
     "logoAlt": "OptimeFlow(s) logo",
     "brandName": "OptimeFlow(s)",
     "brandSrOnly": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
@@ -13,13 +13,13 @@
     "themeLabel": "Theme",
     "themes": {
       "system": "System",
-      "dark": "Dark Core",
-      "midnight": "Midnight Blue",
-      "nebula": "Neon Nebula",
-      "ocean": "Deep Ocean",
-      "forest": "Emerald Forest",
-      "amber": "Warm Amber",
-      "violet": "Royal Violet",
+      "dark": "Dark core",
+      "midnight": "Midnight blue",
+      "nebula": "Neon nebula",
+      "ocean": "Deep ocean",
+      "forest": "Emerald forest",
+      "amber": "Warm amber",
+      "violet": "Royal violet",
       "mono": "Mono noir"
     },
     "languageLabel": "Language",
@@ -32,8 +32,8 @@
       "fr": "French",
       "ko": "Korean",
       "ja": "Japanese",
-      "ru": "Russian",
       "zh": "Chinese",
+      "ru": "Russian",
       "hi": "Hindi",
       "ar": "Arabic"
     },
@@ -52,26 +52,33 @@
     }
   },
   "export": {
-    "settingsTitle": "Meeting minutes export",
-    "headerHint": "Set the meeting minutes header with the entity name and, if you want, a logo.",
+    "settingsTitle": "Minutes export",
+    "headerHint": "Set up the document header with the entity name and, if you want, a logo.",
     "headerNameLabel": "Company / entity name",
     "headerNamePh": "E.g.: Globalogistics, COCOLAB Committee, General Management…",
     "includeLogo": "Include logo",
     "logoLabel": "Logo",
     "logoPick": "Choose",
     "logoReset": "Remove",
-    "logoStatusApp": "Logo: using the app one",
+    "logoStatusApp": "Logo: using the app logo",
     "logoStatusCustom": "Logo: custom",
     "logoStatusSet": "Header logo configured",
     "logoStatusNone": "No header logo",
     "logoAlt": "Header logo",
     "footerLabel": "Footer",
     "footerPh": "Optional footer text…",
-    "footerHint": "Tip: this text is added at the end of the minutes (useful for entity, area, confidentiality, etc.)."
+    "footerHint": "Tip: this text is added at the end of the minutes (useful for entity, department, confidentiality, etc.).",
+    "colorsTitle": "Document colors",
+    "colorsHint": "These colors are applied to the exported PDF and the copy for Gmail.",
+    "marginColorLabel": "Margin color",
+    "contourColorLabel": "Outline color",
+    "tableColorLabel": "Tables and headers color",
+    "textColorLabel": "Text color",
+    "colorsReset": "Restore colors"
   },
   "setup": {
     "title": "Setup",
-    "lead": "Define the base data and generate the meeting minutes structure.",
+    "lead": "Define the base details and generate the minutes structure.",
     "meetingTitle": "Meeting title / name",
     "meetingTitlePh": "Sprint Review, Committee, etc.",
     "date": "Date",
@@ -94,7 +101,7 @@
   },
   "empty": {
     "title": "Start by creating the meeting",
-    "body": "Add participants and click “Generate structure”. Then you can dictate contributions, extract key points, assign tasks, and export."
+    "body": "Add participants and click “Generate structure”. Then you can dictate contributions, extract key points, assign tasks and export."
   },
   "progress": {
     "title": "Progress",
@@ -113,11 +120,48 @@
     "emptyThreads": "There are no contributions yet. Add the first one above or dictate one with 🎙️."
   },
   "dictation": {
-    "listening": "🎙️ Listening… speak naturally."
+    "listening": "🎙️ Listening… speak naturally.",
+    "whisperHelp": "Press once to record. Press again to transcribe the recording.",
+    "browserHelp": "Press once to start dictation. Press again to stop dictation."
+  },
+  "transcription": {
+    "modeLabel": "Transcription engine",
+    "modeWhisper": "Whisper offline · Privacy",
+    "modeBrowser": "Browser · Faster",
+    "modeHintWhisper": "Maximum privacy: audio and text are processed locally after downloading the model.",
+    "modeHintBrowser": "Faster startup: uses the browser's speech engine and may depend on platform or browser services.",
+    "title": "Offline transcriber · Whisper Small",
+    "lead": "Download the model once and then dictate offline.",
+    "download": "Download model",
+    "delete": "Delete model",
+    "statusMissing": "Model not downloaded.",
+    "statusReady": "Model ready for offline dictation.",
+    "statusChecking": "Checking local model…",
+    "statusPreparingRuntime": "Preparing local runtime…",
+    "statusDownloading": "Downloading model…",
+    "statusLoading": "Loading local model…",
+    "statusRecording": "Recording audio… press again to finish.",
+    "statusProcessing": "Transcribing locally…",
+    "statusDeleted": "Model deleted.",
+    "browserStatusListening": "Browser dictation active… speak now.",
+    "toastReady": "Whisper Small model ready.",
+    "toastDeleted": "Model deleted.",
+    "errModelMissing": "Download Whisper Small first from Settings.",
+    "errMicDenied": "Microphone permission denied.",
+    "errMicUnavailable": "Microphone unavailable.",
+    "errProcessing": "Could not transcribe locally.",
+    "errTooShort": "I didn't detect enough speech.",
+    "errDownload": "Could not download the model.",
+    "errUnsupported": "This browser does not support offline local transcription.",
+    "errLibrary": "Could not load the local transcription engine.",
+    "commandSelectAria": "Transcription engine",
+    "commandDownload": "Download Whisper",
+    "commandReady": "Whisper ready",
+    "commandMissing": "Whisper not downloaded"
   },
   "keypoints": {
     "title": "Key points",
-    "lead": "Extract points from the contributions (including replies) with deduplication.",
+    "lead": "Extract points from contributions (including replies) with deduplication.",
     "howmany": "How many points?",
     "extract": "Extract",
     "empty": "There are no key points yet. Click “Extract”.",
@@ -125,7 +169,7 @@
   },
   "tasks": {
     "title": "Tasks and timelines",
-    "lead": "Assign tasks to each participant with a target date.",
+    "lead": "Assign tasks by participant with target date.",
     "task": "Task",
     "taskPh": "Task description…",
     "assignee": "Assignee",
@@ -146,7 +190,7 @@
   },
   "timeline": {
     "title": "Timeline by participant",
-    "empty": "When you add tasks, you will see the timeline by person here."
+    "empty": "When you add tasks, the timeline by person will appear here."
   },
   "print": {
     "untitled": "Untitled meeting",
@@ -180,19 +224,19 @@
     },
     "summary": {
       "bullets": {
-        "contrib": "Contributions recorded: {{total}} ({{threads}} main threads)",
-        "keypoints": "Key points identified: {{n}}",
+        "contrib": "Recorded contributions: {{total}} ({{threads}} main threads)",
+        "keypoints": "Identified key points: {{n}}",
         "tasks": "Tasks: {{total}} ({{done}} done, {{pending}} pending)"
       },
       "highlights": "Highlights"
     },
     "contrib": {
       "kind": {
-        "root": "Intervention",
+        "root": "Contribution",
         "reply": "Reply"
       },
       "replyTo": "associated with point #{{n}}",
-      "repliesLabel": "Related interventions"
+      "repliesLabel": "Associated contributions"
     },
     "tasksTable": {
       "id": "ID",
@@ -216,24 +260,24 @@
   "alerts": {
     "needParticipants": "Add at least 1 participant to continue.",
     "needAuthor": "Select an author.",
-    "needText": "Write something first.",
+    "needText": "Type something first.",
     "needTextField": "Select a text field for dictation.",
     "voiceNotAvail": "Dictation is not available in this browser.",
     "voicePermissionDenied": "Microphone permission was not granted.",
     "voiceMicUnavailable": "No available microphone was detected.",
-    "voiceNoSpeech": "No speech was detected. Try again.",
-    "voiceNetwork": "Browser dictation needs a connection on this device.",
-    "voiceGenericError": "The dictation could not be completed. Try again.",
-    "noThreadsForKeypoints": "Add contributions first so key points can be extracted.",
-    "needTaskText": "Write a task.",
-    "needGenerateFirst": "Generate the structure first (Setup → Generate structure).",
+    "voiceNoSpeech": "No speech detected. Try again.",
+    "voiceNetwork": "Browser dictation needs a network connection on this device.",
+    "voiceGenericError": "Could not complete dictation. Try again.",
+    "noThreadsForKeypoints": "Add contributions first to extract key points.",
+    "needTaskText": "Type a task.",
+    "needGenerateFirst": "First generate the structure (Setup → Generate structure).",
     "clearConfirm": "Are you sure you want to clear all data? This cannot be undone.",
     "deleteContribConfirm": "Delete this contribution and all its replies?",
     "deleteTaskConfirm": "Delete this task?",
-    "printAreaMissing": "The print area (printArea) was not found.",
-    "copyNotSupported": "Automatic copy could not be completed in this browser. Try another one (Chrome/Edge) or copy the plain text.",
+    "printAreaMissing": "Print area (printArea) was not found.",
+    "copyNotSupported": "Could not copy automatically in this browser. Try another one (Chrome/Edge) or copy the plain text.",
     "logoTooBig": "The logo is too large. Use a lighter image (ideally < 900KB).",
-    "logoReadFail": "The logo could not be read. Try another file."
+    "logoReadFail": "Could not read the logo. Try another file."
   },
   "toasts": {
     "structureReady": "Structure ready ✅",
@@ -250,10 +294,11 @@
     "cleared": "Data cleared ✅",
     "exportPreparing": "Preparing PDF…",
     "copyPreparing": "Copying minutes…",
-    "exportCopied": "Minutes copied ✅ (paste it into Gmail)",
+    "exportCopied": "Minutes copied ✅ (paste them into Gmail)",
     "exportSettingsSaved": "Export updated ✅",
     "logoUpdated": "Logo updated ✅",
-    "logoReset": "Logo removed ✅"
+    "logoReset": "Logo removed ✅",
+    "exportColorsRestored": "PDF colors restored ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",
@@ -261,22 +306,22 @@
     "year": "2025",
     "author": "Andrés Calvo Espinosa",
     "coherenceButtonAria": "Universal Coherence",
-    "licenseButtonAria": "MIT License",
-    "licenseButton": "MIT License",
+    "licenseButtonAria": "Licenses",
+    "licenseButton": "Licenses",
     "privacyButton": "Privacy",
     "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
   "licenseOverlay": {
-    "title": "MIT License",
-    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    "title": "Licenses",
+    "body": "<p><b>The app's own code.</b> The code specifically developed for this application is distributed under the MIT license.</p>\n<pre class=\"license-text\">MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre>\n<h3>Third-party code and components</h3>\n<ul>\n  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>\n  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>\n  <li><b>ONNX Runtime</b>: MIT</li>\n  <li><b>OpenAI Whisper (original project)</b>: MIT</li>\n</ul>\n<p>These third-party licenses do not change the MIT license of the app's own code, but you must preserve the applicable notices and license texts when redistributing the application or its components.</p>\n<p>In practice: you can publish your code under MIT, but the final distribution of the app must also include a section on third-party licenses or the license and NOTICE files required for the included components.</p>"
   },
   "privacy": {
-    "title": "Privacy Policy",
-    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> runs 100% in your browser. We do not send your data to any server.</p>"
+    "title": "The app's actual privacy",
+    "body": "<p><b>Summary.</b> This application is designed to run the main work in your browser. According to the reviewed code, the contents of the minutes are not sent to the application's own backend.</p>\n<h3>What is stored locally in your browser</h3>\n<ul>\n  <li>The title, date, meeting type, participants, contributions, tasks, key points and observations.</li>\n  <li>Preferences such as language, theme, transcription engine and export settings.</li>\n  <li>If you upload a logo for the PDF, that file may also be stored locally as part of the export settings.</li>\n</ul>\n<h3>What is not shared by default</h3>\n<p>The reviewed code does not show its own API or an upload of the minutes content to the application's servers. There is also no indication of first-party analytics for the content you type or dictate.</p>\n<h3>Transcription depending on the selected mode</h3>\n<p><b>Whisper offline.</b> Audio is captured in the browser and processed locally on the device with the downloaded model. Once the runtime and model are downloaded, transcription works locally and there is no upload of the audio to a transcription service in the reviewed code.</p>\n<p><b>Browser.</b> The app uses the browser's own recognition engine. In this mode, the app does not implement its own audio upload, but the actual processing may be local or remote depending on the browser, operating system and platform. That is why this mode should not be assumed to be 100% local on every device.</p>\n<h3>When external connections may happen</h3>\n<ul>\n  <li>When the runtime or model required for offline transcription is downloaded for the first time.</li>\n  <li>When you use browser transcription mode on devices or browsers that depend on platform voice services.</li>\n  <li>When you open external links from the interface.</li>\n  <li>When you copy the minutes and decide to paste them into Gmail or another external service.</li>\n</ul>\n<h3>Export and offline use</h3>\n<p>PDF export is generated locally in the browser and sent to the browser's own print dialog. The app can work offline thanks to local storage and the service worker, but that is not the same as local encryption or automatic deletion.</p>\n<h3>Important</h3>\n<p>Because the information is stored locally in the browser or in the device profile, anyone with access to that browser or profile could see it. If you share the device, it is advisable to clear the app data when you finish.</p>"
   },
   "coherence": {
     "title": "Universal Coherence",
-    "body": "May this work serve as gratitude and as a commitment: to think, feel, and act in the same direction."
+    "body": "May this work serve as gratitude and commitment: to think, feel and act in the same direction."
   },
   "confirm": {
     "title": "Confirmation"

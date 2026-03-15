@@ -14,7 +14,7 @@
     "themes": {
       "system": "Sistema",
       "dark": "Nucleo scuro",
-      "midnight": "Blu mezzanotte",
+      "midnight": "Blu notte",
       "nebula": "Nebulosa neon",
       "ocean": "Oceano profondo",
       "forest": "Foresta smeraldo",
@@ -29,18 +29,18 @@
       "pt-br": "Portoghese (Brasile)",
       "de": "Tedesco",
       "it": "Italiano",
-      "ru": "Russo",
       "fr": "Francese",
       "ko": "Coreano",
       "ja": "Giapponese",
       "zh": "Cinese",
+      "ru": "Russo",
       "hi": "Hindi",
       "ar": "Arabo"
     },
-    "installButton": "Installa l'app"
+    "installButton": "Installa app"
   },
   "actions": {
-    "clear": "Cancella",
+    "clear": "Pulisci",
     "export": "Esporta PDF",
     "copy": "Copia per Gmail",
     "jumpAria": "Vai alla sezione",
@@ -55,7 +55,7 @@
     "settingsTitle": "Esportazione del verbale",
     "headerHint": "Configura l'intestazione del verbale con il nome dell'entità e, se vuoi, un logo.",
     "headerNameLabel": "Nome azienda / entità",
-    "headerNamePh": "Es.: Globalogistics, Comitato COCOLAB, Direzione generale…",
+    "headerNamePh": "Es.: Globalogistics, Comitato COCOLAB, Direzione Generale…",
     "includeLogo": "Includi logo",
     "logoLabel": "Logo",
     "logoPick": "Scegli",
@@ -66,19 +66,26 @@
     "logoStatusNone": "Nessun logo nell'intestazione",
     "logoAlt": "Logo dell'intestazione",
     "footerLabel": "Piè di pagina",
-    "footerPh": "Testo facoltativo per il piè di pagina…",
-    "footerHint": "Suggerimento: questo testo viene aggiunto alla fine del verbale (utile per entità, area, riservatezza, ecc.)."
+    "footerPh": "Testo opzionale per il piè di pagina…",
+    "footerHint": "Suggerimento: questo testo viene aggiunto alla fine del verbale (utile per entità, area, riservatezza, ecc.).",
+    "colorsTitle": "Colori del documento",
+    "colorsHint": "Questi colori vengono applicati al PDF esportato e alla copia per Gmail.",
+    "marginColorLabel": "Colore dei margini",
+    "contourColorLabel": "Colore dei contorni",
+    "tableColorLabel": "Colore di tabelle e intestazioni",
+    "textColorLabel": "Colore dei testi",
+    "colorsReset": "Ripristina colori"
   },
   "setup": {
     "title": "Configurazione",
     "lead": "Definisci i dati di base e genera la struttura del verbale.",
-    "meetingTitle": "Titolo / Nome della riunione",
+    "meetingTitle": "Titolo / nome della riunione",
     "meetingTitlePh": "Sprint Review, Comitato, ecc.",
     "date": "Data",
     "type": "Tipo",
     "types": {
       "meeting": "Riunione",
-      "catchup": "Aggiornamento",
+      "catchup": "Allineamento",
       "workshop": "Workshop",
       "oneonone": "1:1",
       "retro": "Retrospettiva"
@@ -94,10 +101,10 @@
   },
   "empty": {
     "title": "Inizia creando la riunione",
-    "body": "Aggiungi partecipanti e premi “Genera struttura”. Poi potrai dettare contributi, estrarre punti chiave, assegnare attività ed esportare."
+    "body": "Aggiungi i partecipanti e premi “Genera struttura”. Poi potrai dettare contributi, estrarre punti chiave, assegnare attività ed esportare."
   },
   "progress": {
-    "title": "Avanzamento",
+    "title": "Progresso",
     "caption": "sezioni pronte",
     "pill": "{{done}}/{{total}}"
   },
@@ -107,13 +114,50 @@
     "author": "Autore",
     "text": "Testo del contributo",
     "textPh": "Scrivi o detta il tuo contributo…",
-    "dictate": "🎙️ Detta",
+    "dictate": "🎙️ Dettare",
     "add": "Aggiungi contributo",
     "reply": "Rispondi",
     "emptyThreads": "Non ci sono ancora contributi. Aggiungi il primo qui sopra o dettane uno con 🎙️."
   },
   "dictation": {
-    "listening": "🎙️ In ascolto… parla naturalmente."
+    "listening": "🎙️ In ascolto… parla naturalmente.",
+    "whisperHelp": "Premi una volta per registrare. Premi di nuovo per trascrivere ciò che hai registrato.",
+    "browserHelp": "Premi una volta per iniziare a dettare. Premi di nuovo per fermare la dettatura."
+  },
+  "transcription": {
+    "modeLabel": "Motore di trascrizione",
+    "modeWhisper": "Whisper offline · Privacy",
+    "modeBrowser": "Browser · Più veloce",
+    "modeHintWhisper": "Massima privacy: audio e testo vengono elaborati localmente dopo aver scaricato il modello.",
+    "modeHintBrowser": "Avvio più rapido: usa il motore vocale del browser e può dipendere da servizi della piattaforma o del browser stesso.",
+    "title": "Trascrittore offline · Whisper Small",
+    "lead": "Scarica il modello una volta e poi detta senza connessione.",
+    "download": "Scarica modello",
+    "delete": "Elimina modello",
+    "statusMissing": "Modello non scaricato.",
+    "statusReady": "Modello pronto per la dettatura offline.",
+    "statusChecking": "Controllo del modello locale…",
+    "statusPreparingRuntime": "Preparazione del runtime locale…",
+    "statusDownloading": "Download del modello…",
+    "statusLoading": "Caricamento del modello locale…",
+    "statusRecording": "Registrazione audio… premi di nuovo per terminare.",
+    "statusProcessing": "Trascrizione locale in corso…",
+    "statusDeleted": "Modello eliminato.",
+    "browserStatusListening": "Dettatura del browser attiva… parla ora.",
+    "toastReady": "Modello Whisper Small pronto.",
+    "toastDeleted": "Modello eliminato.",
+    "errModelMissing": "Scarica prima Whisper Small dalle Impostazioni.",
+    "errMicDenied": "Permesso microfono negato.",
+    "errMicUnavailable": "Microfono non disponibile.",
+    "errProcessing": "Impossibile trascrivere localmente.",
+    "errTooShort": "Non ho rilevato abbastanza voce.",
+    "errDownload": "Impossibile scaricare il modello.",
+    "errUnsupported": "Questo browser non supporta la trascrizione locale offline.",
+    "errLibrary": "Impossibile caricare il motore di trascrizione locale.",
+    "commandSelectAria": "Motore di trascrizione",
+    "commandDownload": "Scarica Whisper",
+    "commandReady": "Whisper pronto",
+    "commandMissing": "Whisper non scaricato"
   },
   "keypoints": {
     "title": "Punti chiave",
@@ -124,8 +168,8 @@
     "remove": "Rimuovi punto chiave"
   },
   "tasks": {
-    "title": "Attività e scadenze",
-    "lead": "Assegna attività per partecipante con una data obiettivo.",
+    "title": "Attività e timeline",
+    "lead": "Assegna attività per partecipante con data obiettivo.",
     "task": "Attività",
     "taskPh": "Descrizione dell'attività…",
     "assignee": "Responsabile",
@@ -134,25 +178,25 @@
     "pending": "In sospeso",
     "done": "Completata",
     "add": "Aggiungi",
-    "hint": "Suggerimento: cambia stato con ✓ e torna indietro con ↩︎.",
+    "hint": "Suggerimento: alterna lo stato con ✓ e torna indietro con ↩︎.",
     "empty": "Non ci sono ancora attività. Aggiungine una qui sopra."
   },
   "observations": {
     "title": "Osservazioni",
-    "lead": "Lascia traccia di imprevisti, clima della riunione, rischi, incidenti o qualsiasi nota rilevante.",
+    "lead": "Registra imprevisti, clima della riunione, rischi, incidenti o qualsiasi annotazione rilevante.",
     "field": "Osservazioni finali",
-    "ph": "Annota qui incidenti, blocchi, clima generale, dipendenze, accordi taciti o qualsiasi aspetto rilevante…",
+    "ph": "Annota qui incidenti, blocchi, clima generale, dipendenze, accordi impliciti o qualsiasi aspetto rilevante…",
     "hint": "Queste note appariranno alla fine del verbale esportato."
   },
   "timeline": {
-    "title": "Cronologia per partecipante",
-    "empty": "Quando aggiungerai attività, qui vedrai la cronologia per persona."
+    "title": "Timeline per partecipante",
+    "empty": "Quando aggiungerai attività, qui vedrai la timeline per persona."
   },
   "print": {
     "untitled": "Riunione senza titolo",
     "none": "—",
     "doc": {
-      "title": "VERBALE DELLA RIUNIONE"
+      "title": "VERBALE DI RIUNIONE"
     },
     "header": {
       "reference": "Riferimento",
@@ -171,8 +215,8 @@
       "createdAt": "Generato"
     },
     "sections": {
-      "summary": "Riepilogo esecutivo",
-      "contrib": "Sviluppo della riunione",
+      "summary": "Sintesi esecutiva",
+      "contrib": "Svolgimento della riunione",
       "keypoints": "Punti chiave e accordi",
       "tasks": "Attività / conclusioni",
       "observations": "Osservazioni",
@@ -184,14 +228,14 @@
         "keypoints": "Punti chiave identificati: {{n}}",
         "tasks": "Attività: {{total}} ({{done}} completate, {{pending}} in sospeso)"
       },
-      "highlights": "Aspetti principali"
+      "highlights": "Aspetti salienti"
     },
     "contrib": {
       "kind": {
         "root": "Intervento",
         "reply": "Risposta"
       },
-      "replyTo": "associata al punto n.{{n}}",
+      "replyTo": "associata al punto #{{n}}",
       "repliesLabel": "Interventi associati"
     },
     "tasksTable": {
@@ -218,22 +262,22 @@
     "needAuthor": "Seleziona un autore.",
     "needText": "Scrivi prima qualcosa.",
     "needTextField": "Seleziona un campo di testo per la dettatura.",
-    "voiceNotAvail": "La dettatura non è disponibile in questo browser.",
-    "voicePermissionDenied": "Il permesso per il microfono non è stato concesso.",
-    "voiceMicUnavailable": "Non è stato rilevato alcun microfono disponibile.",
+    "voiceNotAvail": "Dettatura non disponibile in questo browser.",
+    "voicePermissionDenied": "Il permesso del microfono non è stato concesso.",
+    "voiceMicUnavailable": "Nessun microfono disponibile rilevato.",
     "voiceNoSpeech": "Nessuna voce rilevata. Riprova.",
     "voiceNetwork": "La dettatura del browser richiede una connessione su questo dispositivo.",
-    "voiceGenericError": "Non è stato possibile completare la dettatura. Riprova.",
-    "noThreadsForKeypoints": "Aggiungi prima alcuni contributi per poter estrarre i punti chiave.",
+    "voiceGenericError": "Impossibile completare la dettatura. Riprova.",
+    "noThreadsForKeypoints": "Aggiungi prima i contributi per poter estrarre i punti chiave.",
     "needTaskText": "Scrivi un'attività.",
     "needGenerateFirst": "Genera prima la struttura (Configurazione → Genera struttura).",
-    "clearConfirm": "Sei sicuro di voler cancellare tutti i dati? Questa azione non può essere annullata.",
+    "clearConfirm": "Sei sicuro di voler cancellare tutti i dati? L'operazione non può essere annullata.",
     "deleteContribConfirm": "Eliminare questo contributo e tutte le sue risposte?",
     "deleteTaskConfirm": "Eliminare questa attività?",
     "printAreaMissing": "Area di stampa (printArea) non trovata.",
-    "copyNotSupported": "Non è stato possibile copiare automaticamente in questo browser. Prova con un altro (Chrome/Edge) oppure copia il testo semplice.",
+    "copyNotSupported": "Impossibile copiare automaticamente in questo browser. Prova con un altro (Chrome/Edge) oppure copia il testo semplice.",
     "logoTooBig": "Il logo è troppo grande. Usa un'immagine più leggera (ideale < 900KB).",
-    "logoReadFail": "Non è stato possibile leggere il logo. Prova con un altro file."
+    "logoReadFail": "Impossibile leggere il logo. Prova con un altro file."
   },
   "toasts": {
     "structureReady": "Struttura pronta ✅",
@@ -253,7 +297,8 @@
     "exportCopied": "Verbale copiato ✅ (incollalo in Gmail)",
     "exportSettingsSaved": "Esportazione aggiornata ✅",
     "logoUpdated": "Logo aggiornato ✅",
-    "logoReset": "Logo rimosso ✅"
+    "logoReset": "Logo rimosso ✅",
+    "exportColorsRestored": "Colori del PDF ripristinati ✅"
   },
   "footer": {
     "brand": "OptimeFlow(s)®",
@@ -261,18 +306,18 @@
     "year": "2025",
     "author": "Andrés Calvo Espinosa",
     "coherenceButtonAria": "Coerenza Universale",
-    "licenseButtonAria": "Licenza MIT",
-    "licenseButton": "Licenza MIT",
+    "licenseButtonAria": "Licenze",
+    "licenseButton": "Licenze",
     "privacyButton": "Privacy",
     "iconAlt": "Re⏪ K🧠  π🌀 Tú🫵 L@🗣️"
   },
   "licenseOverlay": {
-    "title": "Licenza MIT",
-    "text": "MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
+    "title": "Licenze",
+    "body": "<p><b>Codice proprio dell'app.</b> Il codice sviluppato specificamente per questa applicazione è distribuito con licenza MIT.</p>\n<pre class=\"license-text\">MIT License\n\nCopyright (c) 2025 Andrés Calvo Espinosa\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.</pre>\n<h3>Codice e componenti di terze parti</h3>\n<ul>\n  <li><b>@huggingface/transformers (Transformers.js)</b>: Apache-2.0</li>\n  <li><b>Xenova/whisper-small</b>: Apache-2.0</li>\n  <li><b>ONNX Runtime</b>: MIT</li>\n  <li><b>OpenAI Whisper (progetto originale)</b>: MIT</li>\n</ul>\n<p>Queste licenze di terze parti non cambiano la licenza MIT del codice proprio dell'app, ma devi conservare gli avvisi e i testi di licenza applicabili quando ridistribuisci l'applicazione o i suoi componenti.</p>\n<p>In pratica: puoi pubblicare il tuo codice sotto MIT, ma la distribuzione finale dell'app deve includere anche una sezione sulle licenze di terze parti oppure i file di licenza e NOTICE richiesti dai componenti inclusi.</p>"
   },
   "privacy": {
-    "title": "Informativa sulla privacy",
-    "body": "<p><b>Re⏪ K🧠  π🌀 Tú🫵 L@🗣️</b> funziona al 100% nel tuo browser. Non inviamo i tuoi dati a nessun server.</p>"
+    "title": "Privacy reale dell'app",
+    "body": "<p><b>Riepilogo.</b> Questa applicazione è progettata per eseguire il lavoro principale nel tuo browser. In base al codice esaminato, il contenuto del verbale non viene inviato a un backend proprietario dell'applicazione.</p>\n<h3>Cosa viene salvato localmente nel tuo browser</h3>\n<ul>\n  <li>Il titolo, la data, il tipo di riunione, i partecipanti, i contributi, le attività, i punti chiave e le osservazioni.</li>\n  <li>Preferenze come lingua, tema, motore di trascrizione e impostazioni di esportazione.</li>\n  <li>Se carichi un logo per il PDF, anche quel file può essere salvato localmente come parte delle impostazioni di esportazione.</li>\n</ul>\n<h3>Cosa non viene condiviso per impostazione predefinita</h3>\n<p>Il codice esaminato non mostra un'API propria né un caricamento del contenuto del verbale verso i server dell'applicazione. Non si notano nemmeno analytics proprietari per i contenuti che scrivi o detti.</p>\n<h3>Trascrizione in base alla modalità scelta</h3>\n<p><b>Whisper offline.</b> L'audio viene acquisito nel browser ed elaborato localmente sul dispositivo con il modello scaricato. Una volta scaricati runtime e modello, la trascrizione funziona localmente e nel codice esaminato non è previsto alcun invio dell'audio a un servizio di trascrizione.</p>\n<p><b>Browser.</b> L'app usa il motore di riconoscimento del browser stesso. In questa modalità l'app non implementa un proprio invio dell'audio, ma il trattamento reale può essere locale o remoto a seconda del browser, del sistema operativo e della piattaforma. Per questo non si deve presumere che questa modalità sia sempre al 100% locale su tutti i dispositivi.</p>\n<h3>Quando possono avvenire connessioni esterne</h3>\n<ul>\n  <li>Quando runtime o modello necessari per la trascrizione offline vengono scaricati per la prima volta.</li>\n  <li>Quando usi la modalità di trascrizione del browser su dispositivi o browser che dipendono dai servizi vocali della piattaforma.</li>\n  <li>Quando apri link esterni dall'interfaccia.</li>\n  <li>Quando copi il verbale e decidi di incollarlo in Gmail o in un altro servizio esterno.</li>\n</ul>\n<h3>Esportazione e uso offline</h3>\n<p>L'esportazione in PDF viene generata localmente nel browser e inviata alla finestra di stampa del browser stesso. L'app può funzionare offline grazie all'archiviazione locale e al service worker, ma questo non equivale a crittografia locale né a cancellazione automatica.</p>\n<h3>Importante</h3>\n<p>Poiché le informazioni restano salvate localmente nel browser o nel profilo del dispositivo, chiunque abbia accesso a quel browser o a quel profilo potrebbe vederle. Se condividi il dispositivo, è consigliabile cancellare i dati dell'app al termine.</p>"
   },
   "coherence": {
     "title": "Coerenza Universale",

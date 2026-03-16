@@ -125,6 +125,7 @@
       date: '',
       type: 'meeting',
       participants: [],
+      participantRoles: {},
       observations: ''
     },
     threads: [],
@@ -135,6 +136,52 @@
     }
   };
 
+  function normalizeParticipantRoles(rawRoles, participants) {
+    const out = {};
+    const src = (rawRoles && typeof rawRoles === 'object' && !Array.isArray(rawRoles)) ? rawRoles : {};
+    const list = Array.isArray(participants) ? participants : [];
+
+    for (const name of list) {
+      const cleanName = String(name || '').trim();
+      if (!cleanName) continue;
+
+      const cleanRole = String(src[cleanName] || '').trim();
+      if (cleanRole) out[cleanName] = cleanRole;
+    }
+
+    return out;
+  }
+
+  function ensureParticipantRoles() {
+    state.meeting.participantRoles = normalizeParticipantRoles(state.meeting.participantRoles, state.meeting.participants);
+    return state.meeting.participantRoles;
+  }
+
+  function getParticipantRole(name) {
+    const key = String(name || '').trim();
+    if (!key) return '';
+
+    const roles = ensureParticipantRoles();
+    return String(roles[key] || '').trim();
+  }
+
+  function setParticipantRole(name, role) {
+    const key = String(name || '').trim();
+    if (!key) return;
+
+    const cleanRole = String(role || '').trim();
+    const roles = ensureParticipantRoles();
+
+    if (cleanRole) roles[key] = cleanRole;
+    else delete roles[key];
+  }
+
+  function participantOptionLabel(name) {
+    const cleanName = String(name || '').trim() || '—';
+    const role = getParticipantRole(cleanName);
+    return role ? `${cleanName} — ${role}` : cleanName;
+  }
+
   function loadState() {
     const raw = safeGet(STATE_KEY);
     if (!raw) return;
@@ -144,6 +191,7 @@
       if (data && typeof data === 'object') {
         Object.assign(state.meeting, data.meeting || {});
         state.meeting.participants = Array.isArray(state.meeting.participants) ? state.meeting.participants : [];
+        state.meeting.participantRoles = normalizeParticipantRoles(state.meeting.participantRoles, state.meeting.participants);
         state.meeting.observations = String(state.meeting.observations || '');
 
         state.threads = Array.isArray(data.threads) ? data.threads : [];
@@ -157,6 +205,8 @@
   }
 
   function saveState() {
+    state.meeting.participantRoles = normalizeParticipantRoles(state.meeting.participantRoles, state.meeting.participants);
+
     try {
       safeSet(STATE_KEY, JSON.stringify(state));
     } catch {
@@ -481,11 +531,13 @@
     const md = $id('meetingDate');
     const mtype = $id('meetingType');
     const obs = $id('meetingObservations');
+    const participantRoleInput = $id('participantRoleInput');
 
     if (mt) mt.value = state.meeting.title || '';
     if (md) md.value = state.meeting.date || '';
     if (mtype) mtype.value = state.meeting.type || 'meeting';
     if (obs) obs.value = state.meeting.observations || '';
+    if (participantRoleInput) participantRoleInput.value = '';
   }
 
   // =========================
@@ -495,11 +547,16 @@
     const box = $id('participantsList');
     if (!box) return;
 
+    ensureParticipantRoles();
     box.innerHTML = '';
+
     for (const p of state.meeting.participants) {
+      const role = getParticipantRole(p);
+      const label = role ? `${p} · ${role}` : p;
+
       const chip = document.createElement('span');
       chip.className = 'chip';
-      chip.innerHTML = `<span>${escHtml(p)}</span><button type="button" aria-label="${escHtml(T('setup.removeParticipant'))}" data-name="${escHtml(p)}">✕</button>`;
+      chip.innerHTML = `<span>${escHtml(label)}</span><button type="button" aria-label="${escHtml(T('setup.removeParticipant'))}" data-name="${escHtml(p)}">✕</button>`;
       box.appendChild(chip);
     }
   }
@@ -528,7 +585,7 @@
       for (const p of participants) {
         const o = document.createElement('option');
         o.value = p;
-        o.textContent = p;
+        o.textContent = participantOptionLabel(p);
         selectEl.appendChild(o);
       }
 
@@ -769,7 +826,7 @@
         <label class="field grow">
           <span class="field-label">${escHtml(T('contrib.author'))}</span>
           <select class="sel sel-field replyAuthor">
-            ${participants.map(p => `<option value="${escHtml(p)}">${escHtml(p)}</option>`).join('')}
+            ${participants.map(p => `<option value="${escHtml(p)}">${escHtml(participantOptionLabel(p))}</option>`).join('')}
           </select>
         </label>
       </div>
@@ -1004,7 +1061,7 @@
 
       const tasks = groups[person].slice().sort((a, b) => (a.due || '').localeCompare(b.due || ''));
 
-      col.innerHTML = `<h3>${escHtml(person)}</h3>`;
+      col.innerHTML = `<h3>${escHtml(participantOptionLabel(person))}</h3>`;
       const ul = document.createElement('ul');
 
       for (const tk of tasks) {
@@ -1052,7 +1109,7 @@
 
       try { localStorage.removeItem(STATE_KEY); } catch { /* ignore */ }
 
-      state.meeting = { title: '', date: '', type: 'meeting', participants: [], observations: '' };
+      state.meeting = { title: '', date: '', type: 'meeting', participants: [], participantRoles: {}, observations: '' };
       state.threads = [];
       state.tasks = [];
       state.keypoints = [];
@@ -1200,26 +1257,38 @@
     });
 
     const participantInput = $id('participantInput');
+    const participantRoleInput = $id('participantRoleInput');
     const btnAddParticipant = $id('btnAddParticipant');
 
     function addParticipantFromInput() {
       const val = String(participantInput ? participantInput.value : '').trim();
+      const role = String(participantRoleInput ? participantRoleInput.value : '').trim();
       if (!val) return;
 
-      if (!state.meeting.participants.includes(val)) {
+      const exists = state.meeting.participants.includes(val);
+      if (!exists) {
         state.meeting.participants.push(val);
-        renderParticipants();
-        renderAssigneeSelects();
-        saveState();
-        showToast(T('toasts.participantAdded', { name: val }));
       }
 
+      setParticipantRole(val, role);
+      renderParticipants();
+      renderAssigneeSelects();
+      saveState();
+      showToast(T(exists ? 'toasts.participantUpdated' : 'toasts.participantAdded', { name: val }));
+
       if (participantInput) participantInput.value = '';
+      if (participantRoleInput) participantRoleInput.value = '';
       if (participantInput) participantInput.focus();
     }
 
     btnAddParticipant && btnAddParticipant.addEventListener('click', addParticipantFromInput);
     participantInput && participantInput.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter') {
+        ev.preventDefault();
+        addParticipantFromInput();
+      }
+    });
+    participantRoleInput && participantRoleInput.addEventListener('keydown', (ev) => {
       if (ev.key === 'Enter') {
         ev.preventDefault();
         addParticipantFromInput();
@@ -1234,6 +1303,7 @@
       if (!name) return;
 
       state.meeting.participants = state.meeting.participants.filter(x => x !== name);
+      setParticipantRole(name, '');
       renderParticipants();
       renderAssigneeSelects();
       saveState();

@@ -273,13 +273,24 @@
 
               <label class="field">
                 <span class="field-label" data-i18n="setup.participants">Integrantes</span>
-                <div class="add-row">
+                <div class="add-row" style="flex-wrap:wrap">
                   <input
                     id="participantInput"
                     class="text"
                     type="text"
                     placeholder="Añadir integrante…"
                     data-i18n-placeholder="setup.participantsPh"
+                    style="flex:1 1 220px"
+                  />
+                  <input
+                    id="participantRoleInput"
+                    class="text"
+                    type="text"
+                    placeholder="Cargo / puesto (opcional)…"
+                    data-i18n-placeholder="setup.participantRolePh"
+                    aria-label="Cargo / puesto del integrante"
+                    data-i18n-aria-label="setup.participantRoleAria"
+                    style="flex:1 1 220px"
                   />
                   <button id="btnAddParticipant" class="btn" type="button" data-i18n="setup.add">Añadir</button>
                 </div>

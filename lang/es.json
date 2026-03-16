@@ -92,6 +92,8 @@
     },
     "participants": "Integrantes",
     "participantsPh": "Añadir integrante…",
+    "participantRolePh": "Cargo / puesto (opcional)…",
+    "participantRoleAria": "Cargo / puesto del integrante",
     "add": "Añadir",
     "generate": "Generar estructura",
     "autosave": "Autosave ON · Local",
@@ -282,6 +284,7 @@
   "toasts": {
     "structureReady": "Estructura lista ✅",
     "participantAdded": "Integrante añadido: {{name}}",
+    "participantUpdated": "Integrante actualizado: {{name}}",
     "participantRemoved": "Integrante eliminado: {{name}}",
     "contribAdded": "Aporte añadido ✅",
     "replyAdded": "Respuesta añadida ✅",

@@ -117,9 +117,33 @@
   // =========================
   // Load state
   // =========================
+  function normalizeParticipantRoles(rawRoles, participants) {
+    const out = {};
+    const src = (rawRoles && typeof rawRoles === 'object' && !Array.isArray(rawRoles)) ? rawRoles : {};
+    const list = Array.isArray(participants) ? participants : [];
+
+    for (const name of list) {
+      const cleanName = String(name || '').trim();
+      if (!cleanName) continue;
+
+      const cleanRole = String(src[cleanName] || '').trim();
+      if (cleanRole) out[cleanName] = cleanRole;
+    }
+
+    return out;
+  }
+
+  function getParticipantRole(meeting, name) {
+    const key = String(name || '').trim();
+    if (!key) return '';
+
+    const roles = normalizeParticipantRoles(meeting && meeting.participantRoles, meeting && meeting.participants);
+    return String(roles[key] || '').trim();
+  }
+
   function loadState() {
     const empty = {
-      meeting: { title: '', date: '', type: 'meeting', participants: [], observations: '' },
+      meeting: { title: '', date: '', type: 'meeting', participants: [], participantRoles: {}, observations: '' },
       threads: [],
       tasks: [],
       keypoints: [],
@@ -142,6 +166,7 @@
       };
 
       if (!Array.isArray(out.meeting.participants)) out.meeting.participants = [];
+      out.meeting.participantRoles = normalizeParticipantRoles(out.meeting.participantRoles, out.meeting.participants);
       out.meeting.observations = String(out.meeting.observations || '');
 
       return out;
@@ -677,8 +702,9 @@
   }
 
   function renderParticipantsTable(state, cfg) {
-    const participants = Array.isArray(state && state.meeting && state.meeting.participants)
-      ? state.meeting.participants
+    const meeting = state && state.meeting ? state.meeting : { participants: [], participantRoles: {} };
+    const participants = Array.isArray(meeting.participants)
+      ? meeting.participants
       : [];
 
     const thN = escHtml(T('print.participantsTable.number'));
@@ -690,15 +716,18 @@
     const defaultCompany = escHtml(getHeaderName(cfg) || T('print.none'));
 
     const rows = participants.length
-      ? participants.map((name, i) => `
+      ? participants.map((name, i) => {
+          const role = getParticipantRole(meeting, name);
+          return `
           <tr>
             <td class="nowrap">${escHtml(String(i + 1))}</td>
             <td>${escHtml(String(name || '').trim() || '—')}</td>
-            <td>&nbsp;</td>
+            <td>${role ? escHtml(role) : '&nbsp;'}</td>
             <td>${defaultCompany}</td>
             <td>&nbsp;</td>
           </tr>
-        `).join('')
+        `;
+        }).join('')
       : `
         <tr>
           <td class="nowrap">1</td>
@@ -781,11 +810,12 @@ body {
   font: 10.8pt/1.42 Georgia, "Times New Roman", Times, serif;
   overflow: visible;
   box-sizing: border-box;
+  padding-bottom: 3mm;
 }
 
 body.print-mode #printArea,
 body.standalone-print #printArea {
-  padding: 10mm 11mm 10mm 11mm;
+  padding: 10mm 11mm 14mm 11mm;
 }
 
 @media screen {
@@ -806,7 +836,7 @@ body.standalone-print #printArea {
   }
 
   #printArea .formal-sheet {
-    padding: 0;
+    padding: 0 0 3mm 0;
     box-shadow: 0 18px 50px rgba(0,0,0,.22);
   }
 }
@@ -826,7 +856,7 @@ body.standalone-print #printArea {
   #printArea {
     max-width: none !important;
     margin: 0 !important;
-    padding: 10mm 11mm 10mm 11mm !important;
+    padding: 10mm 11mm 14mm 11mm !important;
     overflow: visible !important;
     background: var(--doc-margin) !important;
     box-sizing: border-box !important;
@@ -835,7 +865,7 @@ body.standalone-print #printArea {
   #printArea .formal-sheet {
     max-width: none !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 0 3mm 0 !important;
     box-shadow: none !important;
     overflow: visible !important;
   }
@@ -1161,14 +1191,33 @@ body.standalone-print #printArea {
   margin-top: 8px;
   border-top: 1.2px solid var(--doc-contour);
   padding-top: 5px;
+  padding-bottom: 2mm;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 4px 12px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 8.8pt;
   color: var(--doc-muted);
   break-inside: avoid;
   page-break-inside: avoid;
+}
+
+#printArea .doc-footer-note,
+#printArea .doc-footer-meta {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+#printArea .doc-footer-note {
+  flex: 1 1 62%;
+}
+
+#printArea .doc-footer-meta {
+  flex: 0 1 auto;
+  text-align: right;
 }
 `;
   }
@@ -1291,8 +1340,8 @@ body.standalone-print #printArea {
         ${renderParticipantsTable(state, cfg)}
 
         <footer class="doc-footer">
-          <div>${escHtml(footerText)}</div>
-          <div>${escHtml(createdAtLabel)}: ${escHtml(createdAt || T('print.none'))}</div>
+          <div class="doc-footer-note">${escHtml(footerText)}</div>
+          <div class="doc-footer-meta">${escHtml(createdAtLabel)}: ${escHtml(createdAt || T('print.none'))}</div>
         </footer>
       </article>
     `;
@@ -1309,7 +1358,8 @@ body.standalone-print #printArea {
     const type = (state.meeting && state.meeting.type) ? String(state.meeting.type) : 'meeting';
     const typeLabel = T('setup.types.' + type);
 
-    const participants = (state.meeting && Array.isArray(state.meeting.participants)) ? state.meeting.participants : [];
+    const meeting = state && state.meeting ? state.meeting : { participants: [], participantRoles: {} };
+    const participants = Array.isArray(meeting.participants) ? meeting.participants : [];
     const participantsLine = participantsToLine(participants);
     const participantsCount = participants.length ? String(participants.length) : T('print.none');
 
@@ -1406,7 +1456,8 @@ body.standalone-print #printArea {
       out += `1. ${T('print.none')}\n`;
     } else {
       participants.forEach((name, i) => {
-        out += `${i + 1}. ${String(name || '').trim() || '—'}\n`;
+        const role = getParticipantRole(meeting, name);
+        out += `${i + 1}. ${String(name || '').trim() || '—'}${role ? ' — ' + role : ''}\n`;
       });
     }
 
@@ -1534,8 +1585,9 @@ body.standalone-print #printArea {
   }
 
   function renderParticipantsEmailHTML(state, cfg, palette) {
-    const participants = Array.isArray(state && state.meeting && state.meeting.participants)
-      ? state.meeting.participants
+    const meeting = state && state.meeting ? state.meeting : { participants: [], participantRoles: {} };
+    const participants = Array.isArray(meeting.participants)
+      ? meeting.participants
       : [];
 
     const thN = escHtml(T('print.participantsTable.number'));
@@ -1551,15 +1603,18 @@ body.standalone-print #printArea {
     const fillTextColor = escHtml(palette.fillTextColor);
 
     const rows = participants.length
-      ? participants.map((name, i) => `
+      ? participants.map((name, i) => {
+          const role = getParticipantRole(meeting, name);
+          return `
           <tr>
             <td style="border:1px solid ${contourColor};padding:6px 7px;white-space:nowrap;color:${textColor};">${escHtml(String(i + 1))}</td>
             <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${escHtml(String(name || '').trim() || '—')}</td>
-            <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">&nbsp;</td>
+            <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${role ? escHtml(role) : '&nbsp;'}</td>
             <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">${defaultCompany}</td>
             <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">&nbsp;</td>
           </tr>
-        `).join('')
+        `;
+        }).join('')
       : `
         <tr>
           <td style="border:1px solid ${contourColor};padding:6px 7px;color:${textColor};">1</td>
@@ -1735,7 +1790,7 @@ body.standalone-print #printArea {
   <div style="margin-top:12px;border:1px solid ${contourColor};background:${tableColor};color:${fillTextColor};padding:4px 6px;text-align:center;font-weight:800;text-transform:uppercase;">6. ${escHtml(T('print.sections.participants'))}</div>
   ${renderParticipantsEmailHTML(state, cfg, palette)}
 
-  <div style="margin-top:10px;border-top:1px solid ${contourColor};padding-top:6px;font-size:12px;color:${mutedColor};">
+  <div style="margin-top:10px;border-top:1px solid ${contourColor};padding-top:6px;font-size:12px;color:${mutedColor};word-break:break-word;overflow-wrap:anywhere;">
     ${escHtml(footerText)}
   </div>
 </div>
